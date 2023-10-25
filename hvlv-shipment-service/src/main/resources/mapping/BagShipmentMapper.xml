@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BagShipmentMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BagShipment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="bag_id" jdbcType="INTEGER" property="bagId" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="operator" jdbcType="INTEGER" property="operator" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bag_id, shipment_id, operator, create
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bag_shipment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bag_shipment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BagShipment" useGeneratedKeys="true">
+    insert into bag_shipment (bag_id, shipment_id, operator, 
+      create)
+    values (#{bagId,jdbcType=INTEGER}, #{shipmentId,jdbcType=INTEGER}, #{operator,jdbcType=INTEGER}, 
+      #{create,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BagShipment" useGeneratedKeys="true">
+    insert into bag_shipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bagId != null">
+        bag_id,
+      </if>
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bagId != null">
+        #{bagId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BagShipment">
+    update bag_shipment
+    <set>
+      <if test="bagId != null">
+        bag_id = #{bagId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BagShipment">
+    update bag_shipment
+    set bag_id = #{bagId,jdbcType=INTEGER},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

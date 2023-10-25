@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CogsLineHasSiReconcileLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CogsLineHasSiReconcileLine">
+    <id column="cogs_line_id" jdbcType="INTEGER" property="cogsLineId" />
+    <id column="si_reconcile_line_id" jdbcType="INTEGER" property="siReconcileLineId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from cogs_line_has_si_reconcile_line
+    where cogs_line_id = #{cogsLineId,jdbcType=INTEGER}
+      and si_reconcile_line_id = #{siReconcileLineId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CogsLineHasSiReconcileLine">
+    insert into cogs_line_has_si_reconcile_line (cogs_line_id, si_reconcile_line_id)
+    values (#{cogsLineId,jdbcType=INTEGER}, #{siReconcileLineId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CogsLineHasSiReconcileLine">
+    insert into cogs_line_has_si_reconcile_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cogsLineId != null">
+        cogs_line_id,
+      </if>
+      <if test="siReconcileLineId != null">
+        si_reconcile_line_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cogsLineId != null">
+        #{cogsLineId,jdbcType=INTEGER},
+      </if>
+      <if test="siReconcileLineId != null">
+        #{siReconcileLineId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

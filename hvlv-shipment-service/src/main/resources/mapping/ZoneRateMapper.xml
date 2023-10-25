@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ZoneRateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneRate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rate_id" jdbcType="INTEGER" property="rateId" />
+    <result column="chargecode_id" jdbcType="INTEGER" property="chargecodeId" />
+    <result column="zone" jdbcType="VARCHAR" property="zone" />
+    <result column="zone_name" jdbcType="VARCHAR" property="zoneName" />
+    <result column="weight_lo" jdbcType="DECIMAL" property="weightLo" />
+    <result column="weight_hi" jdbcType="DECIMAL" property="weightHi" />
+    <result column="base" jdbcType="DECIMAL" property="base" />
+    <result column="item" jdbcType="DECIMAL" property="item" />
+    <result column="perkg" jdbcType="DECIMAL" property="perkg" />
+    <result column="nkg" jdbcType="REAL" property="nkg" />
+    <result column="minimum" jdbcType="DECIMAL" property="minimum" />
+    <result column="gst" jdbcType="BIT" property="gst" />
+    <result column="levy" jdbcType="DECIMAL" property="levy" />
+    <result column="min_incl" jdbcType="DECIMAL" property="minIncl" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rate_id, chargecode_id, zone, zone_name, weight_lo, weight_hi, base, item, perkg, 
+    nkg, minimum, gst, levy, min_incl, start_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zone_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findZoneRates" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT *
+    FROM zone_rate
+    WHERE chargecode_id = #{chargecodeId}
+      AND weight_lo &lt;= #{weight}
+      AND weight_hi &gt;= #{weight}
+      AND zone = #{zone}
+      AND base + item + perkg + minimum &gt; 0
+  </select>
+  <select id="selectMaxWeightHiByChargecodeIdAndZone" parameterType="map" resultType="java.math.BigDecimal">
+    SELECT MAX(weight_hi)
+    FROM zone_rate
+    WHERE chargecode_id = #{chargecodeId}
+      AND zone = #{zone}
+  </select>
+  <select id="findByZoneWeightAndRateId" resultMap="BaseResultMap">
+    SELECT * FROM zone_rate
+    WHERE zone = #{zone}
+      AND weight_lo &lt;#{weight}
+      AND weight_hi >= #{weight}
+      AND rate_id = #{rateId}
+  </select>
+  <select id="findByRateIdWeightAndZone" resultMap="BaseResultMap">
+    SELECT *
+    FROM zone_rate
+    WHERE rate_id = #{rateId,jdbcType=INTEGER}
+    AND weight_lo &lt;= #{weight,jdbcType=DECIMAL}
+    AND weight_hi >= #{weight,jdbcType=DECIMAL}
+    AND zone = #{zone,jdbcType=VARCHAR}
+    AND base + item + perkg + minimum > 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zone_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneRate" useGeneratedKeys="true">
+    insert into zone_rate (rate_id, chargecode_id, zone, 
+      zone_name, weight_lo, weight_hi, 
+      base, item, perkg, 
+      nkg, minimum, gst, levy, 
+      min_incl, start_date)
+    values (#{rateId,jdbcType=INTEGER}, #{chargecodeId,jdbcType=INTEGER}, #{zone,jdbcType=VARCHAR}, 
+      #{zoneName,jdbcType=VARCHAR}, #{weightLo,jdbcType=DECIMAL}, #{weightHi,jdbcType=DECIMAL}, 
+      #{base,jdbcType=DECIMAL}, #{item,jdbcType=DECIMAL}, #{perkg,jdbcType=DECIMAL}, 
+      #{nkg,jdbcType=REAL}, #{minimum,jdbcType=DECIMAL}, #{gst,jdbcType=BIT}, #{levy,jdbcType=DECIMAL}, 
+      #{minIncl,jdbcType=DECIMAL}, #{startDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneRate" useGeneratedKeys="true">
+    insert into zone_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        rate_id,
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id,
+      </if>
+      <if test="zone != null">
+        zone,
+      </if>
+      <if test="zoneName != null">
+        zone_name,
+      </if>
+      <if test="weightLo != null">
+        weight_lo,
+      </if>
+      <if test="weightHi != null">
+        weight_hi,
+      </if>
+      <if test="base != null">
+        base,
+      </if>
+      <if test="item != null">
+        item,
+      </if>
+      <if test="perkg != null">
+        perkg,
+      </if>
+      <if test="nkg != null">
+        nkg,
+      </if>
+      <if test="minimum != null">
+        minimum,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="levy != null">
+        levy,
+      </if>
+      <if test="minIncl != null">
+        min_incl,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zone != null">
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneName != null">
+        #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="weightLo != null">
+        #{weightLo,jdbcType=DECIMAL},
+      </if>
+      <if test="weightHi != null">
+        #{weightHi,jdbcType=DECIMAL},
+      </if>
+      <if test="base != null">
+        #{base,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="perkg != null">
+        #{perkg,jdbcType=DECIMAL},
+      </if>
+      <if test="nkg != null">
+        #{nkg,jdbcType=REAL},
+      </if>
+      <if test="minimum != null">
+        #{minimum,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=BIT},
+      </if>
+      <if test="levy != null">
+        #{levy,jdbcType=DECIMAL},
+      </if>
+      <if test="minIncl != null">
+        #{minIncl,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneRate">
+    update zone_rate
+    <set>
+      <if test="rateId != null">
+        rate_id = #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zone != null">
+        zone = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneName != null">
+        zone_name = #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="weightLo != null">
+        weight_lo = #{weightLo,jdbcType=DECIMAL},
+      </if>
+      <if test="weightHi != null">
+        weight_hi = #{weightHi,jdbcType=DECIMAL},
+      </if>
+      <if test="base != null">
+        base = #{base,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        item = #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="perkg != null">
+        perkg = #{perkg,jdbcType=DECIMAL},
+      </if>
+      <if test="nkg != null">
+        nkg = #{nkg,jdbcType=REAL},
+      </if>
+      <if test="minimum != null">
+        minimum = #{minimum,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=BIT},
+      </if>
+      <if test="levy != null">
+        levy = #{levy,jdbcType=DECIMAL},
+      </if>
+      <if test="minIncl != null">
+        min_incl = #{minIncl,jdbcType=DECIMAL},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneRate">
+    update zone_rate
+    set rate_id = #{rateId,jdbcType=INTEGER},
+      chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      zone = #{zone,jdbcType=VARCHAR},
+      zone_name = #{zoneName,jdbcType=VARCHAR},
+      weight_lo = #{weightLo,jdbcType=DECIMAL},
+      weight_hi = #{weightHi,jdbcType=DECIMAL},
+      base = #{base,jdbcType=DECIMAL},
+      item = #{item,jdbcType=DECIMAL},
+      perkg = #{perkg,jdbcType=DECIMAL},
+      nkg = #{nkg,jdbcType=REAL},
+      minimum = #{minimum,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=BIT},
+      levy = #{levy,jdbcType=DECIMAL},
+      min_incl = #{minIncl,jdbcType=DECIMAL},
+      start_date = #{startDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

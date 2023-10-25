@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportZwStorageMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="putcode" jdbcType="VARCHAR" property="putcode" />
+    <result column="tlano" jdbcType="VARCHAR" property="tlano" />
+    <result column="memberid" jdbcType="VARCHAR" property="memberid" />
+    <result column="store_code" jdbcType="VARCHAR" property="storeCode" />
+    <result column="arrival_city" jdbcType="VARCHAR" property="arrivalCity" />
+    <result column="transport_type" jdbcType="INTEGER" property="transportType" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="arrival_date" jdbcType="TIMESTAMP" property="arrivalDate" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="client_id" jdbcType="INTEGER" property="clientId" />
+    <result column="cutday" jdbcType="DATE" property="cutday" />
+    <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="items" jdbcType="LONGVARCHAR" property="items" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, putcode, tlano, memberid, store_code, arrival_city, transport_type, channel_code, 
+    volume, weight, arrival_date, created, updated, org_id, client_id, cutday, goods_count, 
+    remark, status
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, items
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from import_zw_storage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from import_zw_storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage" useGeneratedKeys="true">
+    insert into import_zw_storage (putcode, tlano, memberid, 
+      store_code, arrival_city, transport_type, 
+      channel_code, volume, weight, 
+      arrival_date, created, updated, 
+      org_id, client_id, cutday, 
+      goods_count, remark, status, 
+      meta, items)
+    values (#{putcode,jdbcType=VARCHAR}, #{tlano,jdbcType=VARCHAR}, #{memberid,jdbcType=VARCHAR}, 
+      #{storeCode,jdbcType=VARCHAR}, #{arrivalCity,jdbcType=VARCHAR}, #{transportType,jdbcType=INTEGER}, 
+      #{channelCode,jdbcType=VARCHAR}, #{volume,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, 
+      #{arrivalDate,jdbcType=TIMESTAMP}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
+      #{orgId,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, #{cutday,jdbcType=DATE}, 
+      #{goodsCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{meta,jdbcType=LONGVARCHAR}, #{items,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage" useGeneratedKeys="true">
+    insert into import_zw_storage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="putcode != null">
+        putcode,
+      </if>
+      <if test="tlano != null">
+        tlano,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="storeCode != null">
+        store_code,
+      </if>
+      <if test="arrivalCity != null">
+        arrival_city,
+      </if>
+      <if test="transportType != null">
+        transport_type,
+      </if>
+      <if test="channelCode != null">
+        channel_code,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="arrivalDate != null">
+        arrival_date,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="cutday != null">
+        cutday,
+      </if>
+      <if test="goodsCount != null">
+        goods_count,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="items != null">
+        items,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="putcode != null">
+        #{putcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tlano != null">
+        #{tlano,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalCity != null">
+        #{arrivalCity,jdbcType=VARCHAR},
+      </if>
+      <if test="transportType != null">
+        #{transportType,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null">
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="arrivalDate != null">
+        #{arrivalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="cutday != null">
+        #{cutday,jdbcType=DATE},
+      </if>
+      <if test="goodsCount != null">
+        #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="items != null">
+        #{items,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage">
+    update import_zw_storage
+    <set>
+      <if test="putcode != null">
+        putcode = #{putcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tlano != null">
+        tlano = #{tlano,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        store_code = #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalCity != null">
+        arrival_city = #{arrivalCity,jdbcType=VARCHAR},
+      </if>
+      <if test="transportType != null">
+        transport_type = #{transportType,jdbcType=INTEGER},
+      </if>
+      <if test="channelCode != null">
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="arrivalDate != null">
+        arrival_date = #{arrivalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="cutday != null">
+        cutday = #{cutday,jdbcType=DATE},
+      </if>
+      <if test="goodsCount != null">
+        goods_count = #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="items != null">
+        items = #{items,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage">
+    update import_zw_storage
+    set putcode = #{putcode,jdbcType=VARCHAR},
+      tlano = #{tlano,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      arrival_city = #{arrivalCity,jdbcType=VARCHAR},
+      transport_type = #{transportType,jdbcType=INTEGER},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DECIMAL},
+      arrival_date = #{arrivalDate,jdbcType=TIMESTAMP},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      org_id = #{orgId,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=INTEGER},
+      cutday = #{cutday,jdbcType=DATE},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      items = #{items,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportZwStorage">
+    update import_zw_storage
+    set putcode = #{putcode,jdbcType=VARCHAR},
+      tlano = #{tlano,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      arrival_city = #{arrivalCity,jdbcType=VARCHAR},
+      transport_type = #{transportType,jdbcType=INTEGER},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=DECIMAL},
+      weight = #{weight,jdbcType=DECIMAL},
+      arrival_date = #{arrivalDate,jdbcType=TIMESTAMP},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      org_id = #{orgId,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=INTEGER},
+      cutday = #{cutday,jdbcType=DATE},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PaymentArrangeBillingMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PaymentArrangeBilling">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="payment_arrange_id" jdbcType="INTEGER" property="paymentArrangeId" />
+    <result column="billing_id" jdbcType="INTEGER" property="billingId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, payment_arrange_id, billing_id, amount, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payment_arrange_billing
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from payment_arrange_billing
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PaymentArrangeBilling" useGeneratedKeys="true">
+    insert into payment_arrange_billing (payment_arrange_id, billing_id, amount, 
+      status)
+    values (#{paymentArrangeId,jdbcType=INTEGER}, #{billingId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PaymentArrangeBilling" useGeneratedKeys="true">
+    insert into payment_arrange_billing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paymentArrangeId != null">
+        payment_arrange_id,
+      </if>
+      <if test="billingId != null">
+        billing_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paymentArrangeId != null">
+        #{paymentArrangeId,jdbcType=INTEGER},
+      </if>
+      <if test="billingId != null">
+        #{billingId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PaymentArrangeBilling">
+    update payment_arrange_billing
+    <set>
+      <if test="paymentArrangeId != null">
+        payment_arrange_id = #{paymentArrangeId,jdbcType=INTEGER},
+      </if>
+      <if test="billingId != null">
+        billing_id = #{billingId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PaymentArrangeBilling">
+    update payment_arrange_billing
+    set payment_arrange_id = #{paymentArrangeId,jdbcType=INTEGER},
+      billing_id = #{billingId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.MetaMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta">
+    <result column="value" jdbcType="LONGVARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, model, fid, key
+  </sql>
+  <sql id="Blob_Column_List">
+    value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from meta
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meta
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta" useGeneratedKeys="true">
+    insert into meta (model, fid, key, 
+      value)
+    values (#{model,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, 
+      #{value,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta" useGeneratedKeys="true">
+    insert into meta
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="key != null">
+        key,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta">
+    update meta
+    <set>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="key != null">
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta">
+    update meta
+    set model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      key = #{key,jdbcType=VARCHAR},
+      value = #{value,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Meta">
+    update meta
+    set model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      key = #{key,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

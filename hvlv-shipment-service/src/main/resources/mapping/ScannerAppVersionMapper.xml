@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ScannerAppVersionMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ScannerAppVersion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="verid" jdbcType="INTEGER" property="verid" />
+    <result column="min" jdbcType="INTEGER" property="min" />
+    <result column="max" jdbcType="INTEGER" property="max" />
+    <result column="verstr" jdbcType="VARCHAR" property="verstr" />
+    <result column="updateurl" jdbcType="VARCHAR" property="updateurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, verid, min, max, verstr, updateurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scanner_app_version
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scanner_app_version
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ScannerAppVersion" useGeneratedKeys="true">
+    insert into scanner_app_version (verid, min, max, 
+      verstr, updateurl)
+    values (#{verid,jdbcType=INTEGER}, #{min,jdbcType=INTEGER}, #{max,jdbcType=INTEGER}, 
+      #{verstr,jdbcType=VARCHAR}, #{updateurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ScannerAppVersion" useGeneratedKeys="true">
+    insert into scanner_app_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="verid != null">
+        verid,
+      </if>
+      <if test="min != null">
+        min,
+      </if>
+      <if test="max != null">
+        max,
+      </if>
+      <if test="verstr != null">
+        verstr,
+      </if>
+      <if test="updateurl != null">
+        updateurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="verid != null">
+        #{verid,jdbcType=INTEGER},
+      </if>
+      <if test="min != null">
+        #{min,jdbcType=INTEGER},
+      </if>
+      <if test="max != null">
+        #{max,jdbcType=INTEGER},
+      </if>
+      <if test="verstr != null">
+        #{verstr,jdbcType=VARCHAR},
+      </if>
+      <if test="updateurl != null">
+        #{updateurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ScannerAppVersion">
+    update scanner_app_version
+    <set>
+      <if test="verid != null">
+        verid = #{verid,jdbcType=INTEGER},
+      </if>
+      <if test="min != null">
+        min = #{min,jdbcType=INTEGER},
+      </if>
+      <if test="max != null">
+        max = #{max,jdbcType=INTEGER},
+      </if>
+      <if test="verstr != null">
+        verstr = #{verstr,jdbcType=VARCHAR},
+      </if>
+      <if test="updateurl != null">
+        updateurl = #{updateurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ScannerAppVersion">
+    update scanner_app_version
+    set verid = #{verid,jdbcType=INTEGER},
+      min = #{min,jdbcType=INTEGER},
+      max = #{max,jdbcType=INTEGER},
+      verstr = #{verstr,jdbcType=VARCHAR},
+      updateurl = #{updateurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

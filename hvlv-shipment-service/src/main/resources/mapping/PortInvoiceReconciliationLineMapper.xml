@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PortInvoiceReconciliationLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="connote" jdbcType="VARCHAR" property="connote" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, date, connote, destination, weight, amount
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from port_invoice_reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from port_invoice_reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine" useGeneratedKeys="true">
+    insert into port_invoice_reconciliation_line (parent_id, date, connote, 
+      destination, weight, amount, 
+      meta)
+    values (#{parentId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{connote,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine" useGeneratedKeys="true">
+    insert into port_invoice_reconciliation_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="connote != null">
+        connote,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="connote != null">
+        #{connote,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine">
+    update port_invoice_reconciliation_line
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="connote != null">
+        connote = #{connote,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine">
+    update port_invoice_reconciliation_line
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      connote = #{connote,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliationLine">
+    update port_invoice_reconciliation_line
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      connote = #{connote,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

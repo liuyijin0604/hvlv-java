@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.EdimsgMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="dt" jdbcType="TIMESTAMP" property="dt" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="sender" jdbcType="VARCHAR" property="sender" />
+    <result column="receiver" jdbcType="VARCHAR" property="receiver" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg">
+    <result column="msg" jdbcType="LONGVARCHAR" property="msg" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fid, rid, dt, status, type, mid, sender, receiver
+  </sql>
+  <sql id="Blob_Column_List">
+    msg, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from edimsg
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from edimsg
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg" useGeneratedKeys="true">
+    insert into edimsg (fid, rid, dt, 
+      status, type, mid, 
+      sender, receiver, msg, 
+      meta)
+    values (#{fid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{dt,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=VARCHAR}, #{mid,jdbcType=VARCHAR}, 
+      #{sender,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{msg,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg" useGeneratedKeys="true">
+    insert into edimsg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="dt != null">
+        dt,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="sender != null">
+        sender,
+      </if>
+      <if test="receiver != null">
+        receiver,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="dt != null">
+        #{dt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null">
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null">
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg">
+    update edimsg
+    <set>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="dt != null">
+        dt = #{dt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null">
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null">
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg">
+    update edimsg
+    set fid = #{fid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      dt = #{dt,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=VARCHAR},
+      mid = #{mid,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Edimsg">
+    update edimsg
+    set fid = #{fid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      dt = #{dt,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=VARCHAR},
+      mid = #{mid,jdbcType=VARCHAR},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

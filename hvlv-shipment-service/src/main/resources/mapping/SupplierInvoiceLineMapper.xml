@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SupplierInvoiceLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="inv_id" jdbcType="INTEGER" property="invId" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="item_code" jdbcType="VARCHAR" property="itemCode" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="det" jdbcType="VARCHAR" property="det" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="qty" jdbcType="DECIMAL" property="qty" />
+    <result column="amount_ex_gst" jdbcType="DECIMAL" property="amountExGst" />
+    <result column="courier_cubic" jdbcType="REAL" property="courierCubic" />
+    <result column="cdeadwt" jdbcType="REAL" property="cdeadwt" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, inv_id, ref, item_code, postcode, amount, gst, det, weight, qty, amount_ex_gst, 
+    courier_cubic, cdeadwt
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from supplier_invoice_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier_invoice_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine" useGeneratedKeys="true">
+    insert into supplier_invoice_line (inv_id, ref, item_code, 
+      postcode, amount, gst, 
+      det, weight, qty, amount_ex_gst, 
+      courier_cubic, cdeadwt, meta
+      )
+    values (#{invId,jdbcType=INTEGER}, #{ref,jdbcType=VARCHAR}, #{itemCode,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, 
+      #{det,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{qty,jdbcType=DECIMAL}, #{amountExGst,jdbcType=DECIMAL}, 
+      #{courierCubic,jdbcType=REAL}, #{cdeadwt,jdbcType=REAL}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine" useGeneratedKeys="true">
+    insert into supplier_invoice_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invId != null">
+        inv_id,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="itemCode != null">
+        item_code,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="det != null">
+        det,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="amountExGst != null">
+        amount_ex_gst,
+      </if>
+      <if test="courierCubic != null">
+        courier_cubic,
+      </if>
+      <if test="cdeadwt != null">
+        cdeadwt,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invId != null">
+        #{invId,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCode != null">
+        #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="det != null">
+        #{det,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="amountExGst != null">
+        #{amountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="courierCubic != null">
+        #{courierCubic,jdbcType=REAL},
+      </if>
+      <if test="cdeadwt != null">
+        #{cdeadwt,jdbcType=REAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine">
+    update supplier_invoice_line
+    <set>
+      <if test="invId != null">
+        inv_id = #{invId,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCode != null">
+        item_code = #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="det != null">
+        det = #{det,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=DECIMAL},
+      </if>
+      <if test="amountExGst != null">
+        amount_ex_gst = #{amountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="courierCubic != null">
+        courier_cubic = #{courierCubic,jdbcType=REAL},
+      </if>
+      <if test="cdeadwt != null">
+        cdeadwt = #{cdeadwt,jdbcType=REAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine">
+    update supplier_invoice_line
+    set inv_id = #{invId,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=VARCHAR},
+      item_code = #{itemCode,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      det = #{det,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      qty = #{qty,jdbcType=DECIMAL},
+      amount_ex_gst = #{amountExGst,jdbcType=DECIMAL},
+      courier_cubic = #{courierCubic,jdbcType=REAL},
+      cdeadwt = #{cdeadwt,jdbcType=REAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoiceLine">
+    update supplier_invoice_line
+    set inv_id = #{invId,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=VARCHAR},
+      item_code = #{itemCode,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      det = #{det,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      qty = #{qty,jdbcType=DECIMAL},
+      amount_ex_gst = #{amountExGst,jdbcType=DECIMAL},
+      courier_cubic = #{courierCubic,jdbcType=REAL},
+      cdeadwt = #{cdeadwt,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

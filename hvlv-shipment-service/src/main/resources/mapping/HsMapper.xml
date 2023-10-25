@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.HsMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Hs">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hs" jdbcType="CHAR" property="hs" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="uc" jdbcType="CHAR" property="uc" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="rate" jdbcType="REAL" property="rate" />
+    <result column="active" jdbcType="BIT" property="active" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hs, name, unit, uc, price, rate, active
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Hs" useGeneratedKeys="true">
+    insert into hs (hs, name, unit, 
+      uc, price, rate, active
+      )
+    values (#{hs,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{uc,jdbcType=CHAR}, #{price,jdbcType=REAL}, #{rate,jdbcType=REAL}, #{active,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Hs" useGeneratedKeys="true">
+    insert into hs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hs != null">
+        hs,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="uc != null">
+        uc,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hs != null">
+        #{hs,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="uc != null">
+        #{uc,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=REAL},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Hs">
+    update hs
+    <set>
+      <if test="hs != null">
+        hs = #{hs,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="uc != null">
+        uc = #{uc,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=REAL},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Hs">
+    update hs
+    set hs = #{hs,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      uc = #{uc,jdbcType=CHAR},
+      price = #{price,jdbcType=REAL},
+      rate = #{rate,jdbcType=REAL},
+      active = #{active,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

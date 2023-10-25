@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.RouteMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="airline_id" jdbcType="INTEGER" property="airlineId" />
+    <result column="flight_no" jdbcType="VARCHAR" property="flightNo" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="destination" jdbcType="VARCHAR" property="destination" />
+    <result column="departure" jdbcType="VARCHAR" property="departure" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="stops" jdbcType="VARCHAR" property="stops" />
+    <result column="days" jdbcType="VARCHAR" property="days" />
+    <result column="cca_charge" jdbcType="DECIMAL" property="ccaCharge" />
+    <result column="awb_p" jdbcType="DECIMAL" property="awbP" />
+    <result column="security_fuel" jdbcType="DECIMAL" property="securityFuel" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route">
+    <result column="info" jdbcType="LONGVARCHAR" property="info" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, airline_id, flight_no, status, destination, departure, code, stops, days, cca_charge, 
+    awb_p, security_fuel
+  </sql>
+  <sql id="Blob_Column_List">
+    info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from route
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from route
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route" useGeneratedKeys="true">
+    insert into route (airline_id, flight_no, status, 
+      destination, departure, code, 
+      stops, days, cca_charge, 
+      awb_p, security_fuel, info
+      )
+    values (#{airlineId,jdbcType=INTEGER}, #{flightNo,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{destination,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{stops,jdbcType=VARCHAR}, #{days,jdbcType=VARCHAR}, #{ccaCharge,jdbcType=DECIMAL}, 
+      #{awbP,jdbcType=DECIMAL}, #{securityFuel,jdbcType=DECIMAL}, #{info,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route" useGeneratedKeys="true">
+    insert into route
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="airlineId != null">
+        airline_id,
+      </if>
+      <if test="flightNo != null">
+        flight_no,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="departure != null">
+        departure,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="stops != null">
+        stops,
+      </if>
+      <if test="days != null">
+        days,
+      </if>
+      <if test="ccaCharge != null">
+        cca_charge,
+      </if>
+      <if test="awbP != null">
+        awb_p,
+      </if>
+      <if test="securityFuel != null">
+        security_fuel,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="airlineId != null">
+        #{airlineId,jdbcType=INTEGER},
+      </if>
+      <if test="flightNo != null">
+        #{flightNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="stops != null">
+        #{stops,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null">
+        #{days,jdbcType=VARCHAR},
+      </if>
+      <if test="ccaCharge != null">
+        #{ccaCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="awbP != null">
+        #{awbP,jdbcType=DECIMAL},
+      </if>
+      <if test="securityFuel != null">
+        #{securityFuel,jdbcType=DECIMAL},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route">
+    update route
+    <set>
+      <if test="airlineId != null">
+        airline_id = #{airlineId,jdbcType=INTEGER},
+      </if>
+      <if test="flightNo != null">
+        flight_no = #{flightNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null">
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="stops != null">
+        stops = #{stops,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null">
+        days = #{days,jdbcType=VARCHAR},
+      </if>
+      <if test="ccaCharge != null">
+        cca_charge = #{ccaCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="awbP != null">
+        awb_p = #{awbP,jdbcType=DECIMAL},
+      </if>
+      <if test="securityFuel != null">
+        security_fuel = #{securityFuel,jdbcType=DECIMAL},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route">
+    update route
+    set airline_id = #{airlineId,jdbcType=INTEGER},
+      flight_no = #{flightNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      destination = #{destination,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      stops = #{stops,jdbcType=VARCHAR},
+      days = #{days,jdbcType=VARCHAR},
+      cca_charge = #{ccaCharge,jdbcType=DECIMAL},
+      awb_p = #{awbP,jdbcType=DECIMAL},
+      security_fuel = #{securityFuel,jdbcType=DECIMAL},
+      info = #{info,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Route">
+    update route
+    set airline_id = #{airlineId,jdbcType=INTEGER},
+      flight_no = #{flightNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      destination = #{destination,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      stops = #{stops,jdbcType=VARCHAR},
+      days = #{days,jdbcType=VARCHAR},
+      cca_charge = #{ccaCharge,jdbcType=DECIMAL},
+      awb_p = #{awbP,jdbcType=DECIMAL},
+      security_fuel = #{securityFuel,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.StorageMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="wid" jdbcType="INTEGER" property="wid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="cx" jdbcType="INTEGER" property="cx" />
+    <result column="cy" jdbcType="INTEGER" property="cy" />
+    <result column="cz" jdbcType="INTEGER" property="cz" />
+    <result column="cap" jdbcType="INTEGER" property="cap" />
+    <result column="cap_kg" jdbcType="DECIMAL" property="capKg" />
+    <result column="cap_cbm" jdbcType="DECIMAL" property="capCbm" />
+    <result column="cap_item" jdbcType="INTEGER" property="capItem" />
+    <result column="width" jdbcType="DECIMAL" property="width" />
+    <result column="height" jdbcType="DECIMAL" property="height" />
+    <result column="depth" jdbcType="DECIMAL" property="depth" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="wt" jdbcType="INTEGER" property="wt" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage">
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, wid, pid, type, status, name, code, cx, cy, cz, cap, cap_kg, cap_cbm, cap_item, 
+    width, height, depth, bwf, wt
+  </sql>
+  <sql id="Blob_Column_List">
+    notes, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from storage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage" useGeneratedKeys="true">
+    insert into storage (wid, pid, type, 
+      status, name, code, 
+      cx, cy, cz, cap, 
+      cap_kg, cap_cbm, cap_item, 
+      width, height, depth, 
+      bwf, wt, notes, 
+      meta)
+    values (#{wid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{cx,jdbcType=INTEGER}, #{cy,jdbcType=INTEGER}, #{cz,jdbcType=INTEGER}, #{cap,jdbcType=INTEGER}, 
+      #{capKg,jdbcType=DECIMAL}, #{capCbm,jdbcType=DECIMAL}, #{capItem,jdbcType=INTEGER}, 
+      #{width,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{depth,jdbcType=DECIMAL}, 
+      #{bwf,jdbcType=INTEGER}, #{wt,jdbcType=INTEGER}, #{notes,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage" useGeneratedKeys="true">
+    insert into storage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        wid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="cx != null">
+        cx,
+      </if>
+      <if test="cy != null">
+        cy,
+      </if>
+      <if test="cz != null">
+        cz,
+      </if>
+      <if test="cap != null">
+        cap,
+      </if>
+      <if test="capKg != null">
+        cap_kg,
+      </if>
+      <if test="capCbm != null">
+        cap_cbm,
+      </if>
+      <if test="capItem != null">
+        cap_item,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="depth != null">
+        depth,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="wt != null">
+        wt,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wid != null">
+        #{wid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cx != null">
+        #{cx,jdbcType=INTEGER},
+      </if>
+      <if test="cy != null">
+        #{cy,jdbcType=INTEGER},
+      </if>
+      <if test="cz != null">
+        #{cz,jdbcType=INTEGER},
+      </if>
+      <if test="cap != null">
+        #{cap,jdbcType=INTEGER},
+      </if>
+      <if test="capKg != null">
+        #{capKg,jdbcType=DECIMAL},
+      </if>
+      <if test="capCbm != null">
+        #{capCbm,jdbcType=DECIMAL},
+      </if>
+      <if test="capItem != null">
+        #{capItem,jdbcType=INTEGER},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="depth != null">
+        #{depth,jdbcType=DECIMAL},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="wt != null">
+        #{wt,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage">
+    update storage
+    <set>
+      <if test="wid != null">
+        wid = #{wid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cx != null">
+        cx = #{cx,jdbcType=INTEGER},
+      </if>
+      <if test="cy != null">
+        cy = #{cy,jdbcType=INTEGER},
+      </if>
+      <if test="cz != null">
+        cz = #{cz,jdbcType=INTEGER},
+      </if>
+      <if test="cap != null">
+        cap = #{cap,jdbcType=INTEGER},
+      </if>
+      <if test="capKg != null">
+        cap_kg = #{capKg,jdbcType=DECIMAL},
+      </if>
+      <if test="capCbm != null">
+        cap_cbm = #{capCbm,jdbcType=DECIMAL},
+      </if>
+      <if test="capItem != null">
+        cap_item = #{capItem,jdbcType=INTEGER},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="depth != null">
+        depth = #{depth,jdbcType=DECIMAL},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="wt != null">
+        wt = #{wt,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage">
+    update storage
+    set wid = #{wid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      cx = #{cx,jdbcType=INTEGER},
+      cy = #{cy,jdbcType=INTEGER},
+      cz = #{cz,jdbcType=INTEGER},
+      cap = #{cap,jdbcType=INTEGER},
+      cap_kg = #{capKg,jdbcType=DECIMAL},
+      cap_cbm = #{capCbm,jdbcType=DECIMAL},
+      cap_item = #{capItem,jdbcType=INTEGER},
+      width = #{width,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      depth = #{depth,jdbcType=DECIMAL},
+      bwf = #{bwf,jdbcType=INTEGER},
+      wt = #{wt,jdbcType=INTEGER},
+      notes = #{notes,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Storage">
+    update storage
+    set wid = #{wid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      cx = #{cx,jdbcType=INTEGER},
+      cy = #{cy,jdbcType=INTEGER},
+      cz = #{cz,jdbcType=INTEGER},
+      cap = #{cap,jdbcType=INTEGER},
+      cap_kg = #{capKg,jdbcType=DECIMAL},
+      cap_cbm = #{capCbm,jdbcType=DECIMAL},
+      cap_item = #{capItem,jdbcType=INTEGER},
+      width = #{width,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      depth = #{depth,jdbcType=DECIMAL},
+      bwf = #{bwf,jdbcType=INTEGER},
+      wt = #{wt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PoliHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
+    <result column="poli_trn" jdbcType="VARCHAR" property="poliTrn" />
+    <result column="poli_token" jdbcType="VARCHAR" property="poliToken" />
+    <result column="payed_time" jdbcType="TIMESTAMP" property="payedTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, invoice_id, poli_trn, poli_token, payed_time, create_time, result
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from poli_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from poli_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory" useGeneratedKeys="true">
+    insert into poli_history (invoice_id, poli_trn, poli_token, 
+      payed_time, create_time, result, 
+      meta)
+    values (#{invoiceId,jdbcType=INTEGER}, #{poliTrn,jdbcType=VARCHAR}, #{poliToken,jdbcType=VARCHAR}, 
+      #{payedTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{result,jdbcType=VARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory" useGeneratedKeys="true">
+    insert into poli_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        invoice_id,
+      </if>
+      <if test="poliTrn != null">
+        poli_trn,
+      </if>
+      <if test="poliToken != null">
+        poli_token,
+      </if>
+      <if test="payedTime != null">
+        payed_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="poliTrn != null">
+        #{poliTrn,jdbcType=VARCHAR},
+      </if>
+      <if test="poliToken != null">
+        #{poliToken,jdbcType=VARCHAR},
+      </if>
+      <if test="payedTime != null">
+        #{payedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory">
+    update poli_history
+    <set>
+      <if test="invoiceId != null">
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="poliTrn != null">
+        poli_trn = #{poliTrn,jdbcType=VARCHAR},
+      </if>
+      <if test="poliToken != null">
+        poli_token = #{poliToken,jdbcType=VARCHAR},
+      </if>
+      <if test="payedTime != null">
+        payed_time = #{payedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory">
+    update poli_history
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      poli_trn = #{poliTrn,jdbcType=VARCHAR},
+      poli_token = #{poliToken,jdbcType=VARCHAR},
+      payed_time = #{payedTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PoliHistory">
+    update poli_history
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      poli_trn = #{poliTrn,jdbcType=VARCHAR},
+      poli_token = #{poliToken,jdbcType=VARCHAR},
+      payed_time = #{payedTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

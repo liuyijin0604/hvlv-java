@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.DisputeLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="flag" jdbcType="TINYINT" property="flag" />
+    <result column="dispute_id" jdbcType="INTEGER" property="disputeId" />
+    <result column="si_reconcile_line_id" jdbcType="INTEGER" property="siReconcileLineId" />
+    <result column="dispute_amount_ex_gst" jdbcType="DECIMAL" property="disputeAmountExGst" />
+    <result column="credit_amount_ex_gst" jdbcType="DECIMAL" property="creditAmountExGst" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, status, flag, dispute_id, si_reconcile_line_id, dispute_amount_ex_gst, 
+    credit_amount_ex_gst, dpmt
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dispute_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dispute_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine" useGeneratedKeys="true">
+    insert into dispute_line (type, status, flag, 
+      dispute_id, si_reconcile_line_id, dispute_amount_ex_gst, 
+      credit_amount_ex_gst, dpmt, meta, 
+      note)
+    values (#{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{flag,jdbcType=TINYINT}, 
+      #{disputeId,jdbcType=INTEGER}, #{siReconcileLineId,jdbcType=INTEGER}, #{disputeAmountExGst,jdbcType=DECIMAL}, 
+      #{creditAmountExGst,jdbcType=DECIMAL}, #{dpmt,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}, 
+      #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine" useGeneratedKeys="true">
+    insert into dispute_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="disputeId != null">
+        dispute_id,
+      </if>
+      <if test="siReconcileLineId != null">
+        si_reconcile_line_id,
+      </if>
+      <if test="disputeAmountExGst != null">
+        dispute_amount_ex_gst,
+      </if>
+      <if test="creditAmountExGst != null">
+        credit_amount_ex_gst,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="disputeId != null">
+        #{disputeId,jdbcType=INTEGER},
+      </if>
+      <if test="siReconcileLineId != null">
+        #{siReconcileLineId,jdbcType=INTEGER},
+      </if>
+      <if test="disputeAmountExGst != null">
+        #{disputeAmountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="creditAmountExGst != null">
+        #{creditAmountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine">
+    update dispute_line
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="disputeId != null">
+        dispute_id = #{disputeId,jdbcType=INTEGER},
+      </if>
+      <if test="siReconcileLineId != null">
+        si_reconcile_line_id = #{siReconcileLineId,jdbcType=INTEGER},
+      </if>
+      <if test="disputeAmountExGst != null">
+        dispute_amount_ex_gst = #{disputeAmountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="creditAmountExGst != null">
+        credit_amount_ex_gst = #{creditAmountExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine">
+    update dispute_line
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=TINYINT},
+      dispute_id = #{disputeId,jdbcType=INTEGER},
+      si_reconcile_line_id = #{siReconcileLineId,jdbcType=INTEGER},
+      dispute_amount_ex_gst = #{disputeAmountExGst,jdbcType=DECIMAL},
+      credit_amount_ex_gst = #{creditAmountExGst,jdbcType=DECIMAL},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DisputeLine">
+    update dispute_line
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=TINYINT},
+      dispute_id = #{disputeId,jdbcType=INTEGER},
+      si_reconcile_line_id = #{siReconcileLineId,jdbcType=INTEGER},
+      dispute_amount_ex_gst = #{disputeAmountExGst,jdbcType=DECIMAL},
+      credit_amount_ex_gst = #{creditAmountExGst,jdbcType=DECIMAL},
+      dpmt = #{dpmt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

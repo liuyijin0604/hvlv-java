@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentQuestionSubmitMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ticket" jdbcType="VARCHAR" property="ticket" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="faq" jdbcType="VARCHAR" property="faq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit">
+    <result column="c_note" jdbcType="LONGVARCHAR" property="cNote" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ticket, date, org_id, faq, email, phone, type
+  </sql>
+  <sql id="Blob_Column_List">
+    c_note, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_question_submit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_question_submit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit" useGeneratedKeys="true">
+    insert into shipment_question_submit (ticket, date, org_id, 
+      faq, email, phone, 
+      type, c_note, meta
+      )
+    values (#{ticket,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{orgId,jdbcType=INTEGER}, 
+      #{faq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{cNote,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit" useGeneratedKeys="true">
+    insert into shipment_question_submit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ticket != null">
+        ticket,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="faq != null">
+        faq,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="cNote != null">
+        c_note,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ticket != null">
+        #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="faq != null">
+        #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cNote != null">
+        #{cNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit">
+    update shipment_question_submit
+    <set>
+      <if test="ticket != null">
+        ticket = #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="faq != null">
+        faq = #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="cNote != null">
+        c_note = #{cNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit">
+    update shipment_question_submit
+    set ticket = #{ticket,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      org_id = #{orgId,jdbcType=INTEGER},
+      faq = #{faq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      c_note = #{cNote,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestionSubmit">
+    update shipment_question_submit
+    set ticket = #{ticket,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      org_id = #{orgId,jdbcType=INTEGER},
+      faq = #{faq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

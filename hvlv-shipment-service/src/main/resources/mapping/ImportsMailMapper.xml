@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportsMailMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="link_id" jdbcType="INTEGER" property="linkId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="from_email" jdbcType="VARCHAR" property="fromEmail" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="to_email" jdbcType="VARCHAR" property="toEmail" />
+    <result column="to_name" jdbcType="VARCHAR" property="toName" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="cc_email" jdbcType="VARCHAR" property="ccEmail" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="flag" jdbcType="BIT" property="flag" />
+    <result column="from_flag" jdbcType="TINYINT" property="fromFlag" />
+    <result column="is3pl" jdbcType="INTEGER" property="is3pl" />
+    <result column="ticket" jdbcType="VARCHAR" property="ticket" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail">
+    <result column="subject" jdbcType="LONGVARCHAR" property="subject" />
+    <result column="plain_body" jdbcType="LONGVARCHAR" property="plainBody" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, link_id, type, no, from_email, from_name, to_email, to_name, op_id, cc_email, 
+    uid, create_time, date, status, flag, from_flag, is3pl, ticket
+  </sql>
+  <sql id="Blob_Column_List">
+    subject, plain_body, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from imports_mail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from imports_mail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail" useGeneratedKeys="true">
+    insert into imports_mail (link_id, type, no, 
+      from_email, from_name, to_email, 
+      to_name, op_id, cc_email, 
+      uid, create_time, date, 
+      status, flag, from_flag, 
+      is3pl, ticket, subject, 
+      plain_body, meta)
+    values (#{linkId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, 
+      #{fromEmail,jdbcType=VARCHAR}, #{fromName,jdbcType=VARCHAR}, #{toEmail,jdbcType=VARCHAR}, 
+      #{toName,jdbcType=VARCHAR}, #{opId,jdbcType=INTEGER}, #{ccEmail,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{date,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{flag,jdbcType=BIT}, #{fromFlag,jdbcType=TINYINT}, 
+      #{is3pl,jdbcType=INTEGER}, #{ticket,jdbcType=VARCHAR}, #{subject,jdbcType=LONGVARCHAR}, 
+      #{plainBody,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail" useGeneratedKeys="true">
+    insert into imports_mail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="fromEmail != null">
+        from_email,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="toEmail != null">
+        to_email,
+      </if>
+      <if test="toName != null">
+        to_name,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="ccEmail != null">
+        cc_email,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="fromFlag != null">
+        from_flag,
+      </if>
+      <if test="is3pl != null">
+        is3pl,
+      </if>
+      <if test="ticket != null">
+        ticket,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="plainBody != null">
+        plain_body,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="fromEmail != null">
+        #{fromEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="toEmail != null">
+        #{toEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        #{toName,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="ccEmail != null">
+        #{ccEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIT},
+      </if>
+      <if test="fromFlag != null">
+        #{fromFlag,jdbcType=TINYINT},
+      </if>
+      <if test="is3pl != null">
+        #{is3pl,jdbcType=INTEGER},
+      </if>
+      <if test="ticket != null">
+        #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="plainBody != null">
+        #{plainBody,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail">
+    update imports_mail
+    <set>
+      <if test="linkId != null">
+        link_id = #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="fromEmail != null">
+        from_email = #{fromEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="toEmail != null">
+        to_email = #{toEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        to_name = #{toName,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="ccEmail != null">
+        cc_email = #{ccEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=BIT},
+      </if>
+      <if test="fromFlag != null">
+        from_flag = #{fromFlag,jdbcType=TINYINT},
+      </if>
+      <if test="is3pl != null">
+        is3pl = #{is3pl,jdbcType=INTEGER},
+      </if>
+      <if test="ticket != null">
+        ticket = #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="plainBody != null">
+        plain_body = #{plainBody,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail">
+    update imports_mail
+    set link_id = #{linkId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      from_email = #{fromEmail,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      to_email = #{toEmail,jdbcType=VARCHAR},
+      to_name = #{toName,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=INTEGER},
+      cc_email = #{ccEmail,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      flag = #{flag,jdbcType=BIT},
+      from_flag = #{fromFlag,jdbcType=TINYINT},
+      is3pl = #{is3pl,jdbcType=INTEGER},
+      ticket = #{ticket,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=LONGVARCHAR},
+      plain_body = #{plainBody,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMail">
+    update imports_mail
+    set link_id = #{linkId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      from_email = #{fromEmail,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      to_email = #{toEmail,jdbcType=VARCHAR},
+      to_name = #{toName,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=INTEGER},
+      cc_email = #{ccEmail,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      flag = #{flag,jdbcType=BIT},
+      from_flag = #{fromFlag,jdbcType=TINYINT},
+      is3pl = #{is3pl,jdbcType=INTEGER},
+      ticket = #{ticket,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

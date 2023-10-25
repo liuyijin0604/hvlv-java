@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CargoDeliveryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoDeliveryInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="delivery_booking_time" jdbcType="TIMESTAMP" property="deliveryBookingTime" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shipment_id, delivery_booking_time, model
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cargo_delivery_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cargo_delivery_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoDeliveryInfo" useGeneratedKeys="true">
+    insert into cargo_delivery_info (shipment_id, delivery_booking_time, 
+      model)
+    values (#{shipmentId,jdbcType=INTEGER}, #{deliveryBookingTime,jdbcType=TIMESTAMP}, 
+      #{model,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoDeliveryInfo" useGeneratedKeys="true">
+    insert into cargo_delivery_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="deliveryBookingTime != null">
+        delivery_booking_time,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryBookingTime != null">
+        #{deliveryBookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoDeliveryInfo">
+    update cargo_delivery_info
+    <set>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryBookingTime != null">
+        delivery_booking_time = #{deliveryBookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoDeliveryInfo">
+    update cargo_delivery_info
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      delivery_booking_time = #{deliveryBookingTime,jdbcType=TIMESTAMP},
+      model = #{model,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

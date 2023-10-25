@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ErpVendorsMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+    <result column="min_qty" jdbcType="INTEGER" property="minQty" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="valid_from_time" jdbcType="TIMESTAMP" property="validFromTime" />
+    <result column="valid_to_time" jdbcType="TIMESTAMP" property="validToTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors">
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, product_name, product_code, min_qty, price, valid_from_time, valid_to_time
+  </sql>
+  <sql id="Blob_Column_List">
+    notes
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from erp_vendors
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from erp_vendors
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors" useGeneratedKeys="true">
+    insert into erp_vendors (name, product_name, product_code, 
+      min_qty, price, valid_from_time, 
+      valid_to_time, notes)
+    values (#{name,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR}, 
+      #{minQty,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{validFromTime,jdbcType=TIMESTAMP}, 
+      #{validToTime,jdbcType=TIMESTAMP}, #{notes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors" useGeneratedKeys="true">
+    insert into erp_vendors
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productCode != null">
+        product_code,
+      </if>
+      <if test="minQty != null">
+        min_qty,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="validFromTime != null">
+        valid_from_time,
+      </if>
+      <if test="validToTime != null">
+        valid_to_time,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="minQty != null">
+        #{minQty,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="validFromTime != null">
+        #{validFromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validToTime != null">
+        #{validToTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors">
+    update erp_vendors
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="minQty != null">
+        min_qty = #{minQty,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="validFromTime != null">
+        valid_from_time = #{validFromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validToTime != null">
+        valid_to_time = #{validToTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors">
+    update erp_vendors
+    set name = #{name,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      min_qty = #{minQty,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      valid_from_time = #{validFromTime,jdbcType=TIMESTAMP},
+      valid_to_time = #{validToTime,jdbcType=TIMESTAMP},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpVendors">
+    update erp_vendors
+    set name = #{name,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      min_qty = #{minQty,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      valid_from_time = #{validFromTime,jdbcType=TIMESTAMP},
+      valid_to_time = #{validToTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

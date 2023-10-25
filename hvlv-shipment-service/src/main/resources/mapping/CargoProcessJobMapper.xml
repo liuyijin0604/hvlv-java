@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CargoProcessJobMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="job_no" jdbcType="VARCHAR" property="jobNo" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="driver_id" jdbcType="INTEGER" property="driverId" />
+    <result column="gate_pass_id" jdbcType="INTEGER" property="gatePassId" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="vehicle_id" jdbcType="INTEGER" property="vehicleId" />
+    <result column="comp_date" jdbcType="TIMESTAMP" property="compDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_no, job_name, description, status, created, dpt_id, type, user_id, driver_id, 
+    gate_pass_id, region, vehicle_id, comp_date
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cargo_process_job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cargo_process_job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob" useGeneratedKeys="true">
+    insert into cargo_process_job (job_no, job_name, description, 
+      status, created, dpt_id, 
+      type, user_id, driver_id, 
+      gate_pass_id, region, vehicle_id, 
+      comp_date, meta)
+    values (#{jobNo,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{dptId,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{driverId,jdbcType=INTEGER}, 
+      #{gatePassId,jdbcType=INTEGER}, #{region,jdbcType=VARCHAR}, #{vehicleId,jdbcType=INTEGER}, 
+      #{compDate,jdbcType=TIMESTAMP}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob" useGeneratedKeys="true">
+    insert into cargo_process_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobNo != null">
+        job_no,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="driverId != null">
+        driver_id,
+      </if>
+      <if test="gatePassId != null">
+        gate_pass_id,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id,
+      </if>
+      <if test="compDate != null">
+        comp_date,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobNo != null">
+        #{jobNo,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="driverId != null">
+        #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="gatePassId != null">
+        #{gatePassId,jdbcType=INTEGER},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="compDate != null">
+        #{compDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob">
+    update cargo_process_job
+    <set>
+      <if test="jobNo != null">
+        job_no = #{jobNo,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="driverId != null">
+        driver_id = #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="gatePassId != null">
+        gate_pass_id = #{gatePassId,jdbcType=INTEGER},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="compDate != null">
+        comp_date = #{compDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob">
+    update cargo_process_job
+    set job_no = #{jobNo,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      driver_id = #{driverId,jdbcType=INTEGER},
+      gate_pass_id = #{gatePassId,jdbcType=INTEGER},
+      region = #{region,jdbcType=VARCHAR},
+      vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      comp_date = #{compDate,jdbcType=TIMESTAMP},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJob">
+    update cargo_process_job
+    set job_no = #{jobNo,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      driver_id = #{driverId,jdbcType=INTEGER},
+      gate_pass_id = #{gatePassId,jdbcType=INTEGER},
+      region = #{region,jdbcType=VARCHAR},
+      vehicle_id = #{vehicleId,jdbcType=INTEGER},
+      comp_date = #{compDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PlLedgerManagementMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="dpmt" jdbcType="TINYINT" property="dpmt" />
+    <result column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="grp1" jdbcType="VARCHAR" property="grp1" />
+    <result column="grp2" jdbcType="VARCHAR" property="grp2" />
+    <result column="grp3" jdbcType="VARCHAR" property="grp3" />
+    <result column="gl" jdbcType="INTEGER" property="gl" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="amt" jdbcType="DECIMAL" property="amt" />
+    <result column="actual_amt" jdbcType="DECIMAL" property="actualAmt" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="acc" jdbcType="BIT" property="acc" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="zone" jdbcType="VARCHAR" property="zone" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fid, model, org_id, dpt_id, dpmt, lid, grp1, grp2, grp3, gl, date, amt, actual_amt, 
+    gst, acc, weight, zone
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pl_ledger_management
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pl_ledger_management
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement" useGeneratedKeys="true">
+    insert into pl_ledger_management (fid, model, org_id, 
+      dpt_id, dpmt, lid, grp1, 
+      grp2, grp3, gl, date, 
+      amt, actual_amt, gst, 
+      acc, weight, zone, meta
+      )
+    values (#{fid,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER}, 
+      #{dptId,jdbcType=INTEGER}, #{dpmt,jdbcType=TINYINT}, #{lid,jdbcType=INTEGER}, #{grp1,jdbcType=VARCHAR}, 
+      #{grp2,jdbcType=VARCHAR}, #{grp3,jdbcType=VARCHAR}, #{gl,jdbcType=INTEGER}, #{date,jdbcType=DATE}, 
+      #{amt,jdbcType=DECIMAL}, #{actualAmt,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, 
+      #{acc,jdbcType=BIT}, #{weight,jdbcType=DECIMAL}, #{zone,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement" useGeneratedKeys="true">
+    insert into pl_ledger_management
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="lid != null">
+        lid,
+      </if>
+      <if test="grp1 != null">
+        grp1,
+      </if>
+      <if test="grp2 != null">
+        grp2,
+      </if>
+      <if test="grp3 != null">
+        grp3,
+      </if>
+      <if test="gl != null">
+        gl,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="amt != null">
+        amt,
+      </if>
+      <if test="actualAmt != null">
+        actual_amt,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="acc != null">
+        acc,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="zone != null">
+        zone,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="lid != null">
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="grp1 != null">
+        #{grp1,jdbcType=VARCHAR},
+      </if>
+      <if test="grp2 != null">
+        #{grp2,jdbcType=VARCHAR},
+      </if>
+      <if test="grp3 != null">
+        #{grp3,jdbcType=VARCHAR},
+      </if>
+      <if test="gl != null">
+        #{gl,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="actualAmt != null">
+        #{actualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="acc != null">
+        #{acc,jdbcType=BIT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="zone != null">
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement">
+    update pl_ledger_management
+    <set>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="lid != null">
+        lid = #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="grp1 != null">
+        grp1 = #{grp1,jdbcType=VARCHAR},
+      </if>
+      <if test="grp2 != null">
+        grp2 = #{grp2,jdbcType=VARCHAR},
+      </if>
+      <if test="grp3 != null">
+        grp3 = #{grp3,jdbcType=VARCHAR},
+      </if>
+      <if test="gl != null">
+        gl = #{gl,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="amt != null">
+        amt = #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="actualAmt != null">
+        actual_amt = #{actualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="acc != null">
+        acc = #{acc,jdbcType=BIT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="zone != null">
+        zone = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement">
+    update pl_ledger_management
+    set fid = #{fid,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      lid = #{lid,jdbcType=INTEGER},
+      grp1 = #{grp1,jdbcType=VARCHAR},
+      grp2 = #{grp2,jdbcType=VARCHAR},
+      grp3 = #{grp3,jdbcType=VARCHAR},
+      gl = #{gl,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      amt = #{amt,jdbcType=DECIMAL},
+      actual_amt = #{actualAmt,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      acc = #{acc,jdbcType=BIT},
+      weight = #{weight,jdbcType=DECIMAL},
+      zone = #{zone,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PlLedgerManagement">
+    update pl_ledger_management
+    set fid = #{fid,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      lid = #{lid,jdbcType=INTEGER},
+      grp1 = #{grp1,jdbcType=VARCHAR},
+      grp2 = #{grp2,jdbcType=VARCHAR},
+      grp3 = #{grp3,jdbcType=VARCHAR},
+      gl = #{gl,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      amt = #{amt,jdbcType=DECIMAL},
+      actual_amt = #{actualAmt,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      acc = #{acc,jdbcType=BIT},
+      weight = #{weight,jdbcType=DECIMAL},
+      zone = #{zone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.InvoiceTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ref, dpt_id, dpmt, currency, total, gst, status, type
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from invoice_template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invoice_template
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate" useGeneratedKeys="true">
+    insert into invoice_template (ref, dpt_id, dpmt, 
+      currency, total, gst, 
+      status, type, meta
+      )
+    values (#{ref,jdbcType=VARCHAR}, #{dptId,jdbcType=INTEGER}, #{dpmt,jdbcType=INTEGER}, 
+      #{currency,jdbcType=TINYINT}, #{total,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate" useGeneratedKeys="true">
+    insert into invoice_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate">
+    update invoice_template
+    <set>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate">
+    update invoice_template
+    set ref = #{ref,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=TINYINT},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvoiceTemplate">
+    update invoice_template
+    set ref = #{ref,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=TINYINT},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

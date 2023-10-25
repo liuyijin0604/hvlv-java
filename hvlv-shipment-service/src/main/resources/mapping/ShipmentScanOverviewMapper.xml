@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentScanOverviewMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="pre_left_packs" jdbcType="INTEGER" property="preLeftPacks" />
+    <result column="pre_left_weight" jdbcType="REAL" property="preLeftWeight" />
+    <result column="today_packs" jdbcType="INTEGER" property="todayPacks" />
+    <result column="today_weight" jdbcType="REAL" property="todayWeight" />
+    <result column="today_left_packs" jdbcType="INTEGER" property="todayLeftPacks" />
+    <result column="today_left_weight" jdbcType="REAL" property="todayLeftWeight" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, date, dpt_id, pre_left_packs, pre_left_weight, today_packs, today_weight, today_left_packs, 
+    today_left_weight, type
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_scan_overview
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_scan_overview
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview" useGeneratedKeys="true">
+    insert into shipment_scan_overview (date, dpt_id, pre_left_packs, 
+      pre_left_weight, today_packs, today_weight, 
+      today_left_packs, today_left_weight, type, 
+      meta)
+    values (#{date,jdbcType=DATE}, #{dptId,jdbcType=INTEGER}, #{preLeftPacks,jdbcType=INTEGER}, 
+      #{preLeftWeight,jdbcType=REAL}, #{todayPacks,jdbcType=INTEGER}, #{todayWeight,jdbcType=REAL}, 
+      #{todayLeftPacks,jdbcType=INTEGER}, #{todayLeftWeight,jdbcType=REAL}, #{type,jdbcType=INTEGER}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview" useGeneratedKeys="true">
+    insert into shipment_scan_overview
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        date,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="preLeftPacks != null">
+        pre_left_packs,
+      </if>
+      <if test="preLeftWeight != null">
+        pre_left_weight,
+      </if>
+      <if test="todayPacks != null">
+        today_packs,
+      </if>
+      <if test="todayWeight != null">
+        today_weight,
+      </if>
+      <if test="todayLeftPacks != null">
+        today_left_packs,
+      </if>
+      <if test="todayLeftWeight != null">
+        today_left_weight,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="preLeftPacks != null">
+        #{preLeftPacks,jdbcType=INTEGER},
+      </if>
+      <if test="preLeftWeight != null">
+        #{preLeftWeight,jdbcType=REAL},
+      </if>
+      <if test="todayPacks != null">
+        #{todayPacks,jdbcType=INTEGER},
+      </if>
+      <if test="todayWeight != null">
+        #{todayWeight,jdbcType=REAL},
+      </if>
+      <if test="todayLeftPacks != null">
+        #{todayLeftPacks,jdbcType=INTEGER},
+      </if>
+      <if test="todayLeftWeight != null">
+        #{todayLeftWeight,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview">
+    update shipment_scan_overview
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="preLeftPacks != null">
+        pre_left_packs = #{preLeftPacks,jdbcType=INTEGER},
+      </if>
+      <if test="preLeftWeight != null">
+        pre_left_weight = #{preLeftWeight,jdbcType=REAL},
+      </if>
+      <if test="todayPacks != null">
+        today_packs = #{todayPacks,jdbcType=INTEGER},
+      </if>
+      <if test="todayWeight != null">
+        today_weight = #{todayWeight,jdbcType=REAL},
+      </if>
+      <if test="todayLeftPacks != null">
+        today_left_packs = #{todayLeftPacks,jdbcType=INTEGER},
+      </if>
+      <if test="todayLeftWeight != null">
+        today_left_weight = #{todayLeftWeight,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview">
+    update shipment_scan_overview
+    set date = #{date,jdbcType=DATE},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      pre_left_packs = #{preLeftPacks,jdbcType=INTEGER},
+      pre_left_weight = #{preLeftWeight,jdbcType=REAL},
+      today_packs = #{todayPacks,jdbcType=INTEGER},
+      today_weight = #{todayWeight,jdbcType=REAL},
+      today_left_packs = #{todayLeftPacks,jdbcType=INTEGER},
+      today_left_weight = #{todayLeftWeight,jdbcType=REAL},
+      type = #{type,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanOverview">
+    update shipment_scan_overview
+    set date = #{date,jdbcType=DATE},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      pre_left_packs = #{preLeftPacks,jdbcType=INTEGER},
+      pre_left_weight = #{preLeftWeight,jdbcType=REAL},
+      today_packs = #{todayPacks,jdbcType=INTEGER},
+      today_weight = #{todayWeight,jdbcType=REAL},
+      today_left_packs = #{todayLeftPacks,jdbcType=INTEGER},
+      today_left_weight = #{todayLeftWeight,jdbcType=REAL},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

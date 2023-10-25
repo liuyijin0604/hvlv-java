@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportsAmazonPlanMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsAmazonPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="amazon_booking_time" jdbcType="TIMESTAMP" property="amazonBookingTime" />
+    <result column="booking_ref" jdbcType="VARCHAR" property="bookingRef" />
+    <result column="pallet" jdbcType="INTEGER" property="pallet" />
+    <result column="slot" jdbcType="INTEGER" property="slot" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, amazon_booking_time, booking_ref, pallet, slot, user_id, create, dpt_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from imports_amazon_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from imports_amazon_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsAmazonPlan" useGeneratedKeys="true">
+    insert into imports_amazon_plan (amazon_booking_time, booking_ref, 
+      pallet, slot, user_id, 
+      create, dpt_id)
+    values (#{amazonBookingTime,jdbcType=TIMESTAMP}, #{bookingRef,jdbcType=VARCHAR}, 
+      #{pallet,jdbcType=INTEGER}, #{slot,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{create,jdbcType=TIMESTAMP}, #{dptId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsAmazonPlan" useGeneratedKeys="true">
+    insert into imports_amazon_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="amazonBookingTime != null">
+        amazon_booking_time,
+      </if>
+      <if test="bookingRef != null">
+        booking_ref,
+      </if>
+      <if test="pallet != null">
+        pallet,
+      </if>
+      <if test="slot != null">
+        slot,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="amazonBookingTime != null">
+        #{amazonBookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingRef != null">
+        #{bookingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="pallet != null">
+        #{pallet,jdbcType=INTEGER},
+      </if>
+      <if test="slot != null">
+        #{slot,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsAmazonPlan">
+    update imports_amazon_plan
+    <set>
+      <if test="amazonBookingTime != null">
+        amazon_booking_time = #{amazonBookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingRef != null">
+        booking_ref = #{bookingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="pallet != null">
+        pallet = #{pallet,jdbcType=INTEGER},
+      </if>
+      <if test="slot != null">
+        slot = #{slot,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsAmazonPlan">
+    update imports_amazon_plan
+    set amazon_booking_time = #{amazonBookingTime,jdbcType=TIMESTAMP},
+      booking_ref = #{bookingRef,jdbcType=VARCHAR},
+      pallet = #{pallet,jdbcType=INTEGER},
+      slot = #{slot,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      dpt_id = #{dptId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportChargeCodeMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="chargecode" jdbcType="VARCHAR" property="chargecode" />
+    <result column="couriers" jdbcType="VARCHAR" property="couriers" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="charge_wt" jdbcType="BIT" property="chargeWt" />
+    <result column="status_mode" jdbcType="TINYINT" property="statusMode" />
+    <result column="ignore_sac" jdbcType="BIT" property="ignoreSac" />
+    <result column="v_from" jdbcType="TIMESTAMP" property="vFrom" />
+    <result column="v_to" jdbcType="TIMESTAMP" property="vTo" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, type, chargecode, couriers, created, status, charge_wt, status_mode, 
+    ignore_sac, v_from, v_to, note, dpmt, description
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from import_charge_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByChargeCode" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select * from import_charge_code
+    where chargeCode = #{chargecode,jdbcType=VARCHAR}
+  </select>
+  <select id="findByChargecode" parameterType="string" resultType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    SELECT * FROM import_charge_code WHERE chargecode = #{chargecode}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from import_charge_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode" useGeneratedKeys="true">
+    insert into import_charge_code (org_id, type, chargecode, 
+      couriers, created, status, 
+      charge_wt, status_mode, ignore_sac, 
+      v_from, v_to, note, 
+      dpmt, description, meta
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{type,jdbcType=BIT}, #{chargecode,jdbcType=VARCHAR}, 
+      #{couriers,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{chargeWt,jdbcType=BIT}, #{statusMode,jdbcType=TINYINT}, #{ignoreSac,jdbcType=BIT}, 
+      #{vFrom,jdbcType=TIMESTAMP}, #{vTo,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, 
+      #{dpmt,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode" useGeneratedKeys="true">
+    insert into import_charge_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="chargecode != null">
+        chargecode,
+      </if>
+      <if test="couriers != null">
+        couriers,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="chargeWt != null">
+        charge_wt,
+      </if>
+      <if test="statusMode != null">
+        status_mode,
+      </if>
+      <if test="ignoreSac != null">
+        ignore_sac,
+      </if>
+      <if test="vFrom != null">
+        v_from,
+      </if>
+      <if test="vTo != null">
+        v_to,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="chargecode != null">
+        #{chargecode,jdbcType=VARCHAR},
+      </if>
+      <if test="couriers != null">
+        #{couriers,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="chargeWt != null">
+        #{chargeWt,jdbcType=BIT},
+      </if>
+      <if test="statusMode != null">
+        #{statusMode,jdbcType=TINYINT},
+      </if>
+      <if test="ignoreSac != null">
+        #{ignoreSac,jdbcType=BIT},
+      </if>
+      <if test="vFrom != null">
+        #{vFrom,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vTo != null">
+        #{vTo,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    update import_charge_code
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="chargecode != null">
+        chargecode = #{chargecode,jdbcType=VARCHAR},
+      </if>
+      <if test="couriers != null">
+        couriers = #{couriers,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="chargeWt != null">
+        charge_wt = #{chargeWt,jdbcType=BIT},
+      </if>
+      <if test="statusMode != null">
+        status_mode = #{statusMode,jdbcType=TINYINT},
+      </if>
+      <if test="ignoreSac != null">
+        ignore_sac = #{ignoreSac,jdbcType=BIT},
+      </if>
+      <if test="vFrom != null">
+        v_from = #{vFrom,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vTo != null">
+        v_to = #{vTo,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    update import_charge_code
+    set org_id = #{orgId,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      chargecode = #{chargecode,jdbcType=VARCHAR},
+      couriers = #{couriers,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      charge_wt = #{chargeWt,jdbcType=BIT},
+      status_mode = #{statusMode,jdbcType=TINYINT},
+      ignore_sac = #{ignoreSac,jdbcType=BIT},
+      v_from = #{vFrom,jdbcType=TIMESTAMP},
+      v_to = #{vTo,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportChargeCode">
+    update import_charge_code
+    set org_id = #{orgId,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      chargecode = #{chargecode,jdbcType=VARCHAR},
+      couriers = #{couriers,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      charge_wt = #{chargeWt,jdbcType=BIT},
+      status_mode = #{statusMode,jdbcType=TINYINT},
+      ignore_sac = #{ignoreSac,jdbcType=BIT},
+      v_from = #{vFrom,jdbcType=TIMESTAMP},
+      v_to = #{vTo,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.HunterPortcodeMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.HunterPortcode">
+    <id column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <id column="postcode" jdbcType="INTEGER" property="postcode" />
+    <result column="portcode" jdbcType="VARCHAR" property="portcode" />
+    <result column="zonecode" jdbcType="INTEGER" property="zonecode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    suburb, postcode, portcode, zonecode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hunter_portcode
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from hunter_portcode
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.HunterPortcode">
+    insert into hunter_portcode (suburb, postcode, portcode, 
+      zonecode)
+    values (#{suburb,jdbcType=VARCHAR}, #{postcode,jdbcType=INTEGER}, #{portcode,jdbcType=VARCHAR}, 
+      #{zonecode,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.HunterPortcode">
+    insert into hunter_portcode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="portcode != null">
+        portcode,
+      </if>
+      <if test="zonecode != null">
+        zonecode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=INTEGER},
+      </if>
+      <if test="portcode != null">
+        #{portcode,jdbcType=VARCHAR},
+      </if>
+      <if test="zonecode != null">
+        #{zonecode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.HunterPortcode">
+    update hunter_portcode
+    <set>
+      <if test="portcode != null">
+        portcode = #{portcode,jdbcType=VARCHAR},
+      </if>
+      <if test="zonecode != null">
+        zonecode = #{zonecode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.HunterPortcode">
+    update hunter_portcode
+    set portcode = #{portcode,jdbcType=VARCHAR},
+      zonecode = #{zonecode,jdbcType=INTEGER}
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=INTEGER}
+  </update>
+</mapper>

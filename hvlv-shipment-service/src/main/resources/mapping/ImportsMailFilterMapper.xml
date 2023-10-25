@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportsMailFilterMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMailFilter">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="from_email" jdbcType="VARCHAR" property="fromEmail" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="to_email" jdbcType="VARCHAR" property="toEmail" />
+    <result column="cc_email" jdbcType="VARCHAR" property="ccEmail" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="is3pl" jdbcType="INTEGER" property="is3pl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, from_email, from_name, subject, to_email, cc_email, type, tel, note, is3pl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from imports_mail_filter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from imports_mail_filter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMailFilter" useGeneratedKeys="true">
+    insert into imports_mail_filter (from_email, from_name, subject, 
+      to_email, cc_email, type, 
+      tel, note, is3pl)
+    values (#{fromEmail,jdbcType=VARCHAR}, #{fromName,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{toEmail,jdbcType=VARCHAR}, #{ccEmail,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{tel,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{is3pl,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMailFilter" useGeneratedKeys="true">
+    insert into imports_mail_filter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fromEmail != null">
+        from_email,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="toEmail != null">
+        to_email,
+      </if>
+      <if test="ccEmail != null">
+        cc_email,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="is3pl != null">
+        is3pl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fromEmail != null">
+        #{fromEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="toEmail != null">
+        #{toEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ccEmail != null">
+        #{ccEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="is3pl != null">
+        #{is3pl,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMailFilter">
+    update imports_mail_filter
+    <set>
+      <if test="fromEmail != null">
+        from_email = #{fromEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="toEmail != null">
+        to_email = #{toEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ccEmail != null">
+        cc_email = #{ccEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="is3pl != null">
+        is3pl = #{is3pl,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsMailFilter">
+    update imports_mail_filter
+    set from_email = #{fromEmail,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      to_email = #{toEmail,jdbcType=VARCHAR},
+      cc_email = #{ccEmail,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      is3pl = #{is3pl,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

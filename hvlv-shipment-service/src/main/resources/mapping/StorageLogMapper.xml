@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.StorageLogMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.StorageLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="in_dt" jdbcType="TIMESTAMP" property="inDt" />
+    <result column="out_dt" jdbcType="TIMESTAMP" property="outDt" />
+    <result column="ckd" jdbcType="BIT" property="ckd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sid, model, fid, in_dt, out_dt, ckd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from storage_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from storage_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.StorageLog" useGeneratedKeys="true">
+    insert into storage_log (sid, model, fid, 
+      in_dt, out_dt, ckd)
+    values (#{sid,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}, 
+      #{inDt,jdbcType=TIMESTAMP}, #{outDt,jdbcType=TIMESTAMP}, #{ckd,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.StorageLog" useGeneratedKeys="true">
+    insert into storage_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="inDt != null">
+        in_dt,
+      </if>
+      <if test="outDt != null">
+        out_dt,
+      </if>
+      <if test="ckd != null">
+        ckd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="inDt != null">
+        #{inDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outDt != null">
+        #{outDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ckd != null">
+        #{ckd,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.StorageLog">
+    update storage_log
+    <set>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="inDt != null">
+        in_dt = #{inDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outDt != null">
+        out_dt = #{outDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ckd != null">
+        ckd = #{ckd,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.StorageLog">
+    update storage_log
+    set sid = #{sid,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      in_dt = #{inDt,jdbcType=TIMESTAMP},
+      out_dt = #{outDt,jdbcType=TIMESTAMP},
+      ckd = #{ckd,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

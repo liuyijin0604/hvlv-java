@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="man_id" jdbcType="INTEGER" property="manId" />
+    <result column="rec_id" jdbcType="INTEGER" property="recId" />
+    <result column="odpt_id" jdbcType="INTEGER" property="odptId" />
+    <result column="ddpt_id" jdbcType="INTEGER" property="ddptId" />
+    <result column="cnor_id" jdbcType="INTEGER" property="cnorId" />
+    <result column="cnee_id" jdbcType="INTEGER" property="cneeId" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="notify_id" jdbcType="INTEGER" property="notifyId" />
+    <result column="zr_id" jdbcType="INTEGER" property="zrId" />
+    <result column="ot_id" jdbcType="INTEGER" property="otId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="styp" jdbcType="TINYINT" property="styp" />
+    <result column="pickup" jdbcType="BIT" property="pickup" />
+    <result column="hbn" jdbcType="VARCHAR" property="hbn" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="cref" jdbcType="VARCHAR" property="cref" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="value" jdbcType="DECIMAL" property="value" />
+    <result column="dvalue" jdbcType="DECIMAL" property="dvalue" />
+    <result column="tariff" jdbcType="REAL" property="tariff" />
+    <result column="insurance" jdbcType="REAL" property="insurance" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="wtck" jdbcType="DECIMAL" property="wtck" />
+    <result column="cbm" jdbcType="DECIMAL" property="cbm" />
+    <result column="sac" jdbcType="BIT" property="sac" />
+    <result column="exm" jdbcType="VARCHAR" property="exm" />
+    <result column="can" jdbcType="VARCHAR" property="can" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="cbwf" jdbcType="INTEGER" property="cbwf" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="scan_no" jdbcType="INTEGER" property="scanNo" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    <result column="packages" jdbcType="LONGVARCHAR" property="packages" />
+    <result column="items" jdbcType="LONGVARCHAR" property="items" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="scan" jdbcType="LONGVARCHAR" property="scan" />
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, owner_id, agent_id, consol_id, man_id, rec_id, odpt_id, ddpt_id, cnor_id, cnee_id, 
+    receiver_id, notify_id, zr_id, ot_id, status, type, styp, pickup, hbn, ref, cref, 
+    pkg, state, postcode, value, dvalue, tariff, insurance, currency, weight, wtck, cbm, 
+    sac, exm, can, bwf, cbwf, created, scan_no
+  </sql>
+  <sql id="Blob_Column_List">
+    packages, items, meta, scan, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="countShipmentByHbnAndAgentId" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM shipment
+    WHERE hbn = #{hbn} AND agent_id = #{agentId} AND status &lt; 100
+  </select>
+  <select id="countShipmentByRef" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM shipment
+    WHERE ref = #{ref}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment" useGeneratedKeys="true">
+    insert into shipment (owner_id, agent_id, consol_id, 
+      man_id, rec_id, odpt_id, 
+      ddpt_id, cnor_id, cnee_id, 
+      receiver_id, notify_id, zr_id, 
+      ot_id, status, type, 
+      styp, pickup, hbn, ref, 
+      cref, pkg, state, postcode, 
+      value, dvalue, tariff, 
+      insurance, currency, weight, 
+      wtck, cbm, sac, exm, 
+      can, bwf, cbwf, created, 
+      scan_no, packages, items, 
+      meta, scan, note
+      )
+    values (#{ownerId,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, #{consolId,jdbcType=INTEGER}, 
+      #{manId,jdbcType=INTEGER}, #{recId,jdbcType=INTEGER}, #{odptId,jdbcType=INTEGER}, 
+      #{ddptId,jdbcType=INTEGER}, #{cnorId,jdbcType=INTEGER}, #{cneeId,jdbcType=INTEGER}, 
+      #{receiverId,jdbcType=INTEGER}, #{notifyId,jdbcType=INTEGER}, #{zrId,jdbcType=INTEGER}, 
+      #{otId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{styp,jdbcType=TINYINT}, #{pickup,jdbcType=BIT}, #{hbn,jdbcType=VARCHAR}, #{ref,jdbcType=VARCHAR}, 
+      #{cref,jdbcType=VARCHAR}, #{pkg,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{value,jdbcType=DECIMAL}, #{dvalue,jdbcType=DECIMAL}, #{tariff,jdbcType=REAL}, 
+      #{insurance,jdbcType=REAL}, #{currency,jdbcType=TINYINT}, #{weight,jdbcType=DECIMAL}, 
+      #{wtck,jdbcType=DECIMAL}, #{cbm,jdbcType=DECIMAL}, #{sac,jdbcType=BIT}, #{exm,jdbcType=VARCHAR}, 
+      #{can,jdbcType=VARCHAR}, #{bwf,jdbcType=INTEGER}, #{cbwf,jdbcType=INTEGER}, #{created,jdbcType=DATE}, 
+      #{scanNo,jdbcType=INTEGER}, #{packages,jdbcType=LONGVARCHAR}, #{items,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR}, #{scan,jdbcType=LONGVARCHAR}, #{note,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment" useGeneratedKeys="true">
+    insert into shipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="manId != null">
+        man_id,
+      </if>
+      <if test="recId != null">
+        rec_id,
+      </if>
+      <if test="odptId != null">
+        odpt_id,
+      </if>
+      <if test="ddptId != null">
+        ddpt_id,
+      </if>
+      <if test="cnorId != null">
+        cnor_id,
+      </if>
+      <if test="cneeId != null">
+        cnee_id,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="notifyId != null">
+        notify_id,
+      </if>
+      <if test="zrId != null">
+        zr_id,
+      </if>
+      <if test="otId != null">
+        ot_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="styp != null">
+        styp,
+      </if>
+      <if test="pickup != null">
+        pickup,
+      </if>
+      <if test="hbn != null">
+        hbn,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="cref != null">
+        cref,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="dvalue != null">
+        dvalue,
+      </if>
+      <if test="tariff != null">
+        tariff,
+      </if>
+      <if test="insurance != null">
+        insurance,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="wtck != null">
+        wtck,
+      </if>
+      <if test="cbm != null">
+        cbm,
+      </if>
+      <if test="sac != null">
+        sac,
+      </if>
+      <if test="exm != null">
+        exm,
+      </if>
+      <if test="can != null">
+        can,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="cbwf != null">
+        cbwf,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="scanNo != null">
+        scan_no,
+      </if>
+      <if test="packages != null">
+        packages,
+      </if>
+      <if test="items != null">
+        items,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="scan != null">
+        scan,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="manId != null">
+        #{manId,jdbcType=INTEGER},
+      </if>
+      <if test="recId != null">
+        #{recId,jdbcType=INTEGER},
+      </if>
+      <if test="odptId != null">
+        #{odptId,jdbcType=INTEGER},
+      </if>
+      <if test="ddptId != null">
+        #{ddptId,jdbcType=INTEGER},
+      </if>
+      <if test="cnorId != null">
+        #{cnorId,jdbcType=INTEGER},
+      </if>
+      <if test="cneeId != null">
+        #{cneeId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="notifyId != null">
+        #{notifyId,jdbcType=INTEGER},
+      </if>
+      <if test="zrId != null">
+        #{zrId,jdbcType=INTEGER},
+      </if>
+      <if test="otId != null">
+        #{otId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="styp != null">
+        #{styp,jdbcType=TINYINT},
+      </if>
+      <if test="pickup != null">
+        #{pickup,jdbcType=BIT},
+      </if>
+      <if test="hbn != null">
+        #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cref != null">
+        #{cref,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="dvalue != null">
+        #{dvalue,jdbcType=DECIMAL},
+      </if>
+      <if test="tariff != null">
+        #{tariff,jdbcType=REAL},
+      </if>
+      <if test="insurance != null">
+        #{insurance,jdbcType=REAL},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="wtck != null">
+        #{wtck,jdbcType=DECIMAL},
+      </if>
+      <if test="cbm != null">
+        #{cbm,jdbcType=DECIMAL},
+      </if>
+      <if test="sac != null">
+        #{sac,jdbcType=BIT},
+      </if>
+      <if test="exm != null">
+        #{exm,jdbcType=VARCHAR},
+      </if>
+      <if test="can != null">
+        #{can,jdbcType=VARCHAR},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="cbwf != null">
+        #{cbwf,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="scanNo != null">
+        #{scanNo,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null">
+        #{packages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="items != null">
+        #{items,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scan != null">
+        #{scan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    update shipment
+    <set>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="manId != null">
+        man_id = #{manId,jdbcType=INTEGER},
+      </if>
+      <if test="recId != null">
+        rec_id = #{recId,jdbcType=INTEGER},
+      </if>
+      <if test="odptId != null">
+        odpt_id = #{odptId,jdbcType=INTEGER},
+      </if>
+      <if test="ddptId != null">
+        ddpt_id = #{ddptId,jdbcType=INTEGER},
+      </if>
+      <if test="cnorId != null">
+        cnor_id = #{cnorId,jdbcType=INTEGER},
+      </if>
+      <if test="cneeId != null">
+        cnee_id = #{cneeId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="notifyId != null">
+        notify_id = #{notifyId,jdbcType=INTEGER},
+      </if>
+      <if test="zrId != null">
+        zr_id = #{zrId,jdbcType=INTEGER},
+      </if>
+      <if test="otId != null">
+        ot_id = #{otId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="styp != null">
+        styp = #{styp,jdbcType=TINYINT},
+      </if>
+      <if test="pickup != null">
+        pickup = #{pickup,jdbcType=BIT},
+      </if>
+      <if test="hbn != null">
+        hbn = #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cref != null">
+        cref = #{cref,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="dvalue != null">
+        dvalue = #{dvalue,jdbcType=DECIMAL},
+      </if>
+      <if test="tariff != null">
+        tariff = #{tariff,jdbcType=REAL},
+      </if>
+      <if test="insurance != null">
+        insurance = #{insurance,jdbcType=REAL},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="wtck != null">
+        wtck = #{wtck,jdbcType=DECIMAL},
+      </if>
+      <if test="cbm != null">
+        cbm = #{cbm,jdbcType=DECIMAL},
+      </if>
+      <if test="sac != null">
+        sac = #{sac,jdbcType=BIT},
+      </if>
+      <if test="exm != null">
+        exm = #{exm,jdbcType=VARCHAR},
+      </if>
+      <if test="can != null">
+        can = #{can,jdbcType=VARCHAR},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="cbwf != null">
+        cbwf = #{cbwf,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="scanNo != null">
+        scan_no = #{scanNo,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null">
+        packages = #{packages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="items != null">
+        items = #{items,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scan != null">
+        scan = #{scan,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    update shipment
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      man_id = #{manId,jdbcType=INTEGER},
+      rec_id = #{recId,jdbcType=INTEGER},
+      odpt_id = #{odptId,jdbcType=INTEGER},
+      ddpt_id = #{ddptId,jdbcType=INTEGER},
+      cnor_id = #{cnorId,jdbcType=INTEGER},
+      cnee_id = #{cneeId,jdbcType=INTEGER},
+      receiver_id = #{receiverId,jdbcType=INTEGER},
+      notify_id = #{notifyId,jdbcType=INTEGER},
+      zr_id = #{zrId,jdbcType=INTEGER},
+      ot_id = #{otId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      styp = #{styp,jdbcType=TINYINT},
+      pickup = #{pickup,jdbcType=BIT},
+      hbn = #{hbn,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      cref = #{cref,jdbcType=VARCHAR},
+      pkg = #{pkg,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      value = #{value,jdbcType=DECIMAL},
+      dvalue = #{dvalue,jdbcType=DECIMAL},
+      tariff = #{tariff,jdbcType=REAL},
+      insurance = #{insurance,jdbcType=REAL},
+      currency = #{currency,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=DECIMAL},
+      wtck = #{wtck,jdbcType=DECIMAL},
+      cbm = #{cbm,jdbcType=DECIMAL},
+      sac = #{sac,jdbcType=BIT},
+      exm = #{exm,jdbcType=VARCHAR},
+      can = #{can,jdbcType=VARCHAR},
+      bwf = #{bwf,jdbcType=INTEGER},
+      cbwf = #{cbwf,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      scan_no = #{scanNo,jdbcType=INTEGER},
+      packages = #{packages,jdbcType=LONGVARCHAR},
+      items = #{items,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      scan = #{scan,jdbcType=LONGVARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    update shipment
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      man_id = #{manId,jdbcType=INTEGER},
+      rec_id = #{recId,jdbcType=INTEGER},
+      odpt_id = #{odptId,jdbcType=INTEGER},
+      ddpt_id = #{ddptId,jdbcType=INTEGER},
+      cnor_id = #{cnorId,jdbcType=INTEGER},
+      cnee_id = #{cneeId,jdbcType=INTEGER},
+      receiver_id = #{receiverId,jdbcType=INTEGER},
+      notify_id = #{notifyId,jdbcType=INTEGER},
+      zr_id = #{zrId,jdbcType=INTEGER},
+      ot_id = #{otId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      styp = #{styp,jdbcType=TINYINT},
+      pickup = #{pickup,jdbcType=BIT},
+      hbn = #{hbn,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      cref = #{cref,jdbcType=VARCHAR},
+      pkg = #{pkg,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      value = #{value,jdbcType=DECIMAL},
+      dvalue = #{dvalue,jdbcType=DECIMAL},
+      tariff = #{tariff,jdbcType=REAL},
+      insurance = #{insurance,jdbcType=REAL},
+      currency = #{currency,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=DECIMAL},
+      wtck = #{wtck,jdbcType=DECIMAL},
+      cbm = #{cbm,jdbcType=DECIMAL},
+      sac = #{sac,jdbcType=BIT},
+      exm = #{exm,jdbcType=VARCHAR},
+      can = #{can,jdbcType=VARCHAR},
+      bwf = #{bwf,jdbcType=INTEGER},
+      cbwf = #{cbwf,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      scan_no = #{scanNo,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="select" resultMap="BaseResultMap">
+    select * from shipment where id = #{id}
+  </select>
+
+  <select id="selectByRef" resultMap="BaseResultMap" parameterType="map">
+    select * from shipment where ref = #{ref} and status !=100
+  </select>
+
+  <select id="findShipmentForShipmentRecognition" resultMap="BaseResultMap">
+    select t.* from shipment t  where t.status &lt; 100 AND (ref = #{ref} or hbn = #{hbn}) limit 1
+  </select>
+
+  <select id="findShipmentForShipmentRecognitionWithContainerNo" resultMap="BaseResultMap">
+    select t.* from shipment t join consol c on t.consol_id =c.id where t.status &lt; 100 AND ref = #{ref} AND c.id &gt;0 AND (json_value(consol.meta,'$.container_no')  = #{containerNo} or consol.awb = #{containerNo})  limit 1
+  </select>
+
+  <select id="findImparcelById" resultMap="BaseResultMap">
+    select * from shipment where id = #{id} and status !=100
+  </select>
+
+  <select id="findChangeShipment" resultMap="BaseResultMap">
+    select * from shipment where id in (select pid from change_shipment_label where pref=#{ref1} OR phbn = #{ref1} or pref =#{ref2})
+  </select>
+</mapper>

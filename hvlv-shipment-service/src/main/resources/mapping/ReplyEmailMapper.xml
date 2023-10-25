@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ReplyEmailMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="email_id" jdbcType="INTEGER" property="emailId" />
+    <result column="reply_op" jdbcType="INTEGER" property="replyOp" />
+    <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="reply_email" jdbcType="VARCHAR" property="replyEmail" />
+    <result column="reply_from" jdbcType="VARCHAR" property="replyFrom" />
+    <result column="reply_subject" jdbcType="VARCHAR" property="replySubject" />
+    <result column="status" jdbcType="BIT" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, email_id, reply_op, reply_time, reply_email, reply_from, reply_subject, status
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reply_email
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reply_email
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail" useGeneratedKeys="true">
+    insert into reply_email (email_id, reply_op, reply_time, 
+      reply_email, reply_from, reply_subject, 
+      status, meta)
+    values (#{emailId,jdbcType=INTEGER}, #{replyOp,jdbcType=INTEGER}, #{replyTime,jdbcType=TIMESTAMP}, 
+      #{replyEmail,jdbcType=VARCHAR}, #{replyFrom,jdbcType=VARCHAR}, #{replySubject,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail" useGeneratedKeys="true">
+    insert into reply_email
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="emailId != null">
+        email_id,
+      </if>
+      <if test="replyOp != null">
+        reply_op,
+      </if>
+      <if test="replyTime != null">
+        reply_time,
+      </if>
+      <if test="replyEmail != null">
+        reply_email,
+      </if>
+      <if test="replyFrom != null">
+        reply_from,
+      </if>
+      <if test="replySubject != null">
+        reply_subject,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="emailId != null">
+        #{emailId,jdbcType=INTEGER},
+      </if>
+      <if test="replyOp != null">
+        #{replyOp,jdbcType=INTEGER},
+      </if>
+      <if test="replyTime != null">
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyEmail != null">
+        #{replyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="replyFrom != null">
+        #{replyFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="replySubject != null">
+        #{replySubject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail">
+    update reply_email
+    <set>
+      <if test="emailId != null">
+        email_id = #{emailId,jdbcType=INTEGER},
+      </if>
+      <if test="replyOp != null">
+        reply_op = #{replyOp,jdbcType=INTEGER},
+      </if>
+      <if test="replyTime != null">
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyEmail != null">
+        reply_email = #{replyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="replyFrom != null">
+        reply_from = #{replyFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="replySubject != null">
+        reply_subject = #{replySubject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail">
+    update reply_email
+    set email_id = #{emailId,jdbcType=INTEGER},
+      reply_op = #{replyOp,jdbcType=INTEGER},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_email = #{replyEmail,jdbcType=VARCHAR},
+      reply_from = #{replyFrom,jdbcType=VARCHAR},
+      reply_subject = #{replySubject,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReplyEmail">
+    update reply_email
+    set email_id = #{emailId,jdbcType=INTEGER},
+      reply_op = #{replyOp,jdbcType=INTEGER},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_email = #{replyEmail,jdbcType=VARCHAR},
+      reply_from = #{replyFrom,jdbcType=VARCHAR},
+      reply_subject = #{replySubject,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PayInvMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PayInv">
+    <id column="pay_id" jdbcType="INTEGER" property="payId" />
+    <id column="inv_id" jdbcType="INTEGER" property="invId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="exrate" jdbcType="DECIMAL" property="exrate" />
+    <result column="sync_xero" jdbcType="TINYINT" property="syncXero" />
+    <result column="transaction_date" jdbcType="DATE" property="transactionDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pay_id, inv_id, amount, exrate, sync_xero, transaction_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pay_inv
+    where pay_id = #{payId,jdbcType=INTEGER}
+      and inv_id = #{invId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from pay_inv
+    where pay_id = #{payId,jdbcType=INTEGER}
+      and inv_id = #{invId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PayInv">
+    insert into pay_inv (pay_id, inv_id, amount, 
+      exrate, sync_xero, transaction_date
+      )
+    values (#{payId,jdbcType=INTEGER}, #{invId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{exrate,jdbcType=DECIMAL}, #{syncXero,jdbcType=TINYINT}, #{transactionDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PayInv">
+    insert into pay_inv
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payId != null">
+        pay_id,
+      </if>
+      <if test="invId != null">
+        inv_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="exrate != null">
+        exrate,
+      </if>
+      <if test="syncXero != null">
+        sync_xero,
+      </if>
+      <if test="transactionDate != null">
+        transaction_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payId != null">
+        #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="invId != null">
+        #{invId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="exrate != null">
+        #{exrate,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="transactionDate != null">
+        #{transactionDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PayInv">
+    update pay_inv
+    <set>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="exrate != null">
+        exrate = #{exrate,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        sync_xero = #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="transactionDate != null">
+        transaction_date = #{transactionDate,jdbcType=DATE},
+      </if>
+    </set>
+    where pay_id = #{payId,jdbcType=INTEGER}
+      and inv_id = #{invId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PayInv">
+    update pay_inv
+    set amount = #{amount,jdbcType=DECIMAL},
+      exrate = #{exrate,jdbcType=DECIMAL},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      transaction_date = #{transactionDate,jdbcType=DATE}
+    where pay_id = #{payId,jdbcType=INTEGER}
+      and inv_id = #{invId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportsFlexibleSurchargeBkMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsFlexibleSurchargeBk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rate_id" jdbcType="INTEGER" property="rateId" />
+    <result column="chargecode_id" jdbcType="INTEGER" property="chargecodeId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="courier_type" jdbcType="VARCHAR" property="courierType" />
+    <result column="kgdwf" jdbcType="DECIMAL" property="kgdwf" />
+    <result column="kgdwt" jdbcType="DECIMAL" property="kgdwt" />
+    <result column="kgcwf" jdbcType="DECIMAL" property="kgcwf" />
+    <result column="kgcwt" jdbcType="DECIMAL" property="kgcwt" />
+    <result column="meterf" jdbcType="DECIMAL" property="meterf" />
+    <result column="metert" jdbcType="DECIMAL" property="metert" />
+    <result column="length" jdbcType="DECIMAL" property="length" />
+    <result column="width" jdbcType="DECIMAL" property="width" />
+    <result column="height" jdbcType="DECIMAL" property="height" />
+    <result column="cbm" jdbcType="DECIMAL" property="cbm" />
+    <result column="p_piece" jdbcType="DECIMAL" property="pPiece" />
+    <result column="p_shipment" jdbcType="DECIMAL" property="pShipment" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="p_percent" jdbcType="DECIMAL" property="pPercent" />
+    <result column="start" jdbcType="DATE" property="start" />
+    <result column="end" jdbcType="DATE" property="end" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rate_id, chargecode_id, code, type, courier_type, kgdwf, kgdwt, kgcwf, kgcwt, 
+    meterf, metert, length, width, height, cbm, p_piece, p_shipment, status, created, 
+    p_percent, start, end, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from imports_flexible_surcharge_bk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from imports_flexible_surcharge_bk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsFlexibleSurchargeBk" useGeneratedKeys="true">
+    insert into imports_flexible_surcharge_bk (rate_id, chargecode_id, code, 
+      type, courier_type, kgdwf, 
+      kgdwt, kgcwf, kgcwt, 
+      meterf, metert, length, 
+      width, height, cbm, 
+      p_piece, p_shipment, status, 
+      created, p_percent, start, 
+      end, version)
+    values (#{rateId,jdbcType=INTEGER}, #{chargecodeId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{courierType,jdbcType=VARCHAR}, #{kgdwf,jdbcType=DECIMAL}, 
+      #{kgdwt,jdbcType=DECIMAL}, #{kgcwf,jdbcType=DECIMAL}, #{kgcwt,jdbcType=DECIMAL}, 
+      #{meterf,jdbcType=DECIMAL}, #{metert,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL}, 
+      #{width,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{cbm,jdbcType=DECIMAL}, 
+      #{pPiece,jdbcType=DECIMAL}, #{pShipment,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{pPercent,jdbcType=DECIMAL}, #{start,jdbcType=DATE}, 
+      #{end,jdbcType=DATE}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsFlexibleSurchargeBk" useGeneratedKeys="true">
+    insert into imports_flexible_surcharge_bk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        rate_id,
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="courierType != null">
+        courier_type,
+      </if>
+      <if test="kgdwf != null">
+        kgdwf,
+      </if>
+      <if test="kgdwt != null">
+        kgdwt,
+      </if>
+      <if test="kgcwf != null">
+        kgcwf,
+      </if>
+      <if test="kgcwt != null">
+        kgcwt,
+      </if>
+      <if test="meterf != null">
+        meterf,
+      </if>
+      <if test="metert != null">
+        metert,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="cbm != null">
+        cbm,
+      </if>
+      <if test="pPiece != null">
+        p_piece,
+      </if>
+      <if test="pShipment != null">
+        p_shipment,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="pPercent != null">
+        p_percent,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="courierType != null">
+        #{courierType,jdbcType=VARCHAR},
+      </if>
+      <if test="kgdwf != null">
+        #{kgdwf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgdwt != null">
+        #{kgdwt,jdbcType=DECIMAL},
+      </if>
+      <if test="kgcwf != null">
+        #{kgcwf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgcwt != null">
+        #{kgcwt,jdbcType=DECIMAL},
+      </if>
+      <if test="meterf != null">
+        #{meterf,jdbcType=DECIMAL},
+      </if>
+      <if test="metert != null">
+        #{metert,jdbcType=DECIMAL},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=DECIMAL},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="cbm != null">
+        #{cbm,jdbcType=DECIMAL},
+      </if>
+      <if test="pPiece != null">
+        #{pPiece,jdbcType=DECIMAL},
+      </if>
+      <if test="pShipment != null">
+        #{pShipment,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pPercent != null">
+        #{pPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=DATE},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=DATE},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsFlexibleSurchargeBk">
+    update imports_flexible_surcharge_bk
+    <set>
+      <if test="rateId != null">
+        rate_id = #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="courierType != null">
+        courier_type = #{courierType,jdbcType=VARCHAR},
+      </if>
+      <if test="kgdwf != null">
+        kgdwf = #{kgdwf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgdwt != null">
+        kgdwt = #{kgdwt,jdbcType=DECIMAL},
+      </if>
+      <if test="kgcwf != null">
+        kgcwf = #{kgcwf,jdbcType=DECIMAL},
+      </if>
+      <if test="kgcwt != null">
+        kgcwt = #{kgcwt,jdbcType=DECIMAL},
+      </if>
+      <if test="meterf != null">
+        meterf = #{meterf,jdbcType=DECIMAL},
+      </if>
+      <if test="metert != null">
+        metert = #{metert,jdbcType=DECIMAL},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=DECIMAL},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="cbm != null">
+        cbm = #{cbm,jdbcType=DECIMAL},
+      </if>
+      <if test="pPiece != null">
+        p_piece = #{pPiece,jdbcType=DECIMAL},
+      </if>
+      <if test="pShipment != null">
+        p_shipment = #{pShipment,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pPercent != null">
+        p_percent = #{pPercent,jdbcType=DECIMAL},
+      </if>
+      <if test="start != null">
+        start = #{start,jdbcType=DATE},
+      </if>
+      <if test="end != null">
+        end = #{end,jdbcType=DATE},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportsFlexibleSurchargeBk">
+    update imports_flexible_surcharge_bk
+    set rate_id = #{rateId,jdbcType=INTEGER},
+      chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      courier_type = #{courierType,jdbcType=VARCHAR},
+      kgdwf = #{kgdwf,jdbcType=DECIMAL},
+      kgdwt = #{kgdwt,jdbcType=DECIMAL},
+      kgcwf = #{kgcwf,jdbcType=DECIMAL},
+      kgcwt = #{kgcwt,jdbcType=DECIMAL},
+      meterf = #{meterf,jdbcType=DECIMAL},
+      metert = #{metert,jdbcType=DECIMAL},
+      length = #{length,jdbcType=DECIMAL},
+      width = #{width,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      cbm = #{cbm,jdbcType=DECIMAL},
+      p_piece = #{pPiece,jdbcType=DECIMAL},
+      p_shipment = #{pShipment,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      p_percent = #{pPercent,jdbcType=DECIMAL},
+      start = #{start,jdbcType=DATE},
+      end = #{end,jdbcType=DATE},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

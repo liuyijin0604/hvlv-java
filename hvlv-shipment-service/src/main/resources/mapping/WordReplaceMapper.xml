@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WordReplaceMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pre_word" jdbcType="VARCHAR" property="preWord" />
+    <result column="replace_word" jdbcType="VARCHAR" property="replaceWord" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pre_word, replace_word, status, type
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from word_replace
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from word_replace
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace" useGeneratedKeys="true">
+    insert into word_replace (pre_word, replace_word, status, 
+      type, meta)
+    values (#{preWord,jdbcType=VARCHAR}, #{replaceWord,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{type,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace" useGeneratedKeys="true">
+    insert into word_replace
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="preWord != null">
+        pre_word,
+      </if>
+      <if test="replaceWord != null">
+        replace_word,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="preWord != null">
+        #{preWord,jdbcType=VARCHAR},
+      </if>
+      <if test="replaceWord != null">
+        #{replaceWord,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace">
+    update word_replace
+    <set>
+      <if test="preWord != null">
+        pre_word = #{preWord,jdbcType=VARCHAR},
+      </if>
+      <if test="replaceWord != null">
+        replace_word = #{replaceWord,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace">
+    update word_replace
+    set pre_word = #{preWord,jdbcType=VARCHAR},
+      replace_word = #{replaceWord,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      type = #{type,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WordReplace">
+    update word_replace
+    set pre_word = #{preWord,jdbcType=VARCHAR},
+      replace_word = #{replaceWord,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

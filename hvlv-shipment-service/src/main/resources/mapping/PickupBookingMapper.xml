@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PickupBookingMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="booking_time" jdbcType="TIMESTAMP" property="bookingTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
+    <result column="rego" jdbcType="VARCHAR" property="rego" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_email" jdbcType="VARCHAR" property="companyEmail" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="meta" jdbcType="VARCHAR" property="meta" />
+    <result column="booking_number" jdbcType="VARCHAR" property="bookingNumber" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="submit_id" jdbcType="INTEGER" property="submitId" />
+    <result column="depot_id" jdbcType="INTEGER" property="depotId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_date, booking_time, status, driver_name, rego, company_name, company_email, 
+    fee, meta, booking_number, shipment_id, ref, submit_id, depot_id
+  </sql>
+  <sql id="Blob_Column_List">
+    note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pickup_booking
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pickup_booking
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking" useGeneratedKeys="true">
+    insert into pickup_booking (create_date, booking_time, status, 
+      driver_name, rego, company_name, 
+      company_email, fee, meta, 
+      booking_number, shipment_id, ref, 
+      submit_id, depot_id, note
+      )
+    values (#{createDate,jdbcType=TIMESTAMP}, #{bookingTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{driverName,jdbcType=VARCHAR}, #{rego,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{companyEmail,jdbcType=VARCHAR}, #{fee,jdbcType=DECIMAL}, #{meta,jdbcType=VARCHAR}, 
+      #{bookingNumber,jdbcType=VARCHAR}, #{shipmentId,jdbcType=INTEGER}, #{ref,jdbcType=VARCHAR}, 
+      #{submitId,jdbcType=INTEGER}, #{depotId,jdbcType=INTEGER}, #{note,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking" useGeneratedKeys="true">
+    insert into pickup_booking
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="bookingTime != null">
+        booking_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="driverName != null">
+        driver_name,
+      </if>
+      <if test="rego != null">
+        rego,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyEmail != null">
+        company_email,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="bookingNumber != null">
+        booking_number,
+      </if>
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="submitId != null">
+        submit_id,
+      </if>
+      <if test="depotId != null">
+        depot_id,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingTime != null">
+        #{bookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="driverName != null">
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="rego != null">
+        #{rego,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null">
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=VARCHAR},
+      </if>
+      <if test="bookingNumber != null">
+        #{bookingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="submitId != null">
+        #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="depotId != null">
+        #{depotId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking">
+    update pickup_booking
+    <set>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingTime != null">
+        booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="driverName != null">
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="rego != null">
+        rego = #{rego,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null">
+        company_email = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=VARCHAR},
+      </if>
+      <if test="bookingNumber != null">
+        booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="submitId != null">
+        submit_id = #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="depotId != null">
+        depot_id = #{depotId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking">
+    update pickup_booking
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      rego = #{rego,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=VARCHAR},
+      booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=VARCHAR},
+      submit_id = #{submitId,jdbcType=INTEGER},
+      depot_id = #{depotId,jdbcType=INTEGER},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PickupBooking">
+    update pickup_booking
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      rego = #{rego,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=VARCHAR},
+      booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=VARCHAR},
+      submit_id = #{submitId,jdbcType=INTEGER},
+      depot_id = #{depotId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

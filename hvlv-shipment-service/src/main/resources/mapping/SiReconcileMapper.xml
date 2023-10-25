@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SiReconcileMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="supplier_invoice_id" jdbcType="INTEGER" property="supplierInvoiceId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="flag" jdbcType="TINYINT" property="flag" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="total_confirmed" jdbcType="VARCHAR" property="totalConfirmed" />
+    <result column="total_gst" jdbcType="DECIMAL" property="totalGst" />
+    <result column="total_gst_confirmed" jdbcType="VARCHAR" property="totalGstConfirmed" />
+    <result column="total_ex_gst_confirmed" jdbcType="VARCHAR" property="totalExGstConfirmed" />
+    <result column="total_ex_gst" jdbcType="DECIMAL" property="totalExGst" />
+    <result column="confirm_status" jdbcType="INTEGER" property="confirmStatus" />
+    <result column="total_ex_gst_api" jdbcType="DECIMAL" property="totalExGstApi" />
+    <result column="total_ex_gst_my" jdbcType="DECIMAL" property="totalExGstMy" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, supplier_invoice_id, org_id, type, status, flag, create, total, total_confirmed, 
+    total_gst, total_gst_confirmed, total_ex_gst_confirmed, total_ex_gst, confirm_status, 
+    total_ex_gst_api, total_ex_gst_my
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from si_reconcile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from si_reconcile
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile" useGeneratedKeys="true">
+    insert into si_reconcile (supplier_invoice_id, org_id, type, 
+      status, flag, create, 
+      total, total_confirmed, total_gst, 
+      total_gst_confirmed, total_ex_gst_confirmed, 
+      total_ex_gst, confirm_status, total_ex_gst_api, 
+      total_ex_gst_my, meta, note
+      )
+    values (#{supplierInvoiceId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{flag,jdbcType=TINYINT}, #{create,jdbcType=TIMESTAMP}, 
+      #{total,jdbcType=DECIMAL}, #{totalConfirmed,jdbcType=VARCHAR}, #{totalGst,jdbcType=DECIMAL}, 
+      #{totalGstConfirmed,jdbcType=VARCHAR}, #{totalExGstConfirmed,jdbcType=VARCHAR}, 
+      #{totalExGst,jdbcType=DECIMAL}, #{confirmStatus,jdbcType=INTEGER}, #{totalExGstApi,jdbcType=DECIMAL}, 
+      #{totalExGstMy,jdbcType=DECIMAL}, #{meta,jdbcType=LONGVARCHAR}, #{note,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile" useGeneratedKeys="true">
+    insert into si_reconcile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierInvoiceId != null">
+        supplier_invoice_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="totalConfirmed != null">
+        total_confirmed,
+      </if>
+      <if test="totalGst != null">
+        total_gst,
+      </if>
+      <if test="totalGstConfirmed != null">
+        total_gst_confirmed,
+      </if>
+      <if test="totalExGstConfirmed != null">
+        total_ex_gst_confirmed,
+      </if>
+      <if test="totalExGst != null">
+        total_ex_gst,
+      </if>
+      <if test="confirmStatus != null">
+        confirm_status,
+      </if>
+      <if test="totalExGstApi != null">
+        total_ex_gst_api,
+      </if>
+      <if test="totalExGstMy != null">
+        total_ex_gst_my,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierInvoiceId != null">
+        #{supplierInvoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="totalConfirmed != null">
+        #{totalConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalGst != null">
+        #{totalGst,jdbcType=DECIMAL},
+      </if>
+      <if test="totalGstConfirmed != null">
+        #{totalGstConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalExGstConfirmed != null">
+        #{totalExGstConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalExGst != null">
+        #{totalExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmStatus != null">
+        #{confirmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalExGstApi != null">
+        #{totalExGstApi,jdbcType=DECIMAL},
+      </if>
+      <if test="totalExGstMy != null">
+        #{totalExGstMy,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile">
+    update si_reconcile
+    <set>
+      <if test="supplierInvoiceId != null">
+        supplier_invoice_id = #{supplierInvoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="totalConfirmed != null">
+        total_confirmed = #{totalConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalGst != null">
+        total_gst = #{totalGst,jdbcType=DECIMAL},
+      </if>
+      <if test="totalGstConfirmed != null">
+        total_gst_confirmed = #{totalGstConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalExGstConfirmed != null">
+        total_ex_gst_confirmed = #{totalExGstConfirmed,jdbcType=VARCHAR},
+      </if>
+      <if test="totalExGst != null">
+        total_ex_gst = #{totalExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmStatus != null">
+        confirm_status = #{confirmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="totalExGstApi != null">
+        total_ex_gst_api = #{totalExGstApi,jdbcType=DECIMAL},
+      </if>
+      <if test="totalExGstMy != null">
+        total_ex_gst_my = #{totalExGstMy,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile">
+    update si_reconcile
+    set supplier_invoice_id = #{supplierInvoiceId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=TINYINT},
+      create = #{create,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=DECIMAL},
+      total_confirmed = #{totalConfirmed,jdbcType=VARCHAR},
+      total_gst = #{totalGst,jdbcType=DECIMAL},
+      total_gst_confirmed = #{totalGstConfirmed,jdbcType=VARCHAR},
+      total_ex_gst_confirmed = #{totalExGstConfirmed,jdbcType=VARCHAR},
+      total_ex_gst = #{totalExGst,jdbcType=DECIMAL},
+      confirm_status = #{confirmStatus,jdbcType=INTEGER},
+      total_ex_gst_api = #{totalExGstApi,jdbcType=DECIMAL},
+      total_ex_gst_my = #{totalExGstMy,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SiReconcile">
+    update si_reconcile
+    set supplier_invoice_id = #{supplierInvoiceId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=TINYINT},
+      create = #{create,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=DECIMAL},
+      total_confirmed = #{totalConfirmed,jdbcType=VARCHAR},
+      total_gst = #{totalGst,jdbcType=DECIMAL},
+      total_gst_confirmed = #{totalGstConfirmed,jdbcType=VARCHAR},
+      total_ex_gst_confirmed = #{totalExGstConfirmed,jdbcType=VARCHAR},
+      total_ex_gst = #{totalExGst,jdbcType=DECIMAL},
+      confirm_status = #{confirmStatus,jdbcType=INTEGER},
+      total_ex_gst_api = #{totalExGstApi,jdbcType=DECIMAL},
+      total_ex_gst_my = #{totalExGstMy,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

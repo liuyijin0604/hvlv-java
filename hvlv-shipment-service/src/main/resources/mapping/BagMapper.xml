@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BagMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="total_cbm" jdbcType="DECIMAL" property="totalCbm" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="operator" jdbcType="INTEGER" property="operator" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, consol_id, no, type, weight, total_cbm, pkg, create, operator
+  </sql>
+  <sql id="Blob_Column_List">
+    note, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bag
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag" useGeneratedKeys="true">
+    insert into bag (consol_id, no, type, 
+      weight, total_cbm, pkg, 
+      create, operator, note, 
+      meta)
+    values (#{consolId,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{weight,jdbcType=DECIMAL}, #{totalCbm,jdbcType=DECIMAL}, #{pkg,jdbcType=INTEGER}, 
+      #{create,jdbcType=TIMESTAMP}, #{operator,jdbcType=INTEGER}, #{note,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag" useGeneratedKeys="true">
+    insert into bag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="totalCbm != null">
+        total_cbm,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="totalCbm != null">
+        #{totalCbm,jdbcType=DECIMAL},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag">
+    update bag
+    <set>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="totalCbm != null">
+        total_cbm = #{totalCbm,jdbcType=DECIMAL},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag">
+    update bag
+    set consol_id = #{consolId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      total_cbm = #{totalCbm,jdbcType=DECIMAL},
+      pkg = #{pkg,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=INTEGER},
+      note = #{note,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bag">
+    update bag
+    set consol_id = #{consolId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      total_cbm = #{totalCbm,jdbcType=DECIMAL},
+      pkg = #{pkg,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

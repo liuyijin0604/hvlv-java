@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CargoProcessVehicleMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="vehicle_name" jdbcType="VARCHAR" property="vehicleName" />
+    <result column="min_cbm" jdbcType="REAL" property="minCbm" />
+    <result column="max_cbm" jdbcType="REAL" property="maxCbm" />
+    <result column="top_width" jdbcType="INTEGER" property="topWidth" />
+    <result column="bottom_width" jdbcType="INTEGER" property="bottomWidth" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="length" jdbcType="INTEGER" property="length" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, vehicle_name, min_cbm, max_cbm, top_width, bottom_width, height, length, 
+    status
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cargo_process_vehicle
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cargo_process_vehicle
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle" useGeneratedKeys="true">
+    insert into cargo_process_vehicle (type, vehicle_name, min_cbm, 
+      max_cbm, top_width, bottom_width, 
+      height, length, status, 
+      meta)
+    values (#{type,jdbcType=SMALLINT}, #{vehicleName,jdbcType=VARCHAR}, #{minCbm,jdbcType=REAL}, 
+      #{maxCbm,jdbcType=REAL}, #{topWidth,jdbcType=INTEGER}, #{bottomWidth,jdbcType=INTEGER}, 
+      #{height,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle" useGeneratedKeys="true">
+    insert into cargo_process_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="vehicleName != null">
+        vehicle_name,
+      </if>
+      <if test="minCbm != null">
+        min_cbm,
+      </if>
+      <if test="maxCbm != null">
+        max_cbm,
+      </if>
+      <if test="topWidth != null">
+        top_width,
+      </if>
+      <if test="bottomWidth != null">
+        bottom_width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="vehicleName != null">
+        #{vehicleName,jdbcType=VARCHAR},
+      </if>
+      <if test="minCbm != null">
+        #{minCbm,jdbcType=REAL},
+      </if>
+      <if test="maxCbm != null">
+        #{maxCbm,jdbcType=REAL},
+      </if>
+      <if test="topWidth != null">
+        #{topWidth,jdbcType=INTEGER},
+      </if>
+      <if test="bottomWidth != null">
+        #{bottomWidth,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle">
+    update cargo_process_vehicle
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="vehicleName != null">
+        vehicle_name = #{vehicleName,jdbcType=VARCHAR},
+      </if>
+      <if test="minCbm != null">
+        min_cbm = #{minCbm,jdbcType=REAL},
+      </if>
+      <if test="maxCbm != null">
+        max_cbm = #{maxCbm,jdbcType=REAL},
+      </if>
+      <if test="topWidth != null">
+        top_width = #{topWidth,jdbcType=INTEGER},
+      </if>
+      <if test="bottomWidth != null">
+        bottom_width = #{bottomWidth,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle">
+    update cargo_process_vehicle
+    set type = #{type,jdbcType=SMALLINT},
+      vehicle_name = #{vehicleName,jdbcType=VARCHAR},
+      min_cbm = #{minCbm,jdbcType=REAL},
+      max_cbm = #{maxCbm,jdbcType=REAL},
+      top_width = #{topWidth,jdbcType=INTEGER},
+      bottom_width = #{bottomWidth,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessVehicle">
+    update cargo_process_vehicle
+    set type = #{type,jdbcType=SMALLINT},
+      vehicle_name = #{vehicleName,jdbcType=VARCHAR},
+      min_cbm = #{minCbm,jdbcType=REAL},
+      max_cbm = #{maxCbm,jdbcType=REAL},
+      top_width = #{topWidth,jdbcType=INTEGER},
+      bottom_width = #{bottomWidth,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

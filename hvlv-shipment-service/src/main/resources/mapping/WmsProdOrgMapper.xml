@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsProdOrgMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    <id column="prod_id" jdbcType="INTEGER" property="prodId" />
+    <id column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="sku" jdbcType="VARCHAR" property="sku" />
+    <result column="value" jdbcType="REAL" property="value" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    prod_id, org_id, sku, value
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wms_prod_org
+    where prod_id = #{prodId,jdbcType=INTEGER}
+      and org_id = #{orgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from wms_prod_org
+    where prod_id = #{prodId,jdbcType=INTEGER}
+      and org_id = #{orgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    insert into wms_prod_org (prod_id, org_id, sku, 
+      value, meta)
+    values (#{prodId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
+      #{value,jdbcType=REAL}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    insert into wms_prod_org
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=REAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    update wms_prod_org
+    <set>
+      <if test="sku != null">
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=REAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where prod_id = #{prodId,jdbcType=INTEGER}
+      and org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    update wms_prod_org
+    set sku = #{sku,jdbcType=VARCHAR},
+      value = #{value,jdbcType=REAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where prod_id = #{prodId,jdbcType=INTEGER}
+      and org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdOrg">
+    update wms_prod_org
+    set sku = #{sku,jdbcType=VARCHAR},
+      value = #{value,jdbcType=REAL}
+    where prod_id = #{prodId,jdbcType=INTEGER}
+      and org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+</mapper>

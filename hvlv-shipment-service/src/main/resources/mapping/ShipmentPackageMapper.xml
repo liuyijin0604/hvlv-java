@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentPackageMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="cref" jdbcType="VARCHAR" property="cref" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="cbm" jdbcType="REAL" property="cbm" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage">
+    <result column="packages" jdbcType="LONGVARCHAR" property="packages" />
+    <result column="p_packages" jdbcType="LONGVARCHAR" property="pPackages" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ref, cref, user_id, create, weight, cbm, pkg
+  </sql>
+  <sql id="Blob_Column_List">
+    packages, p_packages
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage" useGeneratedKeys="true">
+    insert into shipment_package (ref, cref, user_id, 
+      create, weight, cbm, pkg, 
+      packages, p_packages)
+    values (#{ref,jdbcType=VARCHAR}, #{cref,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{create,jdbcType=TIMESTAMP}, #{weight,jdbcType=REAL}, #{cbm,jdbcType=REAL}, #{pkg,jdbcType=INTEGER}, 
+      #{packages,jdbcType=LONGVARCHAR}, #{pPackages,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage" useGeneratedKeys="true">
+    insert into shipment_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="cref != null">
+        cref,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="cbm != null">
+        cbm,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="packages != null">
+        packages,
+      </if>
+      <if test="pPackages != null">
+        p_packages,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cref != null">
+        #{cref,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="cbm != null">
+        #{cbm,jdbcType=REAL},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null">
+        #{packages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pPackages != null">
+        #{pPackages,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage">
+    update shipment_package
+    <set>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cref != null">
+        cref = #{cref,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="cbm != null">
+        cbm = #{cbm,jdbcType=REAL},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null">
+        packages = #{packages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pPackages != null">
+        p_packages = #{pPackages,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage">
+    update shipment_package
+    set ref = #{ref,jdbcType=VARCHAR},
+      cref = #{cref,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      weight = #{weight,jdbcType=REAL},
+      cbm = #{cbm,jdbcType=REAL},
+      pkg = #{pkg,jdbcType=INTEGER},
+      packages = #{packages,jdbcType=LONGVARCHAR},
+      p_packages = #{pPackages,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentPackage">
+    update shipment_package
+    set ref = #{ref,jdbcType=VARCHAR},
+      cref = #{cref,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      weight = #{weight,jdbcType=REAL},
+      cbm = #{cbm,jdbcType=REAL},
+      pkg = #{pkg,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

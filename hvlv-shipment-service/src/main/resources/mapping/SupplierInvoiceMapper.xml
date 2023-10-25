@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SupplierInvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="inv_date" jdbcType="DATE" property="invDate" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="inv_no" jdbcType="VARCHAR" property="invNo" />
+    <result column="currency" jdbcType="BIT" property="currency" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="total_ex_gst" jdbcType="DECIMAL" property="totalExGst" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, created, inv_date, type, status, inv_no, currency, total, gst, total_ex_gst
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from supplier_invoice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier_invoice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice" useGeneratedKeys="true">
+    insert into supplier_invoice (org_id, created, inv_date, 
+      type, status, inv_no, 
+      currency, total, gst, total_ex_gst, 
+      meta)
+    values (#{orgId,jdbcType=INTEGER}, #{created,jdbcType=DATE}, #{invDate,jdbcType=DATE}, 
+      #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{invNo,jdbcType=VARCHAR}, 
+      #{currency,jdbcType=BIT}, #{total,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, #{totalExGst,jdbcType=DECIMAL}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice" useGeneratedKeys="true">
+    insert into supplier_invoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="invDate != null">
+        inv_date,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="invNo != null">
+        inv_no,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="totalExGst != null">
+        total_ex_gst,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="invDate != null">
+        #{invDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invNo != null">
+        #{invNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=BIT},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="totalExGst != null">
+        #{totalExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice">
+    update supplier_invoice
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="invDate != null">
+        inv_date = #{invDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="invNo != null">
+        inv_no = #{invNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=BIT},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="totalExGst != null">
+        total_ex_gst = #{totalExGst,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice">
+    update supplier_invoice
+    set org_id = #{orgId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      inv_date = #{invDate,jdbcType=DATE},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      inv_no = #{invNo,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=BIT},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      total_ex_gst = #{totalExGst,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SupplierInvoice">
+    update supplier_invoice
+    set org_id = #{orgId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      inv_date = #{invDate,jdbcType=DATE},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      inv_no = #{invNo,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=BIT},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      total_ex_gst = #{totalExGst,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

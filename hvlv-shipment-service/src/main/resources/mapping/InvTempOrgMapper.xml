@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.InvTempOrgMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvTempOrg">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="temp_id" jdbcType="INTEGER" property="tempId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="start" jdbcType="DATE" property="start" />
+    <result column="end" jdbcType="DATE" property="end" />
+    <result column="freq" jdbcType="TINYINT" property="freq" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, temp_id, org_id, start, end, freq, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inv_temp_org
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inv_temp_org
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvTempOrg" useGeneratedKeys="true">
+    insert into inv_temp_org (temp_id, org_id, start, 
+      end, freq, status)
+    values (#{tempId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{start,jdbcType=DATE}, 
+      #{end,jdbcType=DATE}, #{freq,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvTempOrg" useGeneratedKeys="true">
+    insert into inv_temp_org
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tempId != null">
+        temp_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="freq != null">
+        freq,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tempId != null">
+        #{tempId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=DATE},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=DATE},
+      </if>
+      <if test="freq != null">
+        #{freq,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvTempOrg">
+    update inv_temp_org
+    <set>
+      <if test="tempId != null">
+        temp_id = #{tempId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        start = #{start,jdbcType=DATE},
+      </if>
+      <if test="end != null">
+        end = #{end,jdbcType=DATE},
+      </if>
+      <if test="freq != null">
+        freq = #{freq,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvTempOrg">
+    update inv_temp_org
+    set temp_id = #{tempId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      start = #{start,jdbcType=DATE},
+      end = #{end,jdbcType=DATE},
+      freq = #{freq,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

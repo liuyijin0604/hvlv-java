@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.LedgerMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="from_id" jdbcType="INTEGER" property="fromId" />
+    <result column="to_id" jdbcType="INTEGER" property="toId" />
+    <result column="cra" jdbcType="INTEGER" property="cra" />
+    <result column="dea" jdbcType="INTEGER" property="dea" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="chgcode" jdbcType="VARCHAR" property="chgcode" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger">
+    <result column="lines" jdbcType="LONGVARCHAR" property="lines" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, from_id, to_id, cra, dea, fid, model, type, chgcode, currency, status, no, ref, 
+    date, due, total, bwf
+  </sql>
+  <sql id="Blob_Column_List">
+    lines, meta, notes
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ledger
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ledger
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger" useGeneratedKeys="true">
+    insert into ledger (from_id, to_id, cra, 
+      dea, fid, model, type, 
+      chgcode, currency, status, 
+      no, ref, date, due, 
+      total, bwf, lines, 
+      meta, notes)
+    values (#{fromId,jdbcType=INTEGER}, #{toId,jdbcType=INTEGER}, #{cra,jdbcType=INTEGER}, 
+      #{dea,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{chgcode,jdbcType=VARCHAR}, #{currency,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{no,jdbcType=VARCHAR}, #{ref,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{due,jdbcType=DATE}, 
+      #{total,jdbcType=DECIMAL}, #{bwf,jdbcType=INTEGER}, #{lines,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR}, #{notes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger" useGeneratedKeys="true">
+    insert into ledger
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fromId != null">
+        from_id,
+      </if>
+      <if test="toId != null">
+        to_id,
+      </if>
+      <if test="cra != null">
+        cra,
+      </if>
+      <if test="dea != null">
+        dea,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="chgcode != null">
+        chgcode,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="lines != null">
+        lines,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fromId != null">
+        #{fromId,jdbcType=INTEGER},
+      </if>
+      <if test="toId != null">
+        #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="cra != null">
+        #{cra,jdbcType=INTEGER},
+      </if>
+      <if test="dea != null">
+        #{dea,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="chgcode != null">
+        #{chgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="lines != null">
+        #{lines,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger">
+    update ledger
+    <set>
+      <if test="fromId != null">
+        from_id = #{fromId,jdbcType=INTEGER},
+      </if>
+      <if test="toId != null">
+        to_id = #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="cra != null">
+        cra = #{cra,jdbcType=INTEGER},
+      </if>
+      <if test="dea != null">
+        dea = #{dea,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="chgcode != null">
+        chgcode = #{chgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="lines != null">
+        lines = #{lines,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger">
+    update ledger
+    set from_id = #{fromId,jdbcType=INTEGER},
+      to_id = #{toId,jdbcType=INTEGER},
+      cra = #{cra,jdbcType=INTEGER},
+      dea = #{dea,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      chgcode = #{chgcode,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      total = #{total,jdbcType=DECIMAL},
+      bwf = #{bwf,jdbcType=INTEGER},
+      lines = #{lines,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Ledger">
+    update ledger
+    set from_id = #{fromId,jdbcType=INTEGER},
+      to_id = #{toId,jdbcType=INTEGER},
+      cra = #{cra,jdbcType=INTEGER},
+      dea = #{dea,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      chgcode = #{chgcode,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      total = #{total,jdbcType=DECIMAL},
+      bwf = #{bwf,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

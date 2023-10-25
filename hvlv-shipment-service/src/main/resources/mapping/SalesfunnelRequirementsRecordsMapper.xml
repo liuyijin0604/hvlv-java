@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SalesfunnelRequirementsRecordsMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsRecords">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="submit_id" jdbcType="INTEGER" property="submitId" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="answer_id" jdbcType="INTEGER" property="answerId" />
+    <result column="answer_str" jdbcType="VARCHAR" property="answerStr" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, submit_id, question_id, answer_id, answer_str, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salesfunnel_requirements_records
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salesfunnel_requirements_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsRecords" useGeneratedKeys="true">
+    insert into salesfunnel_requirements_records (submit_id, question_id, answer_id, 
+      answer_str, date)
+    values (#{submitId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{answerId,jdbcType=INTEGER}, 
+      #{answerStr,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsRecords" useGeneratedKeys="true">
+    insert into salesfunnel_requirements_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="submitId != null">
+        submit_id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="answerStr != null">
+        answer_str,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="submitId != null">
+        #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="answerStr != null">
+        #{answerStr,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsRecords">
+    update salesfunnel_requirements_records
+    <set>
+      <if test="submitId != null">
+        submit_id = #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null">
+        answer_id = #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="answerStr != null">
+        answer_str = #{answerStr,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsRecords">
+    update salesfunnel_requirements_records
+    set submit_id = #{submitId,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER},
+      answer_id = #{answerId,jdbcType=INTEGER},
+      answer_str = #{answerStr,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

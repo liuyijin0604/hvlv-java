@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentChangeProcessMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shipment_id, type, created, user_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_change_process
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_change_process
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess" useGeneratedKeys="true">
+    insert into shipment_change_process (shipment_id, type, created, 
+      user_id, meta)
+    values (#{shipmentId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess" useGeneratedKeys="true">
+    insert into shipment_change_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess">
+    update shipment_change_process
+    <set>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess">
+    update shipment_change_process
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentChangeProcess">
+    update shipment_change_process
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

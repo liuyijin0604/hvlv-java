@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: hvlv-shipment-cluster-service
+
+server:
+  port: ${port:8700}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://topadmin:topadmin912@localhost:8761/eureka/
+
+#hvlv-product-stock-service:
+#  ribbon:
+#    listOfServers: http://localhost:8800, http://localhost:8801

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="dpmt" jdbcType="TINYINT" property="dpmt" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="transaction_date" jdbcType="DATE" property="transactionDate" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="bank" jdbcType="INTEGER" property="bank" />
+    <result column="currency" jdbcType="BIT" property="currency" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="ata" jdbcType="DECIMAL" property="ata" />
+    <result column="refund" jdbcType="DECIMAL" property="refund" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="xero_id" jdbcType="VARCHAR" property="xeroId" />
+    <result column="bank_transaction_id" jdbcType="INTEGER" property="bankTransactionId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, no, org_id, op_id, dpmt, date, transaction_date, status, bank, currency, amount, 
+    ata, refund, type, ref, flag, xero_id, bank_transaction_id
+  </sql>
+  <sql id="Blob_Column_List">
+    note, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from payment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from payment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment" useGeneratedKeys="true">
+    insert into payment (no, org_id, op_id, 
+      dpmt, date, transaction_date, 
+      status, bank, currency, amount, 
+      ata, refund, type, ref, 
+      flag, xero_id, bank_transaction_id, 
+      note, meta)
+    values (#{no,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER}, #{opId,jdbcType=INTEGER}, 
+      #{dpmt,jdbcType=TINYINT}, #{date,jdbcType=DATE}, #{transactionDate,jdbcType=DATE}, 
+      #{status,jdbcType=BIT}, #{bank,jdbcType=INTEGER}, #{currency,jdbcType=BIT}, #{amount,jdbcType=DECIMAL}, 
+      #{ata,jdbcType=DECIMAL}, #{refund,jdbcType=DECIMAL}, #{type,jdbcType=BIT}, #{ref,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=INTEGER}, #{xeroId,jdbcType=VARCHAR}, #{bankTransactionId,jdbcType=INTEGER}, 
+      #{note,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment" useGeneratedKeys="true">
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        no,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="transactionDate != null">
+        transaction_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="bank != null">
+        bank,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="ata != null">
+        ata,
+      </if>
+      <if test="refund != null">
+        refund,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="xeroId != null">
+        xero_id,
+      </if>
+      <if test="bankTransactionId != null">
+        bank_transaction_id,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=BIT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="ata != null">
+        #{ata,jdbcType=DECIMAL},
+      </if>
+      <if test="refund != null">
+        #{refund,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="xeroId != null">
+        #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankTransactionId != null">
+        #{bankTransactionId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment">
+    update payment
+    <set>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        transaction_date = #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="bank != null">
+        bank = #{bank,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=BIT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="ata != null">
+        ata = #{ata,jdbcType=DECIMAL},
+      </if>
+      <if test="refund != null">
+        refund = #{refund,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="xeroId != null">
+        xero_id = #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankTransactionId != null">
+        bank_transaction_id = #{bankTransactionId,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment">
+    update payment
+    set no = #{no,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      date = #{date,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      status = #{status,jdbcType=BIT},
+      bank = #{bank,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      amount = #{amount,jdbcType=DECIMAL},
+      ata = #{ata,jdbcType=DECIMAL},
+      refund = #{refund,jdbcType=DECIMAL},
+      type = #{type,jdbcType=BIT},
+      ref = #{ref,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      xero_id = #{xeroId,jdbcType=VARCHAR},
+      bank_transaction_id = #{bankTransactionId,jdbcType=INTEGER},
+      note = #{note,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Payment">
+    update payment
+    set no = #{no,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      date = #{date,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      status = #{status,jdbcType=BIT},
+      bank = #{bank,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      amount = #{amount,jdbcType=DECIMAL},
+      ata = #{ata,jdbcType=DECIMAL},
+      refund = #{refund,jdbcType=DECIMAL},
+      type = #{type,jdbcType=BIT},
+      ref = #{ref,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      xero_id = #{xeroId,jdbcType=VARCHAR},
+      bank_transaction_id = #{bankTransactionId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

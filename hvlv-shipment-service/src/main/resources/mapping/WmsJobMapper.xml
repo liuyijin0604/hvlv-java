@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsJobMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="oc_id" jdbcType="INTEGER" property="ocId" />
+    <result column="sales_id" jdbcType="INTEGER" property="salesId" />
+    <result column="pm_id" jdbcType="INTEGER" property="pmId" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="po" jdbcType="VARCHAR" property="po" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, oc_id, sales_id, pm_id, no, po, ref, type, status, created, bwf, dpt_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wms_job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob" useGeneratedKeys="true">
+    insert into wms_job (org_id, oc_id, sales_id, 
+      pm_id, no, po, ref, 
+      type, status, created, 
+      bwf, dpt_id, meta
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{ocId,jdbcType=INTEGER}, #{salesId,jdbcType=INTEGER}, 
+      #{pmId,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, #{po,jdbcType=VARCHAR}, #{ref,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{created,jdbcType=DATE}, 
+      #{bwf,jdbcType=INTEGER}, #{dptId,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob" useGeneratedKeys="true">
+    insert into wms_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="ocId != null">
+        oc_id,
+      </if>
+      <if test="salesId != null">
+        sales_id,
+      </if>
+      <if test="pmId != null">
+        pm_id,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="po != null">
+        po,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="ocId != null">
+        #{ocId,jdbcType=INTEGER},
+      </if>
+      <if test="salesId != null">
+        #{salesId,jdbcType=INTEGER},
+      </if>
+      <if test="pmId != null">
+        #{pmId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="po != null">
+        #{po,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob">
+    update wms_job
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="ocId != null">
+        oc_id = #{ocId,jdbcType=INTEGER},
+      </if>
+      <if test="salesId != null">
+        sales_id = #{salesId,jdbcType=INTEGER},
+      </if>
+      <if test="pmId != null">
+        pm_id = #{pmId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="po != null">
+        po = #{po,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob">
+    update wms_job
+    set org_id = #{orgId,jdbcType=INTEGER},
+      oc_id = #{ocId,jdbcType=INTEGER},
+      sales_id = #{salesId,jdbcType=INTEGER},
+      pm_id = #{pmId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      po = #{po,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      created = #{created,jdbcType=DATE},
+      bwf = #{bwf,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsJob">
+    update wms_job
+    set org_id = #{orgId,jdbcType=INTEGER},
+      oc_id = #{ocId,jdbcType=INTEGER},
+      sales_id = #{salesId,jdbcType=INTEGER},
+      pm_id = #{pmId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      po = #{po,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      created = #{created,jdbcType=DATE},
+      bwf = #{bwf,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

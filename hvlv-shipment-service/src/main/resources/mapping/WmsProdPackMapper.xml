@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsProdPackMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdPack">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="prod_id" jdbcType="INTEGER" property="prodId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="qty" jdbcType="REAL" property="qty" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="cbm" jdbcType="REAL" property="cbm" />
+    <result column="dim" jdbcType="VARCHAR" property="dim" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, prod_id, type, qty, barcode, cbm, dim, weight
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wms_prod_pack
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_prod_pack
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdPack" useGeneratedKeys="true">
+    insert into wms_prod_pack (prod_id, type, qty, 
+      barcode, cbm, dim, weight
+      )
+    values (#{prodId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{qty,jdbcType=REAL}, 
+      #{barcode,jdbcType=VARCHAR}, #{cbm,jdbcType=REAL}, #{dim,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdPack" useGeneratedKeys="true">
+    insert into wms_prod_pack
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="cbm != null">
+        cbm,
+      </if>
+      <if test="dim != null">
+        dim,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=REAL},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cbm != null">
+        #{cbm,jdbcType=REAL},
+      </if>
+      <if test="dim != null">
+        #{dim,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdPack">
+    update wms_prod_pack
+    <set>
+      <if test="prodId != null">
+        prod_id = #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=REAL},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cbm != null">
+        cbm = #{cbm,jdbcType=REAL},
+      </if>
+      <if test="dim != null">
+        dim = #{dim,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsProdPack">
+    update wms_prod_pack
+    set prod_id = #{prodId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      qty = #{qty,jdbcType=REAL},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      cbm = #{cbm,jdbcType=REAL},
+      dim = #{dim,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

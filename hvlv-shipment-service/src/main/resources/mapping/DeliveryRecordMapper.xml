@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.DeliveryRecordMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rego" jdbcType="VARCHAR" property="rego" />
+    <result column="plt" jdbcType="INTEGER" property="plt" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="damage" jdbcType="TINYINT" property="damage" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="task" jdbcType="VARCHAR" property="task" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="booking_time" jdbcType="TIMESTAMP" property="bookingTime" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rego, plt, status, damage, op_id, created, task, no, booking_time, mobile, name, 
+    pkg, uuid
+  </sql>
+  <sql id="Blob_Column_List">
+    note, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delivery_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from delivery_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord" useGeneratedKeys="true">
+    insert into delivery_record (rego, plt, status, 
+      damage, op_id, created, 
+      task, no, booking_time, 
+      mobile, name, pkg, 
+      uuid, note, meta
+      )
+    values (#{rego,jdbcType=VARCHAR}, #{plt,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{damage,jdbcType=TINYINT}, #{opId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, 
+      #{task,jdbcType=VARCHAR}, #{no,jdbcType=VARCHAR}, #{bookingTime,jdbcType=TIMESTAMP}, 
+      #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pkg,jdbcType=INTEGER}, 
+      #{uuid,jdbcType=VARCHAR}, #{note,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord" useGeneratedKeys="true">
+    insert into delivery_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rego != null">
+        rego,
+      </if>
+      <if test="plt != null">
+        plt,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="damage != null">
+        damage,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="task != null">
+        task,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="bookingTime != null">
+        booking_time,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rego != null">
+        #{rego,jdbcType=VARCHAR},
+      </if>
+      <if test="plt != null">
+        #{plt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="damage != null">
+        #{damage,jdbcType=TINYINT},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task != null">
+        #{task,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="bookingTime != null">
+        #{bookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord">
+    update delivery_record
+    <set>
+      <if test="rego != null">
+        rego = #{rego,jdbcType=VARCHAR},
+      </if>
+      <if test="plt != null">
+        plt = #{plt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="damage != null">
+        damage = #{damage,jdbcType=TINYINT},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task != null">
+        task = #{task,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="bookingTime != null">
+        booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord">
+    update delivery_record
+    set rego = #{rego,jdbcType=VARCHAR},
+      plt = #{plt,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      damage = #{damage,jdbcType=TINYINT},
+      op_id = #{opId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      task = #{task,jdbcType=VARCHAR},
+      no = #{no,jdbcType=VARCHAR},
+      booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pkg = #{pkg,jdbcType=INTEGER},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.DeliveryRecord">
+    update delivery_record
+    set rego = #{rego,jdbcType=VARCHAR},
+      plt = #{plt,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      damage = #{damage,jdbcType=TINYINT},
+      op_id = #{opId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      task = #{task,jdbcType=VARCHAR},
+      no = #{no,jdbcType=VARCHAR},
+      booking_time = #{bookingTime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pkg = #{pkg,jdbcType=INTEGER},
+      uuid = #{uuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

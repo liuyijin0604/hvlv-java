@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.LedgerTransMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="cra" jdbcType="INTEGER" property="cra" />
+    <result column="dea" jdbcType="INTEGER" property="dea" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, lid, cra, dea, date, status, currency, amount, type, ref, bwf
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ledger_trans
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ledger_trans
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans" useGeneratedKeys="true">
+    insert into ledger_trans (lid, cra, dea, 
+      date, status, currency, 
+      amount, type, ref, 
+      bwf, meta)
+    values (#{lid,jdbcType=INTEGER}, #{cra,jdbcType=INTEGER}, #{dea,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE}, #{status,jdbcType=TINYINT}, #{currency,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{type,jdbcType=TINYINT}, #{ref,jdbcType=VARCHAR}, 
+      #{bwf,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans" useGeneratedKeys="true">
+    insert into ledger_trans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        lid,
+      </if>
+      <if test="cra != null">
+        cra,
+      </if>
+      <if test="dea != null">
+        dea,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="cra != null">
+        #{cra,jdbcType=INTEGER},
+      </if>
+      <if test="dea != null">
+        #{dea,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans">
+    update ledger_trans
+    <set>
+      <if test="lid != null">
+        lid = #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="cra != null">
+        cra = #{cra,jdbcType=INTEGER},
+      </if>
+      <if test="dea != null">
+        dea = #{dea,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans">
+    update ledger_trans
+    set lid = #{lid,jdbcType=INTEGER},
+      cra = #{cra,jdbcType=INTEGER},
+      dea = #{dea,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      type = #{type,jdbcType=TINYINT},
+      ref = #{ref,jdbcType=VARCHAR},
+      bwf = #{bwf,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LedgerTrans">
+    update ledger_trans
+    set lid = #{lid,jdbcType=INTEGER},
+      cra = #{cra,jdbcType=INTEGER},
+      dea = #{dea,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      type = #{type,jdbcType=TINYINT},
+      ref = #{ref,jdbcType=VARCHAR},
+      bwf = #{bwf,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

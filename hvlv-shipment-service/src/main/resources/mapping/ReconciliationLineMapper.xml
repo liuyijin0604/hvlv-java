@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ReconciliationLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="shipment_no" jdbcType="VARCHAR" property="shipmentNo" />
+    <result column="cdeadwt" jdbcType="REAL" property="cdeadwt" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="courier_cubic" jdbcType="REAL" property="courierCubic" />
+    <result column="cust_check_weight" jdbcType="REAL" property="custCheckWeight" />
+    <result column="our_charge_weight" jdbcType="REAL" property="ourChargeWeight" />
+    <result column="manifest_weight" jdbcType="REAL" property="manifestWeight" />
+    <result column="value" jdbcType="DECIMAL" property="value" />
+    <result column="my_value" jdbcType="DECIMAL" property="myValue" />
+    <result column="my_value_m" jdbcType="REAL" property="myValueM" />
+    <result column="my_charge" jdbcType="REAL" property="myCharge" />
+    <result column="invoice_no" jdbcType="VARCHAR" property="invoiceNo" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="CS_charge_weight" jdbcType="REAL" property="csChargeWeight" />
+    <result column="weight_diff" jdbcType="REAL" property="weightDiff" />
+    <result column="org_charge_weight" jdbcType="REAL" property="orgChargeWeight" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, consol_id, shipment_no, cdeadwt, weight, courier_cubic, cust_check_weight, 
+    our_charge_weight, manifest_weight, value, my_value, my_value_m, my_charge, invoice_no, 
+    postcode, CS_charge_weight, weight_diff, org_charge_weight, shipment_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+      and parent_id = #{parentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+      and parent_id = #{parentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine" useGeneratedKeys="true">
+    insert into reconciliation_line (parent_id, consol_id, shipment_no, 
+      cdeadwt, weight, courier_cubic, 
+      cust_check_weight, our_charge_weight, manifest_weight, 
+      value, my_value, my_value_m, 
+      my_charge, invoice_no, postcode, 
+      CS_charge_weight, weight_diff, org_charge_weight, 
+      shipment_id, meta)
+    values (#{parentId,jdbcType=INTEGER}, #{consolId,jdbcType=INTEGER}, #{shipmentNo,jdbcType=VARCHAR}, 
+      #{cdeadwt,jdbcType=REAL}, #{weight,jdbcType=DECIMAL}, #{courierCubic,jdbcType=REAL}, 
+      #{custCheckWeight,jdbcType=REAL}, #{ourChargeWeight,jdbcType=REAL}, #{manifestWeight,jdbcType=REAL}, 
+      #{value,jdbcType=DECIMAL}, #{myValue,jdbcType=DECIMAL}, #{myValueM,jdbcType=REAL}, 
+      #{myCharge,jdbcType=REAL}, #{invoiceNo,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{csChargeWeight,jdbcType=REAL}, #{weightDiff,jdbcType=REAL}, #{orgChargeWeight,jdbcType=REAL}, 
+      #{shipmentId,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine" useGeneratedKeys="true">
+    insert into reconciliation_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="shipmentNo != null">
+        shipment_no,
+      </if>
+      <if test="cdeadwt != null">
+        cdeadwt,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="courierCubic != null">
+        courier_cubic,
+      </if>
+      <if test="custCheckWeight != null">
+        cust_check_weight,
+      </if>
+      <if test="ourChargeWeight != null">
+        our_charge_weight,
+      </if>
+      <if test="manifestWeight != null">
+        manifest_weight,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="myValue != null">
+        my_value,
+      </if>
+      <if test="myValueM != null">
+        my_value_m,
+      </if>
+      <if test="myCharge != null">
+        my_charge,
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="csChargeWeight != null">
+        CS_charge_weight,
+      </if>
+      <if test="weightDiff != null">
+        weight_diff,
+      </if>
+      <if test="orgChargeWeight != null">
+        org_charge_weight,
+      </if>
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentNo != null">
+        #{shipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdeadwt != null">
+        #{cdeadwt,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="courierCubic != null">
+        #{courierCubic,jdbcType=REAL},
+      </if>
+      <if test="custCheckWeight != null">
+        #{custCheckWeight,jdbcType=REAL},
+      </if>
+      <if test="ourChargeWeight != null">
+        #{ourChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="manifestWeight != null">
+        #{manifestWeight,jdbcType=REAL},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="myValue != null">
+        #{myValue,jdbcType=DECIMAL},
+      </if>
+      <if test="myValueM != null">
+        #{myValueM,jdbcType=REAL},
+      </if>
+      <if test="myCharge != null">
+        #{myCharge,jdbcType=REAL},
+      </if>
+      <if test="invoiceNo != null">
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="csChargeWeight != null">
+        #{csChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="weightDiff != null">
+        #{weightDiff,jdbcType=REAL},
+      </if>
+      <if test="orgChargeWeight != null">
+        #{orgChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine">
+    update reconciliation_line
+    <set>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentNo != null">
+        shipment_no = #{shipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdeadwt != null">
+        cdeadwt = #{cdeadwt,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="courierCubic != null">
+        courier_cubic = #{courierCubic,jdbcType=REAL},
+      </if>
+      <if test="custCheckWeight != null">
+        cust_check_weight = #{custCheckWeight,jdbcType=REAL},
+      </if>
+      <if test="ourChargeWeight != null">
+        our_charge_weight = #{ourChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="manifestWeight != null">
+        manifest_weight = #{manifestWeight,jdbcType=REAL},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="myValue != null">
+        my_value = #{myValue,jdbcType=DECIMAL},
+      </if>
+      <if test="myValueM != null">
+        my_value_m = #{myValueM,jdbcType=REAL},
+      </if>
+      <if test="myCharge != null">
+        my_charge = #{myCharge,jdbcType=REAL},
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="csChargeWeight != null">
+        CS_charge_weight = #{csChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="weightDiff != null">
+        weight_diff = #{weightDiff,jdbcType=REAL},
+      </if>
+      <if test="orgChargeWeight != null">
+        org_charge_weight = #{orgChargeWeight,jdbcType=REAL},
+      </if>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and parent_id = #{parentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine">
+    update reconciliation_line
+    set consol_id = #{consolId,jdbcType=INTEGER},
+      shipment_no = #{shipmentNo,jdbcType=VARCHAR},
+      cdeadwt = #{cdeadwt,jdbcType=REAL},
+      weight = #{weight,jdbcType=DECIMAL},
+      courier_cubic = #{courierCubic,jdbcType=REAL},
+      cust_check_weight = #{custCheckWeight,jdbcType=REAL},
+      our_charge_weight = #{ourChargeWeight,jdbcType=REAL},
+      manifest_weight = #{manifestWeight,jdbcType=REAL},
+      value = #{value,jdbcType=DECIMAL},
+      my_value = #{myValue,jdbcType=DECIMAL},
+      my_value_m = #{myValueM,jdbcType=REAL},
+      my_charge = #{myCharge,jdbcType=REAL},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      CS_charge_weight = #{csChargeWeight,jdbcType=REAL},
+      weight_diff = #{weightDiff,jdbcType=REAL},
+      org_charge_weight = #{orgChargeWeight,jdbcType=REAL},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and parent_id = #{parentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ReconciliationLine">
+    update reconciliation_line
+    set consol_id = #{consolId,jdbcType=INTEGER},
+      shipment_no = #{shipmentNo,jdbcType=VARCHAR},
+      cdeadwt = #{cdeadwt,jdbcType=REAL},
+      weight = #{weight,jdbcType=DECIMAL},
+      courier_cubic = #{courierCubic,jdbcType=REAL},
+      cust_check_weight = #{custCheckWeight,jdbcType=REAL},
+      our_charge_weight = #{ourChargeWeight,jdbcType=REAL},
+      manifest_weight = #{manifestWeight,jdbcType=REAL},
+      value = #{value,jdbcType=DECIMAL},
+      my_value = #{myValue,jdbcType=DECIMAL},
+      my_value_m = #{myValueM,jdbcType=REAL},
+      my_charge = #{myCharge,jdbcType=REAL},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      CS_charge_weight = #{csChargeWeight,jdbcType=REAL},
+      weight_diff = #{weightDiff,jdbcType=REAL},
+      org_charge_weight = #{orgChargeWeight,jdbcType=REAL},
+      shipment_id = #{shipmentId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and parent_id = #{parentId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.AddrArchiveMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="cnid_id" jdbcType="INTEGER" property="cnidId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="acc" jdbcType="TINYINT" property="acc" />
+    <result column="cnid_no" jdbcType="VARCHAR" property="cnidNo" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive">
+    <result column="address" jdbcType="LONGVARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, owner_id, cnid_id, name, company, suburb, city, state, postcode, country, tel, 
+    email, acc, cnid_no
+  </sql>
+  <sql id="Blob_Column_List">
+    address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from addr_archive
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from addr_archive
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive" useGeneratedKeys="true">
+    insert into addr_archive (owner_id, cnid_id, name, 
+      company, suburb, city, 
+      state, postcode, country, 
+      tel, email, acc, cnid_no, 
+      address)
+    values (#{ownerId,jdbcType=INTEGER}, #{cnidId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{acc,jdbcType=TINYINT}, #{cnidNo,jdbcType=VARCHAR}, 
+      #{address,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive" useGeneratedKeys="true">
+    insert into addr_archive
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="cnidId != null">
+        cnid_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="acc != null">
+        acc,
+      </if>
+      <if test="cnidNo != null">
+        cnid_no,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="cnidId != null">
+        #{cnidId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="acc != null">
+        #{acc,jdbcType=TINYINT},
+      </if>
+      <if test="cnidNo != null">
+        #{cnidNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive">
+    update addr_archive
+    <set>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="cnidId != null">
+        cnid_id = #{cnidId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="acc != null">
+        acc = #{acc,jdbcType=TINYINT},
+      </if>
+      <if test="cnidNo != null">
+        cnid_no = #{cnidNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive">
+    update addr_archive
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      cnid_id = #{cnidId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      acc = #{acc,jdbcType=TINYINT},
+      cnid_no = #{cnidNo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AddrArchive">
+    update addr_archive
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      cnid_id = #{cnidId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      acc = #{acc,jdbcType=TINYINT},
+      cnid_no = #{cnidNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

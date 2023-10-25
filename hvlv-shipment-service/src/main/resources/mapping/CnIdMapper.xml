@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CnIdMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="front" jdbcType="INTEGER" property="front" />
+    <result column="back" jdbcType="INTEGER" property="back" />
+    <result column="joint" jdbcType="INTEGER" property="joint" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, status, no, name, city, mobile, created, front, back, joint, bwf
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cn_id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cn_id
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId" useGeneratedKeys="true">
+    insert into cn_id (status, no, name, 
+      city, mobile, created, 
+      front, back, joint, 
+      bwf, meta)
+    values (#{status,jdbcType=TINYINT}, #{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{front,jdbcType=INTEGER}, #{back,jdbcType=INTEGER}, #{joint,jdbcType=INTEGER}, 
+      #{bwf,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId" useGeneratedKeys="true">
+    insert into cn_id
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        status,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="front != null">
+        front,
+      </if>
+      <if test="back != null">
+        back,
+      </if>
+      <if test="joint != null">
+        joint,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="front != null">
+        #{front,jdbcType=INTEGER},
+      </if>
+      <if test="back != null">
+        #{back,jdbcType=INTEGER},
+      </if>
+      <if test="joint != null">
+        #{joint,jdbcType=INTEGER},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId">
+    update cn_id
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="front != null">
+        front = #{front,jdbcType=INTEGER},
+      </if>
+      <if test="back != null">
+        back = #{back,jdbcType=INTEGER},
+      </if>
+      <if test="joint != null">
+        joint = #{joint,jdbcType=INTEGER},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId">
+    update cn_id
+    set status = #{status,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      front = #{front,jdbcType=INTEGER},
+      back = #{back,jdbcType=INTEGER},
+      joint = #{joint,jdbcType=INTEGER},
+      bwf = #{bwf,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CnId">
+    update cn_id
+    set status = #{status,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      front = #{front,jdbcType=INTEGER},
+      back = #{back,jdbcType=INTEGER},
+      joint = #{joint,jdbcType=INTEGER},
+      bwf = #{bwf,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

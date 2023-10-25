@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CargoProcessJobRelationsMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJobRelations">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="cargo_process_id" jdbcType="INTEGER" property="cargoProcessId" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="active" jdbcType="INTEGER" property="active" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_id, cargo_process_id, created, sequence, active
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cargo_process_job_relations
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cargo_process_job_relations
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJobRelations" useGeneratedKeys="true">
+    insert into cargo_process_job_relations (job_id, cargo_process_id, created, 
+      sequence, active)
+    values (#{jobId,jdbcType=INTEGER}, #{cargoProcessId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, 
+      #{sequence,jdbcType=INTEGER}, #{active,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJobRelations" useGeneratedKeys="true">
+    insert into cargo_process_job_relations
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoProcessId != null">
+        #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJobRelations">
+    update cargo_process_job_relations
+    <set>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoProcessJobRelations">
+    update cargo_process_job_relations
+    set job_id = #{jobId,jdbcType=INTEGER},
+      cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      sequence = #{sequence,jdbcType=INTEGER},
+      active = #{active,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

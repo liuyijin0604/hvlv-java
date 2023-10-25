@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.HolidaysMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Holidays">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pod" jdbcType="VARCHAR" property="pod" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="holiday_name" jdbcType="VARCHAR" property="holidayName" />
+    <result column="information" jdbcType="VARCHAR" property="information" />
+    <result column="jurisdiction" jdbcType="VARCHAR" property="jurisdiction" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pod, date, holiday_name, information, jurisdiction, year
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from holidays
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from holidays
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Holidays" useGeneratedKeys="true">
+    insert into holidays (pod, date, holiday_name, 
+      information, jurisdiction, year
+      )
+    values (#{pod,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{holidayName,jdbcType=VARCHAR}, 
+      #{information,jdbcType=VARCHAR}, #{jurisdiction,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Holidays" useGeneratedKeys="true">
+    insert into holidays
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pod != null">
+        pod,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="holidayName != null">
+        holiday_name,
+      </if>
+      <if test="information != null">
+        information,
+      </if>
+      <if test="jurisdiction != null">
+        jurisdiction,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pod != null">
+        #{pod,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="holidayName != null">
+        #{holidayName,jdbcType=VARCHAR},
+      </if>
+      <if test="information != null">
+        #{information,jdbcType=VARCHAR},
+      </if>
+      <if test="jurisdiction != null">
+        #{jurisdiction,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Holidays">
+    update holidays
+    <set>
+      <if test="pod != null">
+        pod = #{pod,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="holidayName != null">
+        holiday_name = #{holidayName,jdbcType=VARCHAR},
+      </if>
+      <if test="information != null">
+        information = #{information,jdbcType=VARCHAR},
+      </if>
+      <if test="jurisdiction != null">
+        jurisdiction = #{jurisdiction,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Holidays">
+    update holidays
+    set pod = #{pod,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      holiday_name = #{holidayName,jdbcType=VARCHAR},
+      information = #{information,jdbcType=VARCHAR},
+      jurisdiction = #{jurisdiction,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

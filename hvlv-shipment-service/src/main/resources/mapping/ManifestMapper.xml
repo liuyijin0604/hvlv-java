@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ManifestMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fwd_id" jdbcType="INTEGER" property="fwdId" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="by_id" jdbcType="INTEGER" property="byId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="total" jdbcType="REAL" property="total" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="company" jdbcType="INTEGER" property="company" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest">
+    <result column="ref" jdbcType="LONGVARCHAR" property="ref" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fwd_id, consol_id, dpt_id, by_id, type, status, created, total, bwf, company
+  </sql>
+  <sql id="Blob_Column_List">
+    ref, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from manifest
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manifest
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest" useGeneratedKeys="true">
+    insert into manifest (fwd_id, consol_id, dpt_id, 
+      by_id, type, status, 
+      created, total, bwf, 
+      company, ref, meta
+      )
+    values (#{fwdId,jdbcType=INTEGER}, #{consolId,jdbcType=INTEGER}, #{dptId,jdbcType=INTEGER}, 
+      #{byId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{created,jdbcType=TIMESTAMP}, #{total,jdbcType=REAL}, #{bwf,jdbcType=INTEGER}, 
+      #{company,jdbcType=INTEGER}, #{ref,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest" useGeneratedKeys="true">
+    insert into manifest
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fwdId != null">
+        fwd_id,
+      </if>
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="byId != null">
+        by_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fwdId != null">
+        #{fwdId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=REAL},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest">
+    update manifest
+    <set>
+      <if test="fwdId != null">
+        fwd_id = #{fwdId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        by_id = #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=REAL},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest">
+    update manifest
+    set fwd_id = #{fwdId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=REAL},
+      bwf = #{bwf,jdbcType=INTEGER},
+      company = #{company,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Manifest">
+    update manifest
+    set fwd_id = #{fwdId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      created = #{created,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=REAL},
+      bwf = #{bwf,jdbcType=INTEGER},
+      company = #{company,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

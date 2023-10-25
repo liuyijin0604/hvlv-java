@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WarehouseLocationRecommendationLogMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WarehouseLocationRecommendationLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="recommend" jdbcType="VARCHAR" property="recommend" />
+    <result column="actual" jdbcType="VARCHAR" property="actual" />
+    <result column="pallet_no" jdbcType="VARCHAR" property="palletNo" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, recommend, actual, pallet_no, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from warehouse_location_recommendation_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouse_location_recommendation_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WarehouseLocationRecommendationLog" useGeneratedKeys="true">
+    insert into warehouse_location_recommendation_log (recommend, actual, pallet_no, 
+      time)
+    values (#{recommend,jdbcType=VARCHAR}, #{actual,jdbcType=VARCHAR}, #{palletNo,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WarehouseLocationRecommendationLog" useGeneratedKeys="true">
+    insert into warehouse_location_recommendation_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recommend != null">
+        recommend,
+      </if>
+      <if test="actual != null">
+        actual,
+      </if>
+      <if test="palletNo != null">
+        pallet_no,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recommend != null">
+        #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="actual != null">
+        #{actual,jdbcType=VARCHAR},
+      </if>
+      <if test="palletNo != null">
+        #{palletNo,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WarehouseLocationRecommendationLog">
+    update warehouse_location_recommendation_log
+    <set>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=VARCHAR},
+      </if>
+      <if test="actual != null">
+        actual = #{actual,jdbcType=VARCHAR},
+      </if>
+      <if test="palletNo != null">
+        pallet_no = #{palletNo,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WarehouseLocationRecommendationLog">
+    update warehouse_location_recommendation_log
+    set recommend = #{recommend,jdbcType=VARCHAR},
+      actual = #{actual,jdbcType=VARCHAR},
+      pallet_no = #{palletNo,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

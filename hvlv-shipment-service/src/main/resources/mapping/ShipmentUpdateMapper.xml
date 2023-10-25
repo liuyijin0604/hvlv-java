@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentUpdateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentUpdate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="num_value" jdbcType="INTEGER" property="numValue" />
+    <result column="text_value" jdbcType="VARCHAR" property="textValue" />
+    <result column="o_num_value" jdbcType="INTEGER" property="oNumValue" />
+    <result column="o_text_value" jdbcType="VARCHAR" property="oTextValue" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shipment_id, type, created, num_value, text_value, o_num_value, o_text_value, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shipment_update
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_update
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentUpdate" useGeneratedKeys="true">
+    insert into shipment_update (shipment_id, type, created, 
+      num_value, text_value, o_num_value, 
+      o_text_value, status)
+    values (#{shipmentId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, 
+      #{numValue,jdbcType=INTEGER}, #{textValue,jdbcType=VARCHAR}, #{oNumValue,jdbcType=INTEGER}, 
+      #{oTextValue,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentUpdate" useGeneratedKeys="true">
+    insert into shipment_update
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="numValue != null">
+        num_value,
+      </if>
+      <if test="textValue != null">
+        text_value,
+      </if>
+      <if test="oNumValue != null">
+        o_num_value,
+      </if>
+      <if test="oTextValue != null">
+        o_text_value,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="numValue != null">
+        #{numValue,jdbcType=INTEGER},
+      </if>
+      <if test="textValue != null">
+        #{textValue,jdbcType=VARCHAR},
+      </if>
+      <if test="oNumValue != null">
+        #{oNumValue,jdbcType=INTEGER},
+      </if>
+      <if test="oTextValue != null">
+        #{oTextValue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentUpdate">
+    update shipment_update
+    <set>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="numValue != null">
+        num_value = #{numValue,jdbcType=INTEGER},
+      </if>
+      <if test="textValue != null">
+        text_value = #{textValue,jdbcType=VARCHAR},
+      </if>
+      <if test="oNumValue != null">
+        o_num_value = #{oNumValue,jdbcType=INTEGER},
+      </if>
+      <if test="oTextValue != null">
+        o_text_value = #{oTextValue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentUpdate">
+    update shipment_update
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      num_value = #{numValue,jdbcType=INTEGER},
+      text_value = #{textValue,jdbcType=VARCHAR},
+      o_num_value = #{oNumValue,jdbcType=INTEGER},
+      o_text_value = #{oTextValue,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

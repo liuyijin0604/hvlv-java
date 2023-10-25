@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ShipmentWhInspectionMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="process_status" jdbcType="INTEGER" property="processStatus" />
+    <result column="meta" jdbcType="VARCHAR" property="meta" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection">
+    <result column="scan_time" jdbcType="LONGVARCHAR" property="scanTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, process_status, meta, dpt_id, created, upload_time, close_time
+  </sql>
+  <sql id="Blob_Column_List">
+    scan_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_wh_inspection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_wh_inspection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection" useGeneratedKeys="true">
+    insert into shipment_wh_inspection (pid, process_status, meta, 
+      dpt_id, created, upload_time, 
+      close_time, scan_time)
+    values (#{pid,jdbcType=INTEGER}, #{processStatus,jdbcType=INTEGER}, #{meta,jdbcType=VARCHAR}, 
+      #{dptId,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{scanTime,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection" useGeneratedKeys="true">
+    insert into shipment_wh_inspection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="processStatus != null">
+        process_status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="closeTime != null">
+        close_time,
+      </if>
+      <if test="scanTime != null">
+        scan_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="processStatus != null">
+        #{processStatus,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scanTime != null">
+        #{scanTime,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection">
+    update shipment_wh_inspection
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="processStatus != null">
+        process_status = #{processStatus,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scanTime != null">
+        scan_time = #{scanTime,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection">
+    update shipment_wh_inspection
+    set pid = #{pid,jdbcType=INTEGER},
+      process_status = #{processStatus,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      scan_time = #{scanTime,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentWhInspection">
+    update shipment_wh_inspection
+    set pid = #{pid,jdbcType=INTEGER},
+      process_status = #{processStatus,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

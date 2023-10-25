@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CourierNearestDepotMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CourierNearestDepot">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="depot" jdbcType="VARCHAR" property="depot" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, postcode, state, suburb, depot, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from courier_nearest_depot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courier_nearest_depot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CourierNearestDepot" useGeneratedKeys="true">
+    insert into courier_nearest_depot (postcode, state, suburb, 
+      depot, type)
+    values (#{postcode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, 
+      #{depot,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CourierNearestDepot" useGeneratedKeys="true">
+    insert into courier_nearest_depot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="depot != null">
+        depot,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        #{depot,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CourierNearestDepot">
+    update courier_nearest_depot
+    <set>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        depot = #{depot,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CourierNearestDepot">
+    update courier_nearest_depot
+    set postcode = #{postcode,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      depot = #{depot,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

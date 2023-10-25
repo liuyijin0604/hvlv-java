@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CurrencyMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="valid" jdbcType="TINYINT" property="valid" />
+    <result column="type" jdbcType="BIT" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, currency, date, valid, type
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from currency
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getExrate" resultMap="BaseResultMap">
+    SELECT *
+    FROM Currency
+    WHERE `valid` = 1 AND `type` = #{type}
+    AND `date` >= DATE_SUB(#{date}, INTERVAL 3 DAY)
+    AND `date` &lt;= #{date}
+    ORDER BY `date` DESC
+    LIMIT 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from currency
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency" useGeneratedKeys="true">
+    insert into currency (currency, date, valid, 
+      type, meta)
+    values (#{currency,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{valid,jdbcType=TINYINT}, 
+      #{type,jdbcType=BIT}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency" useGeneratedKeys="true">
+    insert into currency
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="currency != null">
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency">
+    update currency
+    <set>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency">
+    update currency
+    set currency = #{currency,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      valid = #{valid,jdbcType=TINYINT},
+      type = #{type,jdbcType=BIT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Currency">
+    update currency
+    set currency = #{currency,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      valid = #{valid,jdbcType=TINYINT},
+      type = #{type,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentProcessMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="s_agent_id" jdbcType="INTEGER" property="sAgentId" />
+    <result column="s_bwf" jdbcType="INTEGER" property="sBwf" />
+    <result column="consol_eta" jdbcType="VARCHAR" property="consolEta" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="broker_id" jdbcType="INTEGER" property="brokerId" />
+    <result column="started" jdbcType="TIMESTAMP" property="started" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="notice_content" jdbcType="LONGVARCHAR" property="noticeContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, status, consol_id, s_agent_id, s_bwf, consol_eta, type, broker_id, started, 
+    date
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, notice_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_process
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_process
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess" useGeneratedKeys="true">
+    insert into shipment_process (pid, status, consol_id, 
+      s_agent_id, s_bwf, consol_eta, 
+      type, broker_id, started, 
+      date, meta, notice_content
+      )
+    values (#{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{consolId,jdbcType=INTEGER}, 
+      #{sAgentId,jdbcType=INTEGER}, #{sBwf,jdbcType=INTEGER}, #{consolEta,jdbcType=VARCHAR}, 
+      #{type,jdbcType=BIT}, #{brokerId,jdbcType=INTEGER}, #{started,jdbcType=TIMESTAMP}, 
+      #{date,jdbcType=TIMESTAMP}, #{meta,jdbcType=LONGVARCHAR}, #{noticeContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess" useGeneratedKeys="true">
+    insert into shipment_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="sAgentId != null">
+        s_agent_id,
+      </if>
+      <if test="sBwf != null">
+        s_bwf,
+      </if>
+      <if test="consolEta != null">
+        consol_eta,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="brokerId != null">
+        broker_id,
+      </if>
+      <if test="started != null">
+        started,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="noticeContent != null">
+        notice_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="sAgentId != null">
+        #{sAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="sBwf != null">
+        #{sBwf,jdbcType=INTEGER},
+      </if>
+      <if test="consolEta != null">
+        #{consolEta,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="brokerId != null">
+        #{brokerId,jdbcType=INTEGER},
+      </if>
+      <if test="started != null">
+        #{started,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeContent != null">
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess">
+    update shipment_process
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="sAgentId != null">
+        s_agent_id = #{sAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="sBwf != null">
+        s_bwf = #{sBwf,jdbcType=INTEGER},
+      </if>
+      <if test="consolEta != null">
+        consol_eta = #{consolEta,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="brokerId != null">
+        broker_id = #{brokerId,jdbcType=INTEGER},
+      </if>
+      <if test="started != null">
+        started = #{started,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeContent != null">
+        notice_content = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess">
+    update shipment_process
+    set pid = #{pid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      s_agent_id = #{sAgentId,jdbcType=INTEGER},
+      s_bwf = #{sBwf,jdbcType=INTEGER},
+      consol_eta = #{consolEta,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      broker_id = #{brokerId,jdbcType=INTEGER},
+      started = #{started,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      notice_content = #{noticeContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentProcess">
+    update shipment_process
+    set pid = #{pid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      s_agent_id = #{sAgentId,jdbcType=INTEGER},
+      s_bwf = #{sBwf,jdbcType=INTEGER},
+      consol_eta = #{consolEta,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      broker_id = #{brokerId,jdbcType=INTEGER},
+      started = #{started,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

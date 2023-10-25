@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.AuPostcodeMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AuPostcode">
+    <id column="postcode" jdbcType="CHAR" property="postcode" />
+    <id column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="lat" jdbcType="DOUBLE" property="lat" />
+    <result column="lon" jdbcType="DOUBLE" property="lon" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    postcode, suburb, state, type, lat, lon
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from au_postcode
+    where postcode = #{postcode,jdbcType=CHAR}
+      and suburb = #{suburb,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from au_postcode
+    where postcode = #{postcode,jdbcType=CHAR}
+      and suburb = #{suburb,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AuPostcode">
+    insert into au_postcode (postcode, suburb, state, 
+      type, lat, lon)
+    values (#{postcode,jdbcType=CHAR}, #{suburb,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, #{lon,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AuPostcode">
+    insert into au_postcode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lon != null">
+        lon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postcode != null">
+        #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AuPostcode">
+    update au_postcode
+    <set>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lon != null">
+        lon = #{lon,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where postcode = #{postcode,jdbcType=CHAR}
+      and suburb = #{suburb,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AuPostcode">
+    update au_postcode
+    set state = #{state,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DOUBLE},
+      lon = #{lon,jdbcType=DOUBLE}
+    where postcode = #{postcode,jdbcType=CHAR}
+      and suburb = #{suburb,jdbcType=VARCHAR}
+  </update>
+</mapper>

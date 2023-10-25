@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.QuotesMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Quotes">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="route_id" jdbcType="INTEGER" property="routeId" />
+    <result column="uld_type" jdbcType="VARCHAR" property="uldType" />
+    <result column="wt_lo" jdbcType="INTEGER" property="wtLo" />
+    <result column="wt_hi" jdbcType="INTEGER" property="wtHi" />
+    <result column="pkg" jdbcType="DECIMAL" property="pkg" />
+    <result column="min" jdbcType="DECIMAL" property="min" />
+    <result column="date_eff" jdbcType="DATE" property="dateEff" />
+    <result column="date_exp" jdbcType="DATE" property="dateExp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, route_id, uld_type, wt_lo, wt_hi, pkg, min, date_eff, date_exp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from quotes
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quotes
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Quotes" useGeneratedKeys="true">
+    insert into quotes (route_id, uld_type, wt_lo, 
+      wt_hi, pkg, min, date_eff, 
+      date_exp)
+    values (#{routeId,jdbcType=INTEGER}, #{uldType,jdbcType=VARCHAR}, #{wtLo,jdbcType=INTEGER}, 
+      #{wtHi,jdbcType=INTEGER}, #{pkg,jdbcType=DECIMAL}, #{min,jdbcType=DECIMAL}, #{dateEff,jdbcType=DATE}, 
+      #{dateExp,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Quotes" useGeneratedKeys="true">
+    insert into quotes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="routeId != null">
+        route_id,
+      </if>
+      <if test="uldType != null">
+        uld_type,
+      </if>
+      <if test="wtLo != null">
+        wt_lo,
+      </if>
+      <if test="wtHi != null">
+        wt_hi,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="min != null">
+        min,
+      </if>
+      <if test="dateEff != null">
+        date_eff,
+      </if>
+      <if test="dateExp != null">
+        date_exp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="routeId != null">
+        #{routeId,jdbcType=INTEGER},
+      </if>
+      <if test="uldType != null">
+        #{uldType,jdbcType=VARCHAR},
+      </if>
+      <if test="wtLo != null">
+        #{wtLo,jdbcType=INTEGER},
+      </if>
+      <if test="wtHi != null">
+        #{wtHi,jdbcType=INTEGER},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null">
+        #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="dateEff != null">
+        #{dateEff,jdbcType=DATE},
+      </if>
+      <if test="dateExp != null">
+        #{dateExp,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Quotes">
+    update quotes
+    <set>
+      <if test="routeId != null">
+        route_id = #{routeId,jdbcType=INTEGER},
+      </if>
+      <if test="uldType != null">
+        uld_type = #{uldType,jdbcType=VARCHAR},
+      </if>
+      <if test="wtLo != null">
+        wt_lo = #{wtLo,jdbcType=INTEGER},
+      </if>
+      <if test="wtHi != null">
+        wt_hi = #{wtHi,jdbcType=INTEGER},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null">
+        min = #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="dateEff != null">
+        date_eff = #{dateEff,jdbcType=DATE},
+      </if>
+      <if test="dateExp != null">
+        date_exp = #{dateExp,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Quotes">
+    update quotes
+    set route_id = #{routeId,jdbcType=INTEGER},
+      uld_type = #{uldType,jdbcType=VARCHAR},
+      wt_lo = #{wtLo,jdbcType=INTEGER},
+      wt_hi = #{wtHi,jdbcType=INTEGER},
+      pkg = #{pkg,jdbcType=DECIMAL},
+      min = #{min,jdbcType=DECIMAL},
+      date_eff = #{dateEff,jdbcType=DATE},
+      date_exp = #{dateExp,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

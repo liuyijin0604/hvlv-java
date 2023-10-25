@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PriceEnquiryMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="length" jdbcType="DOUBLE" property="length" />
+    <result column="width" jdbcType="DOUBLE" property="width" />
+    <result column="height" jdbcType="DOUBLE" property="height" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="dangerous_goods" jdbcType="VARCHAR" property="dangerousGoods" />
+    <result column="charge_code" jdbcType="VARCHAR" property="chargeCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="depot" jdbcType="VARCHAR" property="depot" />
+    <result column="address_type" jdbcType="VARCHAR" property="addressType" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="paid_by" jdbcType="VARCHAR" property="paidBy" />
+    <result column="mannual_unloading" jdbcType="VARCHAR" property="mannualUnloading" />
+    <result column="tailgate_unloading" jdbcType="VARCHAR" property="tailgateUnloading" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="memo" jdbcType="LONGVARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, status, date, code, cost, price, address, weight, length, width, height, quantity, 
+    note, suburb, postcode, dangerous_goods, charge_code, name, tel, email, category, 
+    depot, address_type, org_id, paid_by, mannual_unloading, tailgate_unloading
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from price_enquiry
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByCodeAndOrgIdAndStatus" resultMap="BaseResultMap"
+          parameterType="java.util.Map">
+    SELECT * FROM price_enquiry
+    WHERE code = #{code}
+      AND org_id = #{orgId}
+      AND status = #{status}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from price_enquiry
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry" useGeneratedKeys="true">
+    insert into price_enquiry (status, date, code, 
+      cost, price, address, 
+      weight, length, width, 
+      height, quantity, note, 
+      suburb, postcode, dangerous_goods, 
+      charge_code, name, tel, 
+      email, category, depot, 
+      address_type, org_id, paid_by, 
+      mannual_unloading, tailgate_unloading, meta, 
+      memo)
+    values (#{status,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=DOUBLE}, #{length,jdbcType=DOUBLE}, #{width,jdbcType=DOUBLE}, 
+      #{height,jdbcType=DOUBLE}, #{quantity,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{suburb,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{dangerousGoods,jdbcType=VARCHAR}, 
+      #{chargeCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{depot,jdbcType=VARCHAR}, 
+      #{addressType,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER}, #{paidBy,jdbcType=VARCHAR}, 
+      #{mannualUnloading,jdbcType=VARCHAR}, #{tailgateUnloading,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}, 
+      #{memo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry" useGeneratedKeys="true">
+    insert into price_enquiry
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        status,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="dangerousGoods != null">
+        dangerous_goods,
+      </if>
+      <if test="chargeCode != null">
+        charge_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="depot != null">
+        depot,
+      </if>
+      <if test="addressType != null">
+        address_type,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="paidBy != null">
+        paid_by,
+      </if>
+      <if test="mannualUnloading != null">
+        mannual_unloading,
+      </if>
+      <if test="tailgateUnloading != null">
+        tailgate_unloading,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=DOUBLE},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerousGoods != null">
+        #{dangerousGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeCode != null">
+        #{chargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        #{depot,jdbcType=VARCHAR},
+      </if>
+      <if test="addressType != null">
+        #{addressType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="paidBy != null">
+        #{paidBy,jdbcType=VARCHAR},
+      </if>
+      <if test="mannualUnloading != null">
+        #{mannualUnloading,jdbcType=VARCHAR},
+      </if>
+      <if test="tailgateUnloading != null">
+        #{tailgateUnloading,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry">
+    update price_enquiry
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=DOUBLE},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerousGoods != null">
+        dangerous_goods = #{dangerousGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeCode != null">
+        charge_code = #{chargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        depot = #{depot,jdbcType=VARCHAR},
+      </if>
+      <if test="addressType != null">
+        address_type = #{addressType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="paidBy != null">
+        paid_by = #{paidBy,jdbcType=VARCHAR},
+      </if>
+      <if test="mannualUnloading != null">
+        mannual_unloading = #{mannualUnloading,jdbcType=VARCHAR},
+      </if>
+      <if test="tailgateUnloading != null">
+        tailgate_unloading = #{tailgateUnloading,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry">
+    update price_enquiry
+    set status = #{status,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      length = #{length,jdbcType=DOUBLE},
+      width = #{width,jdbcType=DOUBLE},
+      height = #{height,jdbcType=DOUBLE},
+      quantity = #{quantity,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      dangerous_goods = #{dangerousGoods,jdbcType=VARCHAR},
+      charge_code = #{chargeCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      depot = #{depot,jdbcType=VARCHAR},
+      address_type = #{addressType,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      paid_by = #{paidBy,jdbcType=VARCHAR},
+      mannual_unloading = #{mannualUnloading,jdbcType=VARCHAR},
+      tailgate_unloading = #{tailgateUnloading,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PriceEnquiry">
+    update price_enquiry
+    set status = #{status,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      length = #{length,jdbcType=DOUBLE},
+      width = #{width,jdbcType=DOUBLE},
+      height = #{height,jdbcType=DOUBLE},
+      quantity = #{quantity,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      dangerous_goods = #{dangerousGoods,jdbcType=VARCHAR},
+      charge_code = #{chargeCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      depot = #{depot,jdbcType=VARCHAR},
+      address_type = #{addressType,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      paid_by = #{paidBy,jdbcType=VARCHAR},
+      mannual_unloading = #{mannualUnloading,jdbcType=VARCHAR},
+      tailgate_unloading = #{tailgateUnloading,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

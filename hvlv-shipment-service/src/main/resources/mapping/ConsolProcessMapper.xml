@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ConsolProcessMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="main_type" jdbcType="TINYINT" property="mainType" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="started" jdbcType="TIMESTAMP" property="started" />
+    <result column="to_warehouse" jdbcType="TIMESTAMP" property="toWarehouse" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="airport" jdbcType="VARCHAR" property="airport" />
+    <result column="pick_dead_date" jdbcType="TIMESTAMP" property="pickDeadDate" />
+    <result column="sub_status" jdbcType="INTEGER" property="subStatus" />
+    <result column="sub_status_ignore" jdbcType="INTEGER" property="subStatusIgnore" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fid, type, main_type, status, started, to_warehouse, date, airport, pick_dead_date, 
+    sub_status, sub_status_ignore
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from consol_process
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from consol_process
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess" useGeneratedKeys="true">
+    insert into consol_process (fid, type, main_type, 
+      status, started, to_warehouse, 
+      date, airport, pick_dead_date, 
+      sub_status, sub_status_ignore, meta
+      )
+    values (#{fid,jdbcType=INTEGER}, #{type,jdbcType=BIT}, #{mainType,jdbcType=TINYINT}, 
+      #{status,jdbcType=INTEGER}, #{started,jdbcType=TIMESTAMP}, #{toWarehouse,jdbcType=TIMESTAMP}, 
+      #{date,jdbcType=TIMESTAMP}, #{airport,jdbcType=VARCHAR}, #{pickDeadDate,jdbcType=TIMESTAMP}, 
+      #{subStatus,jdbcType=INTEGER}, #{subStatusIgnore,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess" useGeneratedKeys="true">
+    insert into consol_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="mainType != null">
+        main_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="started != null">
+        started,
+      </if>
+      <if test="toWarehouse != null">
+        to_warehouse,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="airport != null">
+        airport,
+      </if>
+      <if test="pickDeadDate != null">
+        pick_dead_date,
+      </if>
+      <if test="subStatus != null">
+        sub_status,
+      </if>
+      <if test="subStatusIgnore != null">
+        sub_status_ignore,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="mainType != null">
+        #{mainType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="started != null">
+        #{started,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toWarehouse != null">
+        #{toWarehouse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="airport != null">
+        #{airport,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDeadDate != null">
+        #{pickDeadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subStatus != null">
+        #{subStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subStatusIgnore != null">
+        #{subStatusIgnore,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess">
+    update consol_process
+    <set>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="mainType != null">
+        main_type = #{mainType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="started != null">
+        started = #{started,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toWarehouse != null">
+        to_warehouse = #{toWarehouse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="airport != null">
+        airport = #{airport,jdbcType=VARCHAR},
+      </if>
+      <if test="pickDeadDate != null">
+        pick_dead_date = #{pickDeadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subStatus != null">
+        sub_status = #{subStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subStatusIgnore != null">
+        sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess">
+    update consol_process
+    set fid = #{fid,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      main_type = #{mainType,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
+      started = #{started,jdbcType=TIMESTAMP},
+      to_warehouse = #{toWarehouse,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP},
+      airport = #{airport,jdbcType=VARCHAR},
+      pick_dead_date = #{pickDeadDate,jdbcType=TIMESTAMP},
+      sub_status = #{subStatus,jdbcType=INTEGER},
+      sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolProcess">
+    update consol_process
+    set fid = #{fid,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      main_type = #{mainType,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
+      started = #{started,jdbcType=TIMESTAMP},
+      to_warehouse = #{toWarehouse,jdbcType=TIMESTAMP},
+      date = #{date,jdbcType=TIMESTAMP},
+      airport = #{airport,jdbcType=VARCHAR},
+      pick_dead_date = #{pickDeadDate,jdbcType=TIMESTAMP},
+      sub_status = #{subStatus,jdbcType=INTEGER},
+      sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

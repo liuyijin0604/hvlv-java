@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BillingLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="billing_id" jdbcType="INTEGER" property="billingId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="link_id" jdbcType="INTEGER" property="linkId" />
+    <result column="to_id" jdbcType="INTEGER" property="toId" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="transaction_date" jdbcType="DATE" property="transactionDate" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+    <result column="gst" jdbcType="VARCHAR" property="gst" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="billing_cref" jdbcType="VARCHAR" property="billingCref" />
+    <result column="billing_ref" jdbcType="VARCHAR" property="billingRef" />
+    <result column="awb" jdbcType="VARCHAR" property="awb" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="qty" jdbcType="INTEGER" property="qty" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="currency" jdbcType="BIT" property="currency" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="actual_amount" jdbcType="DECIMAL" property="actualAmount" />
+    <result column="accrual_amount" jdbcType="DECIMAL" property="accrualAmount" />
+    <result column="gst_amount" jdbcType="DECIMAL" property="gstAmount" />
+    <result column="charge_code" jdbcType="VARCHAR" property="chargeCode" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="charge_weight" jdbcType="DECIMAL" property="chargeWeight" />
+    <result column="item_code" jdbcType="VARCHAR" property="itemCode" />
+    <result column="sync_xero" jdbcType="TINYINT" property="syncXero" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, billing_id, org_id, op_id, link_id, to_id, created, date, due, transaction_date, 
+    type, dpmt, gst, status, billing_cref, billing_ref, awb, desc, qty, price, dpt_id, 
+    currency, no, actual_amount, accrual_amount, gst_amount, charge_code, weight, charge_weight, 
+    item_code, sync_xero, flag
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from billing_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from billing_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine" useGeneratedKeys="true">
+    insert into billing_line (billing_id, org_id, op_id, 
+      link_id, to_id, created, 
+      date, due, transaction_date, 
+      type, dpmt, gst, status, 
+      billing_cref, billing_ref, awb, 
+      desc, qty, price, dpt_id, 
+      currency, no, actual_amount, 
+      accrual_amount, gst_amount, charge_code, 
+      weight, charge_weight, item_code, 
+      sync_xero, flag, meta
+      )
+    values (#{billingId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{opId,jdbcType=INTEGER}, 
+      #{linkId,jdbcType=INTEGER}, #{toId,jdbcType=INTEGER}, #{created,jdbcType=DATE}, 
+      #{date,jdbcType=DATE}, #{due,jdbcType=DATE}, #{transactionDate,jdbcType=DATE}, 
+      #{type,jdbcType=INTEGER}, #{dpmt,jdbcType=INTEGER}, #{gst,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{billingCref,jdbcType=VARCHAR}, #{billingRef,jdbcType=VARCHAR}, #{awb,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{qty,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{dptId,jdbcType=INTEGER}, 
+      #{currency,jdbcType=BIT}, #{no,jdbcType=VARCHAR}, #{actualAmount,jdbcType=DECIMAL}, 
+      #{accrualAmount,jdbcType=DECIMAL}, #{gstAmount,jdbcType=DECIMAL}, #{chargeCode,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=DECIMAL}, #{chargeWeight,jdbcType=DECIMAL}, #{itemCode,jdbcType=VARCHAR}, 
+      #{syncXero,jdbcType=TINYINT}, #{flag,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine" useGeneratedKeys="true">
+    insert into billing_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billingId != null">
+        billing_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="toId != null">
+        to_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="transactionDate != null">
+        transaction_date,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="billingCref != null">
+        billing_cref,
+      </if>
+      <if test="billingRef != null">
+        billing_ref,
+      </if>
+      <if test="awb != null">
+        awb,
+      </if>
+      <if test="desc != null">
+        desc,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="actualAmount != null">
+        actual_amount,
+      </if>
+      <if test="accrualAmount != null">
+        accrual_amount,
+      </if>
+      <if test="gstAmount != null">
+        gst_amount,
+      </if>
+      <if test="chargeCode != null">
+        charge_code,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight,
+      </if>
+      <if test="itemCode != null">
+        item_code,
+      </if>
+      <if test="syncXero != null">
+        sync_xero,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billingId != null">
+        #{billingId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="toId != null">
+        #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="billingCref != null">
+        #{billingCref,jdbcType=VARCHAR},
+      </if>
+      <if test="billingRef != null">
+        #{billingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="awb != null">
+        #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=BIT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="actualAmount != null">
+        #{actualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="accrualAmount != null">
+        #{accrualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="gstAmount != null">
+        #{gstAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeCode != null">
+        #{chargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="itemCode != null">
+        #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="syncXero != null">
+        #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine">
+    update billing_line
+    <set>
+      <if test="billingId != null">
+        billing_id = #{billingId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        link_id = #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="toId != null">
+        to_id = #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        transaction_date = #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="billingCref != null">
+        billing_cref = #{billingCref,jdbcType=VARCHAR},
+      </if>
+      <if test="billingRef != null">
+        billing_ref = #{billingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="awb != null">
+        awb = #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=BIT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="actualAmount != null">
+        actual_amount = #{actualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="accrualAmount != null">
+        accrual_amount = #{accrualAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="gstAmount != null">
+        gst_amount = #{gstAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeCode != null">
+        charge_code = #{chargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="itemCode != null">
+        item_code = #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="syncXero != null">
+        sync_xero = #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine">
+    update billing_line
+    set billing_id = #{billingId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      link_id = #{linkId,jdbcType=INTEGER},
+      to_id = #{toId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      type = #{type,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      gst = #{gst,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      billing_cref = #{billingCref,jdbcType=VARCHAR},
+      billing_ref = #{billingRef,jdbcType=VARCHAR},
+      awb = #{awb,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      qty = #{qty,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      no = #{no,jdbcType=VARCHAR},
+      actual_amount = #{actualAmount,jdbcType=DECIMAL},
+      accrual_amount = #{accrualAmount,jdbcType=DECIMAL},
+      gst_amount = #{gstAmount,jdbcType=DECIMAL},
+      charge_code = #{chargeCode,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      item_code = #{itemCode,jdbcType=VARCHAR},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      flag = #{flag,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BillingLine">
+    update billing_line
+    set billing_id = #{billingId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      link_id = #{linkId,jdbcType=INTEGER},
+      to_id = #{toId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      type = #{type,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      gst = #{gst,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      billing_cref = #{billingCref,jdbcType=VARCHAR},
+      billing_ref = #{billingRef,jdbcType=VARCHAR},
+      awb = #{awb,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      qty = #{qty,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      no = #{no,jdbcType=VARCHAR},
+      actual_amount = #{actualAmount,jdbcType=DECIMAL},
+      accrual_amount = #{accrualAmount,jdbcType=DECIMAL},
+      gst_amount = #{gstAmount,jdbcType=DECIMAL},
+      charge_code = #{chargeCode,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      item_code = #{itemCode,jdbcType=VARCHAR},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

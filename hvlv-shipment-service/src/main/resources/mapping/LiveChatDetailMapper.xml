@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.LiveChatDetailMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LiveChatDetail">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="agent_email" jdbcType="VARCHAR" property="agentEmail" />
+    <result column="started_timestamp" jdbcType="TIMESTAMP" property="startedTimestamp" />
+    <result column="ended_timestamp" jdbcType="TIMESTAMP" property="endedTimestamp" />
+    <result column="visitor_name" jdbcType="VARCHAR" property="visitorName" />
+    <result column="visitor_email" jdbcType="VARCHAR" property="visitorEmail" />
+    <result column="visitor_contact_number" jdbcType="INTEGER" property="visitorContactNumber" />
+    <result column="visitor_city" jdbcType="VARCHAR" property="visitorCity" />
+    <result column="visitor_country" jdbcType="VARCHAR" property="visitorCountry" />
+  </resultMap>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LiveChatDetail" useGeneratedKeys="true">
+    insert into live_chat_detail (agent_email, started_timestamp, ended_timestamp, 
+      visitor_name, visitor_email, visitor_contact_number, 
+      visitor_city, visitor_country)
+    values (#{agentEmail,jdbcType=VARCHAR}, #{startedTimestamp,jdbcType=TIMESTAMP}, #{endedTimestamp,jdbcType=TIMESTAMP}, 
+      #{visitorName,jdbcType=VARCHAR}, #{visitorEmail,jdbcType=VARCHAR}, #{visitorContactNumber,jdbcType=INTEGER}, 
+      #{visitorCity,jdbcType=VARCHAR}, #{visitorCountry,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.LiveChatDetail" useGeneratedKeys="true">
+    insert into live_chat_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="agentEmail != null">
+        agent_email,
+      </if>
+      <if test="startedTimestamp != null">
+        started_timestamp,
+      </if>
+      <if test="endedTimestamp != null">
+        ended_timestamp,
+      </if>
+      <if test="visitorName != null">
+        visitor_name,
+      </if>
+      <if test="visitorEmail != null">
+        visitor_email,
+      </if>
+      <if test="visitorContactNumber != null">
+        visitor_contact_number,
+      </if>
+      <if test="visitorCity != null">
+        visitor_city,
+      </if>
+      <if test="visitorCountry != null">
+        visitor_country,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="agentEmail != null">
+        #{agentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="startedTimestamp != null">
+        #{startedTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endedTimestamp != null">
+        #{endedTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorName != null">
+        #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorEmail != null">
+        #{visitorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorContactNumber != null">
+        #{visitorContactNumber,jdbcType=INTEGER},
+      </if>
+      <if test="visitorCity != null">
+        #{visitorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCountry != null">
+        #{visitorCountry,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ErpProductsMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="vendor_id" jdbcType="INTEGER" property="vendorId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="buy_price" jdbcType="REAL" property="buyPrice" />
+    <result column="sale_price" jdbcType="REAL" property="salePrice" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="added_time" jdbcType="TIMESTAMP" property="addedTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts">
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, category_id, vendor_id, name, buy_price, sale_price, barcode, added_time
+  </sql>
+  <sql id="Blob_Column_List">
+    notes
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from erp_products
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from erp_products
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts" useGeneratedKeys="true">
+    insert into erp_products (category_id, vendor_id, name, 
+      buy_price, sale_price, barcode, 
+      added_time, notes)
+    values (#{categoryId,jdbcType=INTEGER}, #{vendorId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{buyPrice,jdbcType=REAL}, #{salePrice,jdbcType=REAL}, #{barcode,jdbcType=VARCHAR}, 
+      #{addedTime,jdbcType=TIMESTAMP}, #{notes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts" useGeneratedKeys="true">
+    insert into erp_products
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="vendorId != null">
+        vendor_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="buyPrice != null">
+        buy_price,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="addedTime != null">
+        added_time,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="vendorId != null">
+        #{vendorId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPrice != null">
+        #{buyPrice,jdbcType=REAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=REAL},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="addedTime != null">
+        #{addedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts">
+    update erp_products
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="vendorId != null">
+        vendor_id = #{vendorId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPrice != null">
+        buy_price = #{buyPrice,jdbcType=REAL},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=REAL},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="addedTime != null">
+        added_time = #{addedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts">
+    update erp_products
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      vendor_id = #{vendorId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      buy_price = #{buyPrice,jdbcType=REAL},
+      sale_price = #{salePrice,jdbcType=REAL},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      added_time = #{addedTime,jdbcType=TIMESTAMP},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ErpProducts">
+    update erp_products
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      vendor_id = #{vendorId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      buy_price = #{buyPrice,jdbcType=REAL},
+      sale_price = #{salePrice,jdbcType=REAL},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      added_time = #{addedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

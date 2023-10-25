@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="submit_id" jdbcType="INTEGER" property="submitId" />
+    <result column="c_read" jdbcType="TINYINT" property="cRead" />
+    <result column="s_read" jdbcType="TINYINT" property="sRead" />
+    <result column="faq" jdbcType="VARCHAR" property="faq" />
+    <result column="faq_answer" jdbcType="VARCHAR" property="faqAnswer" />
+    <result column="answer_date" jdbcType="TIMESTAMP" property="answerDate" />
+    <result column="cr_date" jdbcType="TIMESTAMP" property="crDate" />
+    <result column="process_type" jdbcType="INTEGER" property="processType" />
+    <result column="finish_user_id" jdbcType="INTEGER" property="finishUserId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion">
+    <result column="c_note" jdbcType="LONGVARCHAR" property="cNote" />
+    <result column="s_note" jdbcType="LONGVARCHAR" property="sNote" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shipment_id, submit_id, c_read, s_read, faq, faq_answer, answer_date, cr_date, 
+    process_type, finish_user_id
+  </sql>
+  <sql id="Blob_Column_List">
+    c_note, s_note, meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shipment_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion" useGeneratedKeys="true">
+    insert into shipment_question (shipment_id, submit_id, c_read, 
+      s_read, faq, faq_answer, 
+      answer_date, cr_date, process_type, 
+      finish_user_id, c_note, s_note, 
+      meta)
+    values (#{shipmentId,jdbcType=INTEGER}, #{submitId,jdbcType=INTEGER}, #{cRead,jdbcType=TINYINT}, 
+      #{sRead,jdbcType=TINYINT}, #{faq,jdbcType=VARCHAR}, #{faqAnswer,jdbcType=VARCHAR}, 
+      #{answerDate,jdbcType=TIMESTAMP}, #{crDate,jdbcType=TIMESTAMP}, #{processType,jdbcType=INTEGER}, 
+      #{finishUserId,jdbcType=INTEGER}, #{cNote,jdbcType=LONGVARCHAR}, #{sNote,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion" useGeneratedKeys="true">
+    insert into shipment_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="submitId != null">
+        submit_id,
+      </if>
+      <if test="cRead != null">
+        c_read,
+      </if>
+      <if test="sRead != null">
+        s_read,
+      </if>
+      <if test="faq != null">
+        faq,
+      </if>
+      <if test="faqAnswer != null">
+        faq_answer,
+      </if>
+      <if test="answerDate != null">
+        answer_date,
+      </if>
+      <if test="crDate != null">
+        cr_date,
+      </if>
+      <if test="processType != null">
+        process_type,
+      </if>
+      <if test="finishUserId != null">
+        finish_user_id,
+      </if>
+      <if test="cNote != null">
+        c_note,
+      </if>
+      <if test="sNote != null">
+        s_note,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="submitId != null">
+        #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="cRead != null">
+        #{cRead,jdbcType=TINYINT},
+      </if>
+      <if test="sRead != null">
+        #{sRead,jdbcType=TINYINT},
+      </if>
+      <if test="faq != null">
+        #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="faqAnswer != null">
+        #{faqAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerDate != null">
+        #{answerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crDate != null">
+        #{crDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processType != null">
+        #{processType,jdbcType=INTEGER},
+      </if>
+      <if test="finishUserId != null">
+        #{finishUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cNote != null">
+        #{cNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sNote != null">
+        #{sNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion">
+    update shipment_question
+    <set>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="submitId != null">
+        submit_id = #{submitId,jdbcType=INTEGER},
+      </if>
+      <if test="cRead != null">
+        c_read = #{cRead,jdbcType=TINYINT},
+      </if>
+      <if test="sRead != null">
+        s_read = #{sRead,jdbcType=TINYINT},
+      </if>
+      <if test="faq != null">
+        faq = #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="faqAnswer != null">
+        faq_answer = #{faqAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="answerDate != null">
+        answer_date = #{answerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crDate != null">
+        cr_date = #{crDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processType != null">
+        process_type = #{processType,jdbcType=INTEGER},
+      </if>
+      <if test="finishUserId != null">
+        finish_user_id = #{finishUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cNote != null">
+        c_note = #{cNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sNote != null">
+        s_note = #{sNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion">
+    update shipment_question
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      submit_id = #{submitId,jdbcType=INTEGER},
+      c_read = #{cRead,jdbcType=TINYINT},
+      s_read = #{sRead,jdbcType=TINYINT},
+      faq = #{faq,jdbcType=VARCHAR},
+      faq_answer = #{faqAnswer,jdbcType=VARCHAR},
+      answer_date = #{answerDate,jdbcType=TIMESTAMP},
+      cr_date = #{crDate,jdbcType=TIMESTAMP},
+      process_type = #{processType,jdbcType=INTEGER},
+      finish_user_id = #{finishUserId,jdbcType=INTEGER},
+      c_note = #{cNote,jdbcType=LONGVARCHAR},
+      s_note = #{sNote,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentQuestion">
+    update shipment_question
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      submit_id = #{submitId,jdbcType=INTEGER},
+      c_read = #{cRead,jdbcType=TINYINT},
+      s_read = #{sRead,jdbcType=TINYINT},
+      faq = #{faq,jdbcType=VARCHAR},
+      faq_answer = #{faqAnswer,jdbcType=VARCHAR},
+      answer_date = #{answerDate,jdbcType=TIMESTAMP},
+      cr_date = #{crDate,jdbcType=TIMESTAMP},
+      process_type = #{processType,jdbcType=INTEGER},
+      finish_user_id = #{finishUserId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

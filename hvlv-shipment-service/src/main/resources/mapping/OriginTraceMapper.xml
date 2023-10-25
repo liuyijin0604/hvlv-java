@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.OriginTraceMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OriginTrace">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pvdr" jdbcType="TINYINT" property="pvdr" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="bdate" jdbcType="DATE" property="bdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pvdr, no, pid, ref, bdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from origin_trace
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from origin_trace
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OriginTrace" useGeneratedKeys="true">
+    insert into origin_trace (pvdr, no, pid, 
+      ref, bdate)
+    values (#{pvdr,jdbcType=TINYINT}, #{no,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{ref,jdbcType=VARCHAR}, #{bdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OriginTrace" useGeneratedKeys="true">
+    insert into origin_trace
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pvdr != null">
+        pvdr,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="bdate != null">
+        bdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pvdr != null">
+        #{pvdr,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bdate != null">
+        #{bdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OriginTrace">
+    update origin_trace
+    <set>
+      <if test="pvdr != null">
+        pvdr = #{pvdr,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bdate != null">
+        bdate = #{bdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OriginTrace">
+    update origin_trace
+    set pvdr = #{pvdr,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      ref = #{ref,jdbcType=VARCHAR},
+      bdate = #{bdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

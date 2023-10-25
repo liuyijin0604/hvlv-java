@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BillingMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="transaction_date" jdbcType="DATE" property="transactionDate" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="billing_cref" jdbcType="VARCHAR" property="billingCref" />
+    <result column="billing_ref" jdbcType="VARCHAR" property="billingRef" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="currency" jdbcType="BIT" property="currency" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="charge_weight" jdbcType="DECIMAL" property="chargeWeight" />
+    <result column="sync_xero" jdbcType="TINYINT" property="syncXero" />
+    <result column="billingcol" jdbcType="VARCHAR" property="billingcol" />
+    <result column="xero_id" jdbcType="VARCHAR" property="xeroId" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, created, date, due, transaction_date, type, dpmt, status, billing_cref, 
+    billing_ref, dpt_id, currency, no, weight, charge_weight, sync_xero, billingcol, 
+    xero_id, total, gst
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from billing
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from billing
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing" useGeneratedKeys="true">
+    insert into billing (org_id, created, date, 
+      due, transaction_date, type, 
+      dpmt, status, billing_cref, 
+      billing_ref, dpt_id, currency, 
+      no, weight, charge_weight, 
+      sync_xero, billingcol, xero_id, 
+      total, gst, meta
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{created,jdbcType=DATE}, #{date,jdbcType=DATE}, 
+      #{due,jdbcType=DATE}, #{transactionDate,jdbcType=DATE}, #{type,jdbcType=INTEGER}, 
+      #{dpmt,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{billingCref,jdbcType=VARCHAR}, 
+      #{billingRef,jdbcType=VARCHAR}, #{dptId,jdbcType=INTEGER}, #{currency,jdbcType=BIT}, 
+      #{no,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{chargeWeight,jdbcType=DECIMAL}, 
+      #{syncXero,jdbcType=TINYINT}, #{billingcol,jdbcType=VARCHAR}, #{xeroId,jdbcType=VARCHAR}, 
+      #{total,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing" useGeneratedKeys="true">
+    insert into billing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="transactionDate != null">
+        transaction_date,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="billingCref != null">
+        billing_cref,
+      </if>
+      <if test="billingRef != null">
+        billing_ref,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight,
+      </if>
+      <if test="syncXero != null">
+        sync_xero,
+      </if>
+      <if test="billingcol != null">
+        billingcol,
+      </if>
+      <if test="xeroId != null">
+        xero_id,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="billingCref != null">
+        #{billingCref,jdbcType=VARCHAR},
+      </if>
+      <if test="billingRef != null">
+        #{billingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=BIT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="billingcol != null">
+        #{billingcol,jdbcType=VARCHAR},
+      </if>
+      <if test="xeroId != null">
+        #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing">
+    update billing
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="transactionDate != null">
+        transaction_date = #{transactionDate,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="billingCref != null">
+        billing_cref = #{billingCref,jdbcType=VARCHAR},
+      </if>
+      <if test="billingRef != null">
+        billing_ref = #{billingRef,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=BIT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        sync_xero = #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="billingcol != null">
+        billingcol = #{billingcol,jdbcType=VARCHAR},
+      </if>
+      <if test="xeroId != null">
+        xero_id = #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing">
+    update billing
+    set org_id = #{orgId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      type = #{type,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      billing_cref = #{billingCref,jdbcType=VARCHAR},
+      billing_ref = #{billingRef,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      no = #{no,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      billingcol = #{billingcol,jdbcType=VARCHAR},
+      xero_id = #{xeroId,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Billing">
+    update billing
+    set org_id = #{orgId,jdbcType=INTEGER},
+      created = #{created,jdbcType=DATE},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      transaction_date = #{transactionDate,jdbcType=DATE},
+      type = #{type,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      billing_cref = #{billingCref,jdbcType=VARCHAR},
+      billing_ref = #{billingRef,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=BIT},
+      no = #{no,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      billingcol = #{billingcol,jdbcType=VARCHAR},
+      xero_id = #{xeroId,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

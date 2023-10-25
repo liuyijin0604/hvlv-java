@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+    <result column="lname" jdbcType="VARCHAR" property="lname" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="dpmt" jdbcType="INTEGER" property="dpmt" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="since" jdbcType="TIMESTAMP" property="since" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="by_id" jdbcType="INTEGER" property="byId" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="occupation" jdbcType="BIGINT" property="occupation" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="dashboard" jdbcType="LONGVARCHAR" property="dashboard" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, title, fname, lname, user, dpmt, email, password, phone, fax, mobile, since, 
+    active, org_id, by_id, dpt_id, occupation
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, dashboard
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User" useGeneratedKeys="true">
+    insert into user (type, title, fname, 
+      lname, user, dpmt, 
+      email, password, phone, 
+      fax, mobile, since, 
+      active, org_id, by_id, dpt_id, 
+      occupation, meta, dashboard
+      )
+    values (#{type,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, 
+      #{lname,jdbcType=VARCHAR}, #{user,jdbcType=VARCHAR}, #{dpmt,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{since,jdbcType=TIMESTAMP}, 
+      #{active,jdbcType=BIT}, #{orgId,jdbcType=INTEGER}, #{byId,jdbcType=INTEGER}, #{dptId,jdbcType=INTEGER}, 
+      #{occupation,jdbcType=BIGINT}, #{meta,jdbcType=LONGVARCHAR}, #{dashboard,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="fname != null">
+        fname,
+      </if>
+      <if test="lname != null">
+        lname,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="since != null">
+        since,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="byId != null">
+        by_id,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="dashboard != null">
+        dashboard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null">
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null">
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="since != null">
+        #{since,jdbcType=TIMESTAMP},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=BIGINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dashboard != null">
+        #{dashboard,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User">
+    update user
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null">
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null">
+        lname = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="since != null">
+        since = #{since,jdbcType=TIMESTAMP},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        by_id = #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=BIGINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dashboard != null">
+        dashboard = #{dashboard,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User">
+    update user
+    set type = #{type,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      lname = #{lname,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      since = #{since,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=BIT},
+      org_id = #{orgId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      occupation = #{occupation,jdbcType=BIGINT},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      dashboard = #{dashboard,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.User">
+    update user
+    set type = #{type,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      lname = #{lname,jdbcType=VARCHAR},
+      `user` = #{user,jdbcType=VARCHAR},
+      dpmt = #{dpmt,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      since = #{since,jdbcType=TIMESTAMP},
+      active = #{active,jdbcType=BIT},
+      org_id = #{orgId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      occupation = #{occupation,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="select" resultMap="BaseResultMap">
+    select * from user where id = #{id}
+  </select>
+
+</mapper>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ZoneMapMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMap">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="chargecode_id" jdbcType="INTEGER" property="chargecodeId" />
+    <result column="zone_id" jdbcType="TINYINT" property="zoneId" />
+    <result column="z1" jdbcType="VARCHAR" property="z1" />
+    <result column="z2" jdbcType="VARCHAR" property="z2" />
+    <result column="pc_lo" jdbcType="INTEGER" property="pcLo" />
+    <result column="pc_hi" jdbcType="INTEGER" property="pcHi" />
+    <result column="zone_name" jdbcType="VARCHAR" property="zoneName" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, chargecode_id, zone_id, z1, z2, pc_lo, pc_hi, zone_name, suburb, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zone_map
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findZoneRatesByWeightAndZone" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT *
+    FROM zone_rate
+    WHERE chargecode_id = #{chargecodeId}
+      AND weight_lo &lt;= #{weight}
+      AND weight_hi &gt;= #{weight}
+      AND zone = #{zone}
+      AND base + item + perkg + minimum &gt; 0
+  </select>
+  <select id="findZoneMapsByChargecodeIdAndPostcode"  parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM zone_map
+    WHERE chargecode_id = #{chargecodeId,jdbcType=INTEGER}
+    AND pc_lo &lt;= #{cneePostcode,jdbcType=INTEGER}
+    AND pc_hi >= #{cneePostcode,jdbcType=INTEGER}
+  </select>
+  <select id="countZoneMapByOrgAndZoneFw" resultType="int">
+    SELECT COUNT(*)
+    FROM zone_map
+    WHERE org_id = 115 AND zone_id = 1 AND z1 = "SYD"
+    AND pc_lo &lt;= #{postcode} AND pc_hi >= #{postcode}
+  </select>
+  <select id="findByOrgIdZoneIdAndPostcode" resultMap="BaseResultMap">
+    SELECT * FROM zone_map
+    WHERE org_id = #{orgId} AND zone_id = #{zoneId} AND pc_lo &lt;= #{postcode} AND pc_hi >= #{postcode}
+    LIMIT 1
+  </select>
+  <select id="findByOrgIdZoneIdPostcodeAndSuburb" resultMap="BaseResultMap">
+    SELECT * FROM zone_map
+    WHERE org_id = #{orgId} AND zone_id = #{zoneId} AND pc_lo &lt;= #{postcode} AND pc_hi >= #{postcode} AND suburb = #{suburb}
+    LIMIT 1
+  </select>
+  <select id="findByOrgIdAndZoneIdWithNonEmptySuburb" resultMap="BaseResultMap">
+    SELECT * FROM zone_map
+    WHERE
+      org_id = #{orgId,jdbcType=INTEGER}
+      AND
+      zone_id = #{zoneId,jdbcType=TINYINT}
+      AND
+      suburb != ''
+    LIMIT 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zone_map
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMap" useGeneratedKeys="true">
+    insert into zone_map (org_id, chargecode_id, zone_id, 
+      z1, z2, pc_lo, pc_hi, 
+      zone_name, suburb, state
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{chargecodeId,jdbcType=INTEGER}, #{zoneId,jdbcType=TINYINT}, 
+      #{z1,jdbcType=VARCHAR}, #{z2,jdbcType=VARCHAR}, #{pcLo,jdbcType=INTEGER}, #{pcHi,jdbcType=INTEGER}, 
+      #{zoneName,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMap" useGeneratedKeys="true">
+    insert into zone_map
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id,
+      </if>
+      <if test="zoneId != null">
+        zone_id,
+      </if>
+      <if test="z1 != null">
+        z1,
+      </if>
+      <if test="z2 != null">
+        z2,
+      </if>
+      <if test="pcLo != null">
+        pc_lo,
+      </if>
+      <if test="pcHi != null">
+        pc_hi,
+      </if>
+      <if test="zoneName != null">
+        zone_name,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="z1 != null">
+        #{z1,jdbcType=VARCHAR},
+      </if>
+      <if test="z2 != null">
+        #{z2,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        #{pcLo,jdbcType=INTEGER},
+      </if>
+      <if test="pcHi != null">
+        #{pcHi,jdbcType=INTEGER},
+      </if>
+      <if test="zoneName != null">
+        #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMap">
+    update zone_map
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        zone_id = #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="z1 != null">
+        z1 = #{z1,jdbcType=VARCHAR},
+      </if>
+      <if test="z2 != null">
+        z2 = #{z2,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        pc_lo = #{pcLo,jdbcType=INTEGER},
+      </if>
+      <if test="pcHi != null">
+        pc_hi = #{pcHi,jdbcType=INTEGER},
+      </if>
+      <if test="zoneName != null">
+        zone_name = #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMap">
+    update zone_map
+    set org_id = #{orgId,jdbcType=INTEGER},
+      chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      zone_id = #{zoneId,jdbcType=TINYINT},
+      z1 = #{z1,jdbcType=VARCHAR},
+      z2 = #{z2,jdbcType=VARCHAR},
+      pc_lo = #{pcLo,jdbcType=INTEGER},
+      pc_hi = #{pcHi,jdbcType=INTEGER},
+      zone_name = #{zoneName,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.MarketingAddressMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="imp" jdbcType="BIT" property="imp" />
+    <result column="tpl" jdbcType="BIT" property="tpl" />
+    <result column="tld" jdbcType="BIT" property="tld" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="group" jdbcType="VARCHAR" property="group" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company, country, contact, email, tel, imp, tpl, tld, status, group
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from marketing_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from marketing_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress" useGeneratedKeys="true">
+    insert into marketing_address (company, country, contact, 
+      email, tel, imp, tpl, 
+      tld, status, group, meta
+      )
+    values (#{company,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{imp,jdbcType=BIT}, #{tpl,jdbcType=BIT}, 
+      #{tld,jdbcType=BIT}, #{status,jdbcType=BIT}, #{group,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress" useGeneratedKeys="true">
+    insert into marketing_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="company != null">
+        company,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="imp != null">
+        imp,
+      </if>
+      <if test="tpl != null">
+        tpl,
+      </if>
+      <if test="tld != null">
+        tld,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="group != null">
+        group,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="imp != null">
+        #{imp,jdbcType=BIT},
+      </if>
+      <if test="tpl != null">
+        #{tpl,jdbcType=BIT},
+      </if>
+      <if test="tld != null">
+        #{tld,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="group != null">
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress">
+    update marketing_address
+    <set>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="imp != null">
+        imp = #{imp,jdbcType=BIT},
+      </if>
+      <if test="tpl != null">
+        tpl = #{tpl,jdbcType=BIT},
+      </if>
+      <if test="tld != null">
+        tld = #{tld,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="group != null">
+        group = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress">
+    update marketing_address
+    set company = #{company,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      imp = #{imp,jdbcType=BIT},
+      tpl = #{tpl,jdbcType=BIT},
+      tld = #{tld,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      group = #{group,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.MarketingAddress">
+    update marketing_address
+    set company = #{company,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      imp = #{imp,jdbcType=BIT},
+      tpl = #{tpl,jdbcType=BIT},
+      tld = #{tld,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      group = #{group,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

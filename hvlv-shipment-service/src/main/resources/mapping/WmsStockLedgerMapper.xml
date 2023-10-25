@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsStockLedgerMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ti_id" jdbcType="INTEGER" property="tiId" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="stock_id" jdbcType="INTEGER" property="stockId" />
+    <result column="location_id" jdbcType="INTEGER" property="locationId" />
+    <result column="l2_id" jdbcType="INTEGER" property="l2Id" />
+    <result column="qty_in" jdbcType="REAL" property="qtyIn" />
+    <result column="qty_out" jdbcType="REAL" property="qtyOut" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ti_id, task_id, stock_id, location_id, l2_id, qty_in, qty_out, ts, bwf
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wms_stock_ledger
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_stock_ledger
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger" useGeneratedKeys="true">
+    insert into wms_stock_ledger (ti_id, task_id, stock_id, 
+      location_id, l2_id, qty_in, 
+      qty_out, ts, bwf, meta
+      )
+    values (#{tiId,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{stockId,jdbcType=INTEGER}, 
+      #{locationId,jdbcType=INTEGER}, #{l2Id,jdbcType=INTEGER}, #{qtyIn,jdbcType=REAL}, 
+      #{qtyOut,jdbcType=REAL}, #{ts,jdbcType=TIMESTAMP}, #{bwf,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger" useGeneratedKeys="true">
+    insert into wms_stock_ledger
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tiId != null">
+        ti_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
+      <if test="locationId != null">
+        location_id,
+      </if>
+      <if test="l2Id != null">
+        l2_id,
+      </if>
+      <if test="qtyIn != null">
+        qty_in,
+      </if>
+      <if test="qtyOut != null">
+        qty_out,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tiId != null">
+        #{tiId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null">
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="l2Id != null">
+        #{l2Id,jdbcType=INTEGER},
+      </if>
+      <if test="qtyIn != null">
+        #{qtyIn,jdbcType=REAL},
+      </if>
+      <if test="qtyOut != null">
+        #{qtyOut,jdbcType=REAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger">
+    update wms_stock_ledger
+    <set>
+      <if test="tiId != null">
+        ti_id = #{tiId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null">
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="l2Id != null">
+        l2_id = #{l2Id,jdbcType=INTEGER},
+      </if>
+      <if test="qtyIn != null">
+        qty_in = #{qtyIn,jdbcType=REAL},
+      </if>
+      <if test="qtyOut != null">
+        qty_out = #{qtyOut,jdbcType=REAL},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger">
+    update wms_stock_ledger
+    set ti_id = #{tiId,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      stock_id = #{stockId,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      l2_id = #{l2Id,jdbcType=INTEGER},
+      qty_in = #{qtyIn,jdbcType=REAL},
+      qty_out = #{qtyOut,jdbcType=REAL},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      bwf = #{bwf,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStockLedger">
+    update wms_stock_ledger
+    set ti_id = #{tiId,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      stock_id = #{stockId,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      l2_id = #{l2Id,jdbcType=INTEGER},
+      qty_in = #{qtyIn,jdbcType=REAL},
+      qty_out = #{qtyOut,jdbcType=REAL},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      bwf = #{bwf,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

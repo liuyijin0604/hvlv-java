@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SfStationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfStationInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="business_station" jdbcType="VARCHAR" property="businessStation" />
+    <result column="op_station" jdbcType="VARCHAR" property="opStation" />
+    <result column="op_id" jdbcType="VARCHAR" property="opId" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="pc_lo" jdbcType="VARCHAR" property="pcLo" />
+    <result column="pc_hi" jdbcType="VARCHAR" property="pcHi" />
+    <result column="unknow" jdbcType="VARCHAR" property="unknow" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="weekdays" jdbcType="INTEGER" property="weekdays" />
+    <result column="surcharge" jdbcType="DECIMAL" property="surcharge" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="is_end" jdbcType="INTEGER" property="isEnd" />
+    <result column="is_active" jdbcType="INTEGER" property="isActive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, country, city_code, business_station, op_station, op_id, state, city, suburb, 
+    pc_lo, pc_hi, unknow, region, weekdays, surcharge, supplier, is_end, is_active
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sf_station_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sf_station_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfStationInfo" useGeneratedKeys="true">
+    insert into sf_station_info (country, city_code, business_station, 
+      op_station, op_id, state, 
+      city, suburb, pc_lo, 
+      pc_hi, unknow, region, 
+      weekdays, surcharge, supplier, 
+      is_end, is_active)
+    values (#{country,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{businessStation,jdbcType=VARCHAR}, 
+      #{opStation,jdbcType=VARCHAR}, #{opId,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, #{pcLo,jdbcType=VARCHAR}, 
+      #{pcHi,jdbcType=VARCHAR}, #{unknow,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{weekdays,jdbcType=INTEGER}, #{surcharge,jdbcType=DECIMAL}, #{supplier,jdbcType=VARCHAR}, 
+      #{isEnd,jdbcType=INTEGER}, #{isActive,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfStationInfo" useGeneratedKeys="true">
+    insert into sf_station_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="country != null">
+        country,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="businessStation != null">
+        business_station,
+      </if>
+      <if test="opStation != null">
+        op_station,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="pcLo != null">
+        pc_lo,
+      </if>
+      <if test="pcHi != null">
+        pc_hi,
+      </if>
+      <if test="unknow != null">
+        unknow,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="weekdays != null">
+        weekdays,
+      </if>
+      <if test="surcharge != null">
+        surcharge,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="isEnd != null">
+        is_end,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessStation != null">
+        #{businessStation,jdbcType=VARCHAR},
+      </if>
+      <if test="opStation != null">
+        #{opStation,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        #{pcLo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcHi != null">
+        #{pcHi,jdbcType=VARCHAR},
+      </if>
+      <if test="unknow != null">
+        #{unknow,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="weekdays != null">
+        #{weekdays,jdbcType=INTEGER},
+      </if>
+      <if test="surcharge != null">
+        #{surcharge,jdbcType=DECIMAL},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null">
+        #{isEnd,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfStationInfo">
+    update sf_station_info
+    <set>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessStation != null">
+        business_station = #{businessStation,jdbcType=VARCHAR},
+      </if>
+      <if test="opStation != null">
+        op_station = #{opStation,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        pc_lo = #{pcLo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcHi != null">
+        pc_hi = #{pcHi,jdbcType=VARCHAR},
+      </if>
+      <if test="unknow != null">
+        unknow = #{unknow,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="weekdays != null">
+        weekdays = #{weekdays,jdbcType=INTEGER},
+      </if>
+      <if test="surcharge != null">
+        surcharge = #{surcharge,jdbcType=DECIMAL},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnd != null">
+        is_end = #{isEnd,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfStationInfo">
+    update sf_station_info
+    set country = #{country,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      business_station = #{businessStation,jdbcType=VARCHAR},
+      op_station = #{opStation,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      pc_lo = #{pcLo,jdbcType=VARCHAR},
+      pc_hi = #{pcHi,jdbcType=VARCHAR},
+      unknow = #{unknow,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      weekdays = #{weekdays,jdbcType=INTEGER},
+      surcharge = #{surcharge,jdbcType=DECIMAL},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      is_end = #{isEnd,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

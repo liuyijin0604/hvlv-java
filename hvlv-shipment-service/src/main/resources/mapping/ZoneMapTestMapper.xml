@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ZoneMapTestMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rate_id" jdbcType="INTEGER" property="rateId" />
+    <result column="chargecode_id" jdbcType="INTEGER" property="chargecodeId" />
+    <result column="zone_id" jdbcType="TINYINT" property="zoneId" />
+    <result column="z1" jdbcType="VARCHAR" property="z1" />
+    <result column="z2" jdbcType="VARCHAR" property="z2" />
+    <result column="pc_lo" jdbcType="INTEGER" property="pcLo" />
+    <result column="pc_hi" jdbcType="INTEGER" property="pcHi" />
+    <result column="zone_name" jdbcType="VARCHAR" property="zoneName" />
+    <result column="import_id" jdbcType="INTEGER" property="importId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rate_id, chargecode_id, zone_id, z1, z2, pc_lo, pc_hi, zone_name, import_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zone_map_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByRateIdZoneIdAndPostcode" resultMap="BaseResultMap">
+    select *
+    from zone_map_test
+    where rate_id = #{rateId,jdbcType=INTEGER}
+    and zone_id = #{zoneId,jdbcType=TINYINT}
+    and pc_lo &lt;= #{postcode,jdbcType=INTEGER}
+    and pc_hi >= #{postcode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zone_map_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest" useGeneratedKeys="true">
+    insert into zone_map_test (rate_id, chargecode_id, zone_id, 
+      z1, z2, pc_lo, pc_hi, 
+      zone_name, import_id, meta
+      )
+    values (#{rateId,jdbcType=INTEGER}, #{chargecodeId,jdbcType=INTEGER}, #{zoneId,jdbcType=TINYINT}, 
+      #{z1,jdbcType=VARCHAR}, #{z2,jdbcType=VARCHAR}, #{pcLo,jdbcType=INTEGER}, #{pcHi,jdbcType=INTEGER}, 
+      #{zoneName,jdbcType=VARCHAR}, #{importId,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest" useGeneratedKeys="true">
+    insert into zone_map_test
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        rate_id,
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id,
+      </if>
+      <if test="zoneId != null">
+        zone_id,
+      </if>
+      <if test="z1 != null">
+        z1,
+      </if>
+      <if test="z2 != null">
+        z2,
+      </if>
+      <if test="pcLo != null">
+        pc_lo,
+      </if>
+      <if test="pcHi != null">
+        pc_hi,
+      </if>
+      <if test="zoneName != null">
+        zone_name,
+      </if>
+      <if test="importId != null">
+        import_id,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rateId != null">
+        #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="z1 != null">
+        #{z1,jdbcType=VARCHAR},
+      </if>
+      <if test="z2 != null">
+        #{z2,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        #{pcLo,jdbcType=INTEGER},
+      </if>
+      <if test="pcHi != null">
+        #{pcHi,jdbcType=INTEGER},
+      </if>
+      <if test="zoneName != null">
+        #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="importId != null">
+        #{importId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest">
+    update zone_map_test
+    <set>
+      <if test="rateId != null">
+        rate_id = #{rateId,jdbcType=INTEGER},
+      </if>
+      <if test="chargecodeId != null">
+        chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        zone_id = #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="z1 != null">
+        z1 = #{z1,jdbcType=VARCHAR},
+      </if>
+      <if test="z2 != null">
+        z2 = #{z2,jdbcType=VARCHAR},
+      </if>
+      <if test="pcLo != null">
+        pc_lo = #{pcLo,jdbcType=INTEGER},
+      </if>
+      <if test="pcHi != null">
+        pc_hi = #{pcHi,jdbcType=INTEGER},
+      </if>
+      <if test="zoneName != null">
+        zone_name = #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="importId != null">
+        import_id = #{importId,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest">
+    update zone_map_test
+    set rate_id = #{rateId,jdbcType=INTEGER},
+      chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      zone_id = #{zoneId,jdbcType=TINYINT},
+      z1 = #{z1,jdbcType=VARCHAR},
+      z2 = #{z2,jdbcType=VARCHAR},
+      pc_lo = #{pcLo,jdbcType=INTEGER},
+      pc_hi = #{pcHi,jdbcType=INTEGER},
+      zone_name = #{zoneName,jdbcType=VARCHAR},
+      import_id = #{importId,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ZoneMapTest">
+    update zone_map_test
+    set rate_id = #{rateId,jdbcType=INTEGER},
+      chargecode_id = #{chargecodeId,jdbcType=INTEGER},
+      zone_id = #{zoneId,jdbcType=TINYINT},
+      z1 = #{z1,jdbcType=VARCHAR},
+      z2 = #{z2,jdbcType=VARCHAR},
+      pc_lo = #{pcLo,jdbcType=INTEGER},
+      pc_hi = #{pcHi,jdbcType=INTEGER},
+      zone_name = #{zoneName,jdbcType=VARCHAR},
+      import_id = #{importId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

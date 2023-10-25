@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CargoBookingMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="booking_date_1" jdbcType="DATE" property="bookingDate1" />
+    <result column="booking_date_2" jdbcType="DATE" property="bookingDate2" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="delivery_period" jdbcType="VARCHAR" property="deliveryPeriod" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="booking_number" jdbcType="VARCHAR" property="bookingNumber" />
+    <result column="destination" jdbcType="INTEGER" property="destination" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="cargo_process_id" jdbcType="INTEGER" property="cargoProcessId" />
+    <result column="confirmed_date" jdbcType="DATE" property="confirmedDate" />
+    <result column="hbn" jdbcType="VARCHAR" property="hbn" />
+    <result column="other_ref" jdbcType="VARCHAR" property="otherRef" />
+    <result column="depot" jdbcType="INTEGER" property="depot" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_date, booking_date_1, booking_date_2, status, delivery_period, org_id, 
+    shipment_id, booking_number, destination, fee, ref, cargo_process_id, confirmed_date, 
+    hbn, other_ref, depot
+  </sql>
+  <sql id="Blob_Column_List">
+    meta, comment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cargo_booking
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cargo_booking
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking" useGeneratedKeys="true">
+    insert into cargo_booking (create_date, booking_date_1, booking_date_2, 
+      status, delivery_period, org_id, 
+      shipment_id, booking_number, destination, 
+      fee, ref, cargo_process_id, 
+      confirmed_date, hbn, other_ref, 
+      depot, meta, comment
+      )
+    values (#{createDate,jdbcType=TIMESTAMP}, #{bookingDate1,jdbcType=DATE}, #{bookingDate2,jdbcType=DATE}, 
+      #{status,jdbcType=TINYINT}, #{deliveryPeriod,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER}, 
+      #{shipmentId,jdbcType=INTEGER}, #{bookingNumber,jdbcType=VARCHAR}, #{destination,jdbcType=INTEGER}, 
+      #{fee,jdbcType=DECIMAL}, #{ref,jdbcType=VARCHAR}, #{cargoProcessId,jdbcType=INTEGER}, 
+      #{confirmedDate,jdbcType=DATE}, #{hbn,jdbcType=VARCHAR}, #{otherRef,jdbcType=VARCHAR}, 
+      #{depot,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR}, #{comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking" useGeneratedKeys="true">
+    insert into cargo_booking
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="bookingDate1 != null">
+        booking_date_1,
+      </if>
+      <if test="bookingDate2 != null">
+        booking_date_2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="deliveryPeriod != null">
+        delivery_period,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="bookingNumber != null">
+        booking_number,
+      </if>
+      <if test="destination != null">
+        destination,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id,
+      </if>
+      <if test="confirmedDate != null">
+        confirmed_date,
+      </if>
+      <if test="hbn != null">
+        hbn,
+      </if>
+      <if test="otherRef != null">
+        other_ref,
+      </if>
+      <if test="depot != null">
+        depot,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingDate1 != null">
+        #{bookingDate1,jdbcType=DATE},
+      </if>
+      <if test="bookingDate2 != null">
+        #{bookingDate2,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deliveryPeriod != null">
+        #{deliveryPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="bookingNumber != null">
+        #{bookingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoProcessId != null">
+        #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmedDate != null">
+        #{confirmedDate,jdbcType=DATE},
+      </if>
+      <if test="hbn != null">
+        #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRef != null">
+        #{otherRef,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        #{depot,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking">
+    update cargo_booking
+    <set>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookingDate1 != null">
+        booking_date_1 = #{bookingDate1,jdbcType=DATE},
+      </if>
+      <if test="bookingDate2 != null">
+        booking_date_2 = #{bookingDate2,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deliveryPeriod != null">
+        delivery_period = #{deliveryPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="bookingNumber != null">
+        booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        destination = #{destination,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmedDate != null">
+        confirmed_date = #{confirmedDate,jdbcType=DATE},
+      </if>
+      <if test="hbn != null">
+        hbn = #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRef != null">
+        other_ref = #{otherRef,jdbcType=VARCHAR},
+      </if>
+      <if test="depot != null">
+        depot = #{depot,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking">
+    update cargo_booking
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      booking_date_1 = #{bookingDate1,jdbcType=DATE},
+      booking_date_2 = #{bookingDate2,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      delivery_period = #{deliveryPeriod,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=DECIMAL},
+      ref = #{ref,jdbcType=VARCHAR},
+      cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      confirmed_date = #{confirmedDate,jdbcType=DATE},
+      hbn = #{hbn,jdbcType=VARCHAR},
+      other_ref = #{otherRef,jdbcType=VARCHAR},
+      depot = #{depot,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      comment = #{comment,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CargoBooking">
+    update cargo_booking
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      booking_date_1 = #{bookingDate1,jdbcType=DATE},
+      booking_date_2 = #{bookingDate2,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      delivery_period = #{deliveryPeriod,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=INTEGER},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      booking_number = #{bookingNumber,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=DECIMAL},
+      ref = #{ref,jdbcType=VARCHAR},
+      cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      confirmed_date = #{confirmedDate,jdbcType=DATE},
+      hbn = #{hbn,jdbcType=VARCHAR},
+      other_ref = #{otherRef,jdbcType=VARCHAR},
+      depot = #{depot,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

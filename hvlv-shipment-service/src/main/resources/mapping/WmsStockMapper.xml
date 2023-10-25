@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsStockMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStock">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="prod_id" jdbcType="INTEGER" property="prodId" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="qty" jdbcType="REAL" property="qty" />
+    <result column="qty_res" jdbcType="REAL" property="qtyRes" />
+    <result column="expiry" jdbcType="DATE" property="expiry" />
+    <result column="batch" jdbcType="VARCHAR" property="batch" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, prod_id, org_id, qty, qty_res, expiry, batch, sn, updated
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wms_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStock" useGeneratedKeys="true">
+    insert into wms_stock (prod_id, org_id, qty, 
+      qty_res, expiry, batch, sn, 
+      updated)
+    values (#{prodId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{qty,jdbcType=REAL}, 
+      #{qtyRes,jdbcType=REAL}, #{expiry,jdbcType=DATE}, #{batch,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, 
+      #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStock" useGeneratedKeys="true">
+    insert into wms_stock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="qtyRes != null">
+        qty_res,
+      </if>
+      <if test="expiry != null">
+        expiry,
+      </if>
+      <if test="batch != null">
+        batch,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=REAL},
+      </if>
+      <if test="qtyRes != null">
+        #{qtyRes,jdbcType=REAL},
+      </if>
+      <if test="expiry != null">
+        #{expiry,jdbcType=DATE},
+      </if>
+      <if test="batch != null">
+        #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStock">
+    update wms_stock
+    <set>
+      <if test="prodId != null">
+        prod_id = #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=REAL},
+      </if>
+      <if test="qtyRes != null">
+        qty_res = #{qtyRes,jdbcType=REAL},
+      </if>
+      <if test="expiry != null">
+        expiry = #{expiry,jdbcType=DATE},
+      </if>
+      <if test="batch != null">
+        batch = #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsStock">
+    update wms_stock
+    set prod_id = #{prodId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      qty = #{qty,jdbcType=REAL},
+      qty_res = #{qtyRes,jdbcType=REAL},
+      expiry = #{expiry,jdbcType=DATE},
+      batch = #{batch,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

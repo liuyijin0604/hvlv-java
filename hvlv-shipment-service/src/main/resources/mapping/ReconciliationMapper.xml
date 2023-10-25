@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ReconciliationMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="client_type" jdbcType="INTEGER" property="clientType" />
+    <result column="invoice_no" jdbcType="VARCHAR" property="invoiceNo" />
+    <result column="invoice_date" jdbcType="DATE" property="invoiceDate" />
+    <result column="manifest_no" jdbcType="VARCHAR" property="manifestNo" />
+    <result column="invoice_total" jdbcType="DECIMAL" property="invoiceTotal" />
+    <result column="my_total" jdbcType="DECIMAL" property="myTotal" />
+    <result column="flag" jdbcType="TINYINT" property="flag" />
+    <result column="no_consol" jdbcType="VARCHAR" property="noConsol" />
+    <result column="notype" jdbcType="VARCHAR" property="notype" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, client_type, invoice_no, invoice_date, manifest_no, invoice_total, my_total, 
+    flag, no_consol, notype
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation" useGeneratedKeys="true">
+    insert into reconciliation (client_type, invoice_no, invoice_date, 
+      manifest_no, invoice_total, my_total, 
+      flag, no_consol, notype, 
+      meta)
+    values (#{clientType,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, #{invoiceDate,jdbcType=DATE}, 
+      #{manifestNo,jdbcType=VARCHAR}, #{invoiceTotal,jdbcType=DECIMAL}, #{myTotal,jdbcType=DECIMAL}, 
+      #{flag,jdbcType=TINYINT}, #{noConsol,jdbcType=VARCHAR}, #{notype,jdbcType=VARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation" useGeneratedKeys="true">
+    insert into reconciliation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clientType != null">
+        client_type,
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no,
+      </if>
+      <if test="invoiceDate != null">
+        invoice_date,
+      </if>
+      <if test="manifestNo != null">
+        manifest_no,
+      </if>
+      <if test="invoiceTotal != null">
+        invoice_total,
+      </if>
+      <if test="myTotal != null">
+        my_total,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="noConsol != null">
+        no_consol,
+      </if>
+      <if test="notype != null">
+        notype,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clientType != null">
+        #{clientType,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null">
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDate != null">
+        #{invoiceDate,jdbcType=DATE},
+      </if>
+      <if test="manifestNo != null">
+        #{manifestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTotal != null">
+        #{invoiceTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="myTotal != null">
+        #{myTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="noConsol != null">
+        #{noConsol,jdbcType=VARCHAR},
+      </if>
+      <if test="notype != null">
+        #{notype,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation">
+    update reconciliation
+    <set>
+      <if test="clientType != null">
+        client_type = #{clientType,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceDate != null">
+        invoice_date = #{invoiceDate,jdbcType=DATE},
+      </if>
+      <if test="manifestNo != null">
+        manifest_no = #{manifestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTotal != null">
+        invoice_total = #{invoiceTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="myTotal != null">
+        my_total = #{myTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="noConsol != null">
+        no_consol = #{noConsol,jdbcType=VARCHAR},
+      </if>
+      <if test="notype != null">
+        notype = #{notype,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation">
+    update reconciliation
+    set client_type = #{clientType,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      invoice_date = #{invoiceDate,jdbcType=DATE},
+      manifest_no = #{manifestNo,jdbcType=VARCHAR},
+      invoice_total = #{invoiceTotal,jdbcType=DECIMAL},
+      my_total = #{myTotal,jdbcType=DECIMAL},
+      flag = #{flag,jdbcType=TINYINT},
+      no_consol = #{noConsol,jdbcType=VARCHAR},
+      notype = #{notype,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Reconciliation">
+    update reconciliation
+    set client_type = #{clientType,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      invoice_date = #{invoiceDate,jdbcType=DATE},
+      manifest_no = #{manifestNo,jdbcType=VARCHAR},
+      invoice_total = #{invoiceTotal,jdbcType=DECIMAL},
+      my_total = #{myTotal,jdbcType=DECIMAL},
+      flag = #{flag,jdbcType=TINYINT},
+      no_consol = #{noConsol,jdbcType=VARCHAR},
+      notype = #{notype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

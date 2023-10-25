@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.InvLineRebateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="inv_id" jdbcType="INTEGER" property="invId" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="ccode" jdbcType="VARCHAR" property="ccode" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="det" jdbcType="VARCHAR" property="det" />
+    <result column="qty" jdbcType="REAL" property="qty" />
+    <result column="tax" jdbcType="VARCHAR" property="tax" />
+    <result column="rebate" jdbcType="TINYINT" property="rebate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, inv_id, model, fid, ccode, amount, gst, det, qty, tax, rebate
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from inv_line_rebate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inv_line_rebate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate" useGeneratedKeys="true">
+    insert into inv_line_rebate (inv_id, model, fid, 
+      ccode, amount, gst, 
+      det, qty, tax, rebate, 
+      meta)
+    values (#{invId,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}, 
+      #{ccode,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, 
+      #{det,jdbcType=VARCHAR}, #{qty,jdbcType=REAL}, #{tax,jdbcType=VARCHAR}, #{rebate,jdbcType=TINYINT}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate" useGeneratedKeys="true">
+    insert into inv_line_rebate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invId != null">
+        inv_id,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="ccode != null">
+        ccode,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="det != null">
+        det,
+      </if>
+      <if test="qty != null">
+        qty,
+      </if>
+      <if test="tax != null">
+        tax,
+      </if>
+      <if test="rebate != null">
+        rebate,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invId != null">
+        #{invId,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ccode != null">
+        #{ccode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="det != null">
+        #{det,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        #{qty,jdbcType=REAL},
+      </if>
+      <if test="tax != null">
+        #{tax,jdbcType=VARCHAR},
+      </if>
+      <if test="rebate != null">
+        #{rebate,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate">
+    update inv_line_rebate
+    <set>
+      <if test="invId != null">
+        inv_id = #{invId,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ccode != null">
+        ccode = #{ccode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="det != null">
+        det = #{det,jdbcType=VARCHAR},
+      </if>
+      <if test="qty != null">
+        qty = #{qty,jdbcType=REAL},
+      </if>
+      <if test="tax != null">
+        tax = #{tax,jdbcType=VARCHAR},
+      </if>
+      <if test="rebate != null">
+        rebate = #{rebate,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate">
+    update inv_line_rebate
+    set inv_id = #{invId,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      ccode = #{ccode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      det = #{det,jdbcType=VARCHAR},
+      qty = #{qty,jdbcType=REAL},
+      tax = #{tax,jdbcType=VARCHAR},
+      rebate = #{rebate,jdbcType=TINYINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.InvLineRebate">
+    update inv_line_rebate
+    set inv_id = #{invId,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      ccode = #{ccode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      det = #{det,jdbcType=VARCHAR},
+      qty = #{qty,jdbcType=REAL},
+      tax = #{tax,jdbcType=VARCHAR},
+      rebate = #{rebate,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

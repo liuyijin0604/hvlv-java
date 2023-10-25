@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/log4j-1.2.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/axis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-logging-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/wsdl4j-1.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/saaj.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-discovery-0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jaxrpc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

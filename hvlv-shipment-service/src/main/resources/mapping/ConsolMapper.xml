@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ConsolMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pc_id" jdbcType="INTEGER" property="pcId" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="carrier_id" jdbcType="INTEGER" property="carrierId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="service" jdbcType="TINYINT" property="service" />
+    <result column="awb" jdbcType="VARCHAR" property="awb" />
+    <result column="airline" jdbcType="VARCHAR" property="airline" />
+    <result column="flight" jdbcType="VARCHAR" property="flight" />
+    <result column="exrate" jdbcType="REAL" property="exrate" />
+    <result column="pol" jdbcType="CHAR" property="pol" />
+    <result column="pod" jdbcType="CHAR" property="pod" />
+    <result column="poc" jdbcType="CHAR" property="poc" />
+    <result column="etd" jdbcType="DATE" property="etd" />
+    <result column="eta" jdbcType="DATE" property="eta" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="container_no" jdbcType="VARCHAR" property="containerNo" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pc_id, no, owner_id, dpt_id, carrier_id, type, service, awb, airline, flight, 
+    exrate, pol, pod, poc, etd, eta, created, status, bwf, container_no
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from consol
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from consol
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol" useGeneratedKeys="true">
+    insert into consol (pc_id, no, owner_id, 
+      dpt_id, carrier_id, type, 
+      service, awb, airline, 
+      flight, exrate, pol, pod, 
+      poc, etd, eta, created, 
+      status, bwf, container_no, 
+      meta)
+    values (#{pcId,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, 
+      #{dptId,jdbcType=INTEGER}, #{carrierId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{service,jdbcType=TINYINT}, #{awb,jdbcType=VARCHAR}, #{airline,jdbcType=VARCHAR}, 
+      #{flight,jdbcType=VARCHAR}, #{exrate,jdbcType=REAL}, #{pol,jdbcType=CHAR}, #{pod,jdbcType=CHAR}, 
+      #{poc,jdbcType=CHAR}, #{etd,jdbcType=DATE}, #{eta,jdbcType=DATE}, #{created,jdbcType=DATE}, 
+      #{status,jdbcType=TINYINT}, #{bwf,jdbcType=INTEGER}, #{containerNo,jdbcType=VARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol" useGeneratedKeys="true">
+    insert into consol
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pcId != null">
+        pc_id,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="carrierId != null">
+        carrier_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="service != null">
+        service,
+      </if>
+      <if test="awb != null">
+        awb,
+      </if>
+      <if test="airline != null">
+        airline,
+      </if>
+      <if test="flight != null">
+        flight,
+      </if>
+      <if test="exrate != null">
+        exrate,
+      </if>
+      <if test="pol != null">
+        pol,
+      </if>
+      <if test="pod != null">
+        pod,
+      </if>
+      <if test="poc != null">
+        poc,
+      </if>
+      <if test="etd != null">
+        etd,
+      </if>
+      <if test="eta != null">
+        eta,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="containerNo != null">
+        container_no,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pcId != null">
+        #{pcId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="carrierId != null">
+        #{carrierId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="service != null">
+        #{service,jdbcType=TINYINT},
+      </if>
+      <if test="awb != null">
+        #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="airline != null">
+        #{airline,jdbcType=VARCHAR},
+      </if>
+      <if test="flight != null">
+        #{flight,jdbcType=VARCHAR},
+      </if>
+      <if test="exrate != null">
+        #{exrate,jdbcType=REAL},
+      </if>
+      <if test="pol != null">
+        #{pol,jdbcType=CHAR},
+      </if>
+      <if test="pod != null">
+        #{pod,jdbcType=CHAR},
+      </if>
+      <if test="poc != null">
+        #{poc,jdbcType=CHAR},
+      </if>
+      <if test="etd != null">
+        #{etd,jdbcType=DATE},
+      </if>
+      <if test="eta != null">
+        #{eta,jdbcType=DATE},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="containerNo != null">
+        #{containerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol">
+    update consol
+    <set>
+      <if test="pcId != null">
+        pc_id = #{pcId,jdbcType=INTEGER},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="carrierId != null">
+        carrier_id = #{carrierId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="service != null">
+        service = #{service,jdbcType=TINYINT},
+      </if>
+      <if test="awb != null">
+        awb = #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="airline != null">
+        airline = #{airline,jdbcType=VARCHAR},
+      </if>
+      <if test="flight != null">
+        flight = #{flight,jdbcType=VARCHAR},
+      </if>
+      <if test="exrate != null">
+        exrate = #{exrate,jdbcType=REAL},
+      </if>
+      <if test="pol != null">
+        pol = #{pol,jdbcType=CHAR},
+      </if>
+      <if test="pod != null">
+        pod = #{pod,jdbcType=CHAR},
+      </if>
+      <if test="poc != null">
+        poc = #{poc,jdbcType=CHAR},
+      </if>
+      <if test="etd != null">
+        etd = #{etd,jdbcType=DATE},
+      </if>
+      <if test="eta != null">
+        eta = #{eta,jdbcType=DATE},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="containerNo != null">
+        container_no = #{containerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol">
+    update consol
+    set pc_id = #{pcId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      carrier_id = #{carrierId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      service = #{service,jdbcType=TINYINT},
+      awb = #{awb,jdbcType=VARCHAR},
+      airline = #{airline,jdbcType=VARCHAR},
+      flight = #{flight,jdbcType=VARCHAR},
+      exrate = #{exrate,jdbcType=REAL},
+      pol = #{pol,jdbcType=CHAR},
+      pod = #{pod,jdbcType=CHAR},
+      poc = #{poc,jdbcType=CHAR},
+      etd = #{etd,jdbcType=DATE},
+      eta = #{eta,jdbcType=DATE},
+      created = #{created,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      bwf = #{bwf,jdbcType=INTEGER},
+      container_no = #{containerNo,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Consol">
+    update consol
+    set pc_id = #{pcId,jdbcType=INTEGER},
+      no = #{no,jdbcType=VARCHAR},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      carrier_id = #{carrierId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      service = #{service,jdbcType=TINYINT},
+      awb = #{awb,jdbcType=VARCHAR},
+      airline = #{airline,jdbcType=VARCHAR},
+      flight = #{flight,jdbcType=VARCHAR},
+      exrate = #{exrate,jdbcType=REAL},
+      pol = #{pol,jdbcType=CHAR},
+      pod = #{pod,jdbcType=CHAR},
+      poc = #{poc,jdbcType=CHAR},
+      etd = #{etd,jdbcType=DATE},
+      eta = #{eta,jdbcType=DATE},
+      created = #{created,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      bwf = #{bwf,jdbcType=INTEGER},
+      container_no = #{containerNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

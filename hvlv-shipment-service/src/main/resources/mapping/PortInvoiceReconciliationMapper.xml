@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.PortInvoiceReconciliationMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="invoice_ref" jdbcType="VARCHAR" property="invoiceRef" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="duplicate_count" jdbcType="INTEGER" property="duplicateCount" />
+    <result column="notexisting_count" jdbcType="INTEGER" property="notexistingCount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, created, invoice_ref, weight, amount, duplicate_count, notexisting_count
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from port_invoice_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from port_invoice_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation" useGeneratedKeys="true">
+    insert into port_invoice_reconciliation (created, invoice_ref, weight, 
+      amount, duplicate_count, notexisting_count, 
+      meta)
+    values (#{created,jdbcType=DATE}, #{invoiceRef,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL}, #{duplicateCount,jdbcType=INTEGER}, #{notexistingCount,jdbcType=INTEGER}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation" useGeneratedKeys="true">
+    insert into port_invoice_reconciliation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="created != null">
+        created,
+      </if>
+      <if test="invoiceRef != null">
+        invoice_ref,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="duplicateCount != null">
+        duplicate_count,
+      </if>
+      <if test="notexistingCount != null">
+        notexisting_count,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="invoiceRef != null">
+        #{invoiceRef,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="duplicateCount != null">
+        #{duplicateCount,jdbcType=INTEGER},
+      </if>
+      <if test="notexistingCount != null">
+        #{notexistingCount,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation">
+    update port_invoice_reconciliation
+    <set>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="invoiceRef != null">
+        invoice_ref = #{invoiceRef,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="duplicateCount != null">
+        duplicate_count = #{duplicateCount,jdbcType=INTEGER},
+      </if>
+      <if test="notexistingCount != null">
+        notexisting_count = #{notexistingCount,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation">
+    update port_invoice_reconciliation
+    set created = #{created,jdbcType=DATE},
+      invoice_ref = #{invoiceRef,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      duplicate_count = #{duplicateCount,jdbcType=INTEGER},
+      notexisting_count = #{notexistingCount,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.PortInvoiceReconciliation">
+    update port_invoice_reconciliation
+    set created = #{created,jdbcType=DATE},
+      invoice_ref = #{invoiceRef,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      duplicate_count = #{duplicateCount,jdbcType=INTEGER},
+      notexisting_count = #{notexistingCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

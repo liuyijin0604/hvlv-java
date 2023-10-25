@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.TlaTaskUserMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTaskUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_notice" jdbcType="TINYINT" property="isNotice" />
+    <result column="task_order" jdbcType="INTEGER" property="taskOrder" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="is_confirm" jdbcType="INTEGER" property="isConfirm" />
+    <result column="ete_bk" jdbcType="TIMESTAMP" property="eteBk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, task_id, create_time, close_time, status, is_notice, task_order, create_user_id, 
+    is_confirm, ete_bk
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tla_task_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tla_task_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTaskUser" useGeneratedKeys="true">
+    insert into tla_task_user (user_id, task_id, create_time, 
+      close_time, status, is_notice, 
+      task_order, create_user_id, is_confirm, 
+      ete_bk)
+    values (#{userId,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isNotice,jdbcType=TINYINT}, 
+      #{taskOrder,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, #{isConfirm,jdbcType=INTEGER}, 
+      #{eteBk,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTaskUser" useGeneratedKeys="true">
+    insert into tla_task_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="closeTime != null">
+        close_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isNotice != null">
+        is_notice,
+      </if>
+      <if test="taskOrder != null">
+        task_order,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="isConfirm != null">
+        is_confirm,
+      </if>
+      <if test="eteBk != null">
+        ete_bk,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isNotice != null">
+        #{isNotice,jdbcType=TINYINT},
+      </if>
+      <if test="taskOrder != null">
+        #{taskOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="isConfirm != null">
+        #{isConfirm,jdbcType=INTEGER},
+      </if>
+      <if test="eteBk != null">
+        #{eteBk,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTaskUser">
+    update tla_task_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null">
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isNotice != null">
+        is_notice = #{isNotice,jdbcType=TINYINT},
+      </if>
+      <if test="taskOrder != null">
+        task_order = #{taskOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="isConfirm != null">
+        is_confirm = #{isConfirm,jdbcType=INTEGER},
+      </if>
+      <if test="eteBk != null">
+        ete_bk = #{eteBk,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTaskUser">
+    update tla_task_user
+    set user_id = #{userId,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      is_notice = #{isNotice,jdbcType=TINYINT},
+      task_order = #{taskOrder,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      is_confirm = #{isConfirm,jdbcType=INTEGER},
+      ete_bk = #{eteBk,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

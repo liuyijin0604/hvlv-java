@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.GoogleReviewMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GoogleReview">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hbn" jdbcType="VARCHAR" property="hbn" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="time_start" jdbcType="TIMESTAMP" property="timeStart" />
+    <result column="time_done" jdbcType="TIMESTAMP" property="timeDone" />
+    <result column="cnee_name" jdbcType="VARCHAR" property="cneeName" />
+    <result column="cnee_email" jdbcType="VARCHAR" property="cneeEmail" />
+    <result column="cnee_tel" jdbcType="VARCHAR" property="cneeTel" />
+    <result column="cnor_city" jdbcType="VARCHAR" property="cnorCity" />
+    <result column="cnor_state" jdbcType="VARCHAR" property="cnorState" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="time_arrived" jdbcType="TIMESTAMP" property="timeArrived" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="cargo_process_id" jdbcType="INTEGER" property="cargoProcessId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="time_created" jdbcType="TIMESTAMP" property="timeCreated" />
+    <result column="time_processed" jdbcType="TIMESTAMP" property="timeProcessed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hbn, ref, time_start, time_done, cnee_name, cnee_email, cnee_tel, cnor_city, 
+    cnor_state, pkg, weight, time_arrived, shipment_id, cargo_process_id, status, time_created, 
+    time_processed
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from google_review
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from google_review
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GoogleReview" useGeneratedKeys="true">
+    insert into google_review (hbn, ref, time_start, 
+      time_done, cnee_name, cnee_email, 
+      cnee_tel, cnor_city, cnor_state, 
+      pkg, weight, time_arrived, 
+      shipment_id, cargo_process_id, status, 
+      time_created, time_processed)
+    values (#{hbn,jdbcType=VARCHAR}, #{ref,jdbcType=VARCHAR}, #{timeStart,jdbcType=TIMESTAMP}, 
+      #{timeDone,jdbcType=TIMESTAMP}, #{cneeName,jdbcType=VARCHAR}, #{cneeEmail,jdbcType=VARCHAR}, 
+      #{cneeTel,jdbcType=VARCHAR}, #{cnorCity,jdbcType=VARCHAR}, #{cnorState,jdbcType=VARCHAR}, 
+      #{pkg,jdbcType=INTEGER}, #{weight,jdbcType=DECIMAL}, #{timeArrived,jdbcType=TIMESTAMP}, 
+      #{shipmentId,jdbcType=INTEGER}, #{cargoProcessId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{timeCreated,jdbcType=TIMESTAMP}, #{timeProcessed,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GoogleReview" useGeneratedKeys="true">
+    insert into google_review
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hbn != null">
+        hbn,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="timeStart != null">
+        time_start,
+      </if>
+      <if test="timeDone != null">
+        time_done,
+      </if>
+      <if test="cneeName != null">
+        cnee_name,
+      </if>
+      <if test="cneeEmail != null">
+        cnee_email,
+      </if>
+      <if test="cneeTel != null">
+        cnee_tel,
+      </if>
+      <if test="cnorCity != null">
+        cnor_city,
+      </if>
+      <if test="cnorState != null">
+        cnor_state,
+      </if>
+      <if test="pkg != null">
+        pkg,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="timeArrived != null">
+        time_arrived,
+      </if>
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="timeCreated != null">
+        time_created,
+      </if>
+      <if test="timeProcessed != null">
+        time_processed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hbn != null">
+        #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null">
+        #{timeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeDone != null">
+        #{timeDone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cneeName != null">
+        #{cneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="cneeEmail != null">
+        #{cneeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cneeTel != null">
+        #{cneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cnorCity != null">
+        #{cnorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cnorState != null">
+        #{cnorState,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="timeArrived != null">
+        #{timeArrived,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoProcessId != null">
+        #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="timeCreated != null">
+        #{timeCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeProcessed != null">
+        #{timeProcessed,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GoogleReview">
+    update google_review
+    <set>
+      <if test="hbn != null">
+        hbn = #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStart != null">
+        time_start = #{timeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeDone != null">
+        time_done = #{timeDone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cneeName != null">
+        cnee_name = #{cneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="cneeEmail != null">
+        cnee_email = #{cneeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cneeTel != null">
+        cnee_tel = #{cneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cnorCity != null">
+        cnor_city = #{cnorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cnorState != null">
+        cnor_state = #{cnorState,jdbcType=VARCHAR},
+      </if>
+      <if test="pkg != null">
+        pkg = #{pkg,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="timeArrived != null">
+        time_arrived = #{timeArrived,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoProcessId != null">
+        cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="timeCreated != null">
+        time_created = #{timeCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeProcessed != null">
+        time_processed = #{timeProcessed,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GoogleReview">
+    update google_review
+    set hbn = #{hbn,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      time_start = #{timeStart,jdbcType=TIMESTAMP},
+      time_done = #{timeDone,jdbcType=TIMESTAMP},
+      cnee_name = #{cneeName,jdbcType=VARCHAR},
+      cnee_email = #{cneeEmail,jdbcType=VARCHAR},
+      cnee_tel = #{cneeTel,jdbcType=VARCHAR},
+      cnor_city = #{cnorCity,jdbcType=VARCHAR},
+      cnor_state = #{cnorState,jdbcType=VARCHAR},
+      pkg = #{pkg,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      time_arrived = #{timeArrived,jdbcType=TIMESTAMP},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      cargo_process_id = #{cargoProcessId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      time_created = #{timeCreated,jdbcType=TIMESTAMP},
+      time_processed = #{timeProcessed,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

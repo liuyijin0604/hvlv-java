@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CsFaqUserMapMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CsFaqUserMap">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cs_faq_id" jdbcType="INTEGER" property="csFaqId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cs_faq_id, user_id, tel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cs_faq_user_map
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cs_faq_user_map
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CsFaqUserMap" useGeneratedKeys="true">
+    insert into cs_faq_user_map (cs_faq_id, user_id, tel
+      )
+    values (#{csFaqId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CsFaqUserMap" useGeneratedKeys="true">
+    insert into cs_faq_user_map
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="csFaqId != null">
+        cs_faq_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="csFaqId != null">
+        #{csFaqId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CsFaqUserMap">
+    update cs_faq_user_map
+    <set>
+      <if test="csFaqId != null">
+        cs_faq_id = #{csFaqId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CsFaqUserMap">
+    update cs_faq_user_map
+    set cs_faq_id = #{csFaqId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.AirFreightInvoiceReconciliationHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="invoice_total" jdbcType="INTEGER" property="invoiceTotal" />
+    <result column="success" jdbcType="INTEGER" property="success" />
+    <result column="failed" jdbcType="INTEGER" property="failed" />
+    <result column="attached_file_id" jdbcType="INTEGER" property="attachedFileId" />
+    <result column="report_file_id" jdbcType="INTEGER" property="reportFileId" />
+    <result column="hash" jdbcType="VARCHAR" property="hash" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, created, op_id, invoice_total, success, failed, attached_file_id, report_file_id, 
+    hash
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from air_freight_invoice_reconciliation_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from air_freight_invoice_reconciliation_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation_history (created, op_id, invoice_total, 
+      success, failed, attached_file_id, 
+      report_file_id, hash, meta
+      )
+    values (#{created,jdbcType=DATE}, #{opId,jdbcType=INTEGER}, #{invoiceTotal,jdbcType=INTEGER}, 
+      #{success,jdbcType=INTEGER}, #{failed,jdbcType=INTEGER}, #{attachedFileId,jdbcType=INTEGER}, 
+      #{reportFileId,jdbcType=INTEGER}, #{hash,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="created != null">
+        created,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="invoiceTotal != null">
+        invoice_total,
+      </if>
+      <if test="success != null">
+        success,
+      </if>
+      <if test="failed != null">
+        failed,
+      </if>
+      <if test="attachedFileId != null">
+        attached_file_id,
+      </if>
+      <if test="reportFileId != null">
+        report_file_id,
+      </if>
+      <if test="hash != null">
+        hash,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceTotal != null">
+        #{invoiceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="success != null">
+        #{success,jdbcType=INTEGER},
+      </if>
+      <if test="failed != null">
+        #{failed,jdbcType=INTEGER},
+      </if>
+      <if test="attachedFileId != null">
+        #{attachedFileId,jdbcType=INTEGER},
+      </if>
+      <if test="reportFileId != null">
+        #{reportFileId,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory">
+    update air_freight_invoice_reconciliation_history
+    <set>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceTotal != null">
+        invoice_total = #{invoiceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="success != null">
+        success = #{success,jdbcType=INTEGER},
+      </if>
+      <if test="failed != null">
+        failed = #{failed,jdbcType=INTEGER},
+      </if>
+      <if test="attachedFileId != null">
+        attached_file_id = #{attachedFileId,jdbcType=INTEGER},
+      </if>
+      <if test="reportFileId != null">
+        report_file_id = #{reportFileId,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        hash = #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory">
+    update air_freight_invoice_reconciliation_history
+    set created = #{created,jdbcType=DATE},
+      op_id = #{opId,jdbcType=INTEGER},
+      invoice_total = #{invoiceTotal,jdbcType=INTEGER},
+      success = #{success,jdbcType=INTEGER},
+      failed = #{failed,jdbcType=INTEGER},
+      attached_file_id = #{attachedFileId,jdbcType=INTEGER},
+      report_file_id = #{reportFileId,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationHistory">
+    update air_freight_invoice_reconciliation_history
+    set created = #{created,jdbcType=DATE},
+      op_id = #{opId,jdbcType=INTEGER},
+      invoice_total = #{invoiceTotal,jdbcType=INTEGER},
+      success = #{success,jdbcType=INTEGER},
+      failed = #{failed,jdbcType=INTEGER},
+      attached_file_id = #{attachedFileId,jdbcType=INTEGER},
+      report_file_id = #{reportFileId,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

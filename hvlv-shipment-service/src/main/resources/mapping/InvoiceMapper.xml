@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.InvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="to_id" jdbcType="INTEGER" property="toId" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="cg_order_id" jdbcType="INTEGER" property="cgOrderId" />
+    <result column="man_id" jdbcType="INTEGER" property="manId" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="dpmt" jdbcType="TINYINT" property="dpmt" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="sent" jdbcType="TINYINT" property="sent" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="bflag" jdbcType="INTEGER" property="bflag" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="posted" jdbcType="DATE" property="posted" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="sync_xero" jdbcType="TINYINT" property="syncXero" />
+    <result column="xero_id" jdbcType="VARCHAR" property="xeroId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, to_id, consol_id, pid, job_id, cg_order_id, man_id, dpt_id, dpmt, status, type, 
+    currency, sent, no, ref, bflag, date, due, posted, total, gst, sync_xero, xero_id
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice" useGeneratedKeys="true">
+    insert into invoice (to_id, consol_id, pid, 
+      job_id, cg_order_id, man_id, 
+      dpt_id, dpmt, status, 
+      type, currency, sent, 
+      no, ref, bflag, date, 
+      due, posted, total, gst, 
+      sync_xero, xero_id, meta
+      )
+    values (#{toId,jdbcType=INTEGER}, #{consolId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{jobId,jdbcType=INTEGER}, #{cgOrderId,jdbcType=INTEGER}, #{manId,jdbcType=INTEGER}, 
+      #{dptId,jdbcType=INTEGER}, #{dpmt,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{type,jdbcType=TINYINT}, #{currency,jdbcType=TINYINT}, #{sent,jdbcType=TINYINT}, 
+      #{no,jdbcType=VARCHAR}, #{ref,jdbcType=VARCHAR}, #{bflag,jdbcType=INTEGER}, #{date,jdbcType=DATE}, 
+      #{due,jdbcType=DATE}, #{posted,jdbcType=DATE}, #{total,jdbcType=DECIMAL}, #{gst,jdbcType=DECIMAL}, 
+      #{syncXero,jdbcType=TINYINT}, #{xeroId,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice" useGeneratedKeys="true">
+    insert into invoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="toId != null">
+        to_id,
+      </if>
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="cgOrderId != null">
+        cg_order_id,
+      </if>
+      <if test="manId != null">
+        man_id,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="sent != null">
+        sent,
+      </if>
+      <if test="no != null">
+        no,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="bflag != null">
+        bflag,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="posted != null">
+        posted,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="syncXero != null">
+        sync_xero,
+      </if>
+      <if test="xeroId != null">
+        xero_id,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="toId != null">
+        #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="cgOrderId != null">
+        #{cgOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="manId != null">
+        #{manId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="sent != null">
+        #{sent,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bflag != null">
+        #{bflag,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="posted != null">
+        #{posted,jdbcType=DATE},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="xeroId != null">
+        #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice">
+    update invoice
+    <set>
+      <if test="toId != null">
+        to_id = #{toId,jdbcType=INTEGER},
+      </if>
+      <if test="consolId != null">
+        consol_id = #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="cgOrderId != null">
+        cg_order_id = #{cgOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="manId != null">
+        man_id = #{manId,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="sent != null">
+        sent = #{sent,jdbcType=TINYINT},
+      </if>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="bflag != null">
+        bflag = #{bflag,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="posted != null">
+        posted = #{posted,jdbcType=DATE},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="syncXero != null">
+        sync_xero = #{syncXero,jdbcType=TINYINT},
+      </if>
+      <if test="xeroId != null">
+        xero_id = #{xeroId,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice">
+    update invoice
+    set to_id = #{toId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      cg_order_id = #{cgOrderId,jdbcType=INTEGER},
+      man_id = #{manId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      sent = #{sent,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      bflag = #{bflag,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      posted = #{posted,jdbcType=DATE},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      xero_id = #{xeroId,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Invoice">
+    update invoice
+    set to_id = #{toId,jdbcType=INTEGER},
+      consol_id = #{consolId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      cg_order_id = #{cgOrderId,jdbcType=INTEGER},
+      man_id = #{manId,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      sent = #{sent,jdbcType=TINYINT},
+      no = #{no,jdbcType=VARCHAR},
+      ref = #{ref,jdbcType=VARCHAR},
+      bflag = #{bflag,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      posted = #{posted,jdbcType=DATE},
+      total = #{total,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      sync_xero = #{syncXero,jdbcType=TINYINT},
+      xero_id = #{xeroId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

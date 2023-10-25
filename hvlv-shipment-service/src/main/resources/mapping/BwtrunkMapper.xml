@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BwtrunkMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bwtrunk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="MAWB_number" jdbcType="VARCHAR" property="mawbNumber" />
+    <result column="pieces_pick_up" jdbcType="INTEGER" property="piecesPickUp" />
+    <result column="CTO_start" jdbcType="TIMESTAMP" property="ctoStart" />
+    <result column="CTO_finish" jdbcType="TIMESTAMP" property="ctoFinish" />
+    <result column="Client_start" jdbcType="TIMESTAMP" property="clientStart" />
+    <result column="Client_finish" jdbcType="TIMESTAMP" property="clientFinish" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, MAWB_number, pieces_pick_up, CTO_start, CTO_finish, Client_start, Client_finish
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bwtrunk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bwtrunk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bwtrunk" useGeneratedKeys="true">
+    insert into bwtrunk (MAWB_number, pieces_pick_up, CTO_start, 
+      CTO_finish, Client_start, Client_finish
+      )
+    values (#{mawbNumber,jdbcType=VARCHAR}, #{piecesPickUp,jdbcType=INTEGER}, #{ctoStart,jdbcType=TIMESTAMP}, 
+      #{ctoFinish,jdbcType=TIMESTAMP}, #{clientStart,jdbcType=TIMESTAMP}, #{clientFinish,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bwtrunk" useGeneratedKeys="true">
+    insert into bwtrunk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mawbNumber != null">
+        MAWB_number,
+      </if>
+      <if test="piecesPickUp != null">
+        pieces_pick_up,
+      </if>
+      <if test="ctoStart != null">
+        CTO_start,
+      </if>
+      <if test="ctoFinish != null">
+        CTO_finish,
+      </if>
+      <if test="clientStart != null">
+        Client_start,
+      </if>
+      <if test="clientFinish != null">
+        Client_finish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mawbNumber != null">
+        #{mawbNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="piecesPickUp != null">
+        #{piecesPickUp,jdbcType=INTEGER},
+      </if>
+      <if test="ctoStart != null">
+        #{ctoStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctoFinish != null">
+        #{ctoFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientStart != null">
+        #{clientStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientFinish != null">
+        #{clientFinish,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bwtrunk">
+    update bwtrunk
+    <set>
+      <if test="mawbNumber != null">
+        MAWB_number = #{mawbNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="piecesPickUp != null">
+        pieces_pick_up = #{piecesPickUp,jdbcType=INTEGER},
+      </if>
+      <if test="ctoStart != null">
+        CTO_start = #{ctoStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctoFinish != null">
+        CTO_finish = #{ctoFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientStart != null">
+        Client_start = #{clientStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientFinish != null">
+        Client_finish = #{clientFinish,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Bwtrunk">
+    update bwtrunk
+    set MAWB_number = #{mawbNumber,jdbcType=VARCHAR},
+      pieces_pick_up = #{piecesPickUp,jdbcType=INTEGER},
+      CTO_start = #{ctoStart,jdbcType=TIMESTAMP},
+      CTO_finish = #{ctoFinish,jdbcType=TIMESTAMP},
+      Client_start = #{clientStart,jdbcType=TIMESTAMP},
+      Client_finish = #{clientFinish,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

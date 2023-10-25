@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentScanProcessMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanProcess">
+    <id column="shipment_scan_id" jdbcType="INTEGER" property="shipmentScanId" />
+    <result column="process" jdbcType="INTEGER" property="process" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    shipment_scan_id, process, barcode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shipment_scan_process
+    where shipment_scan_id = #{shipmentScanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_scan_process
+    where shipment_scan_id = #{shipmentScanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanProcess">
+    insert into shipment_scan_process (shipment_scan_id, process, barcode
+      )
+    values (#{shipmentScanId,jdbcType=INTEGER}, #{process,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanProcess">
+    insert into shipment_scan_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentScanId != null">
+        shipment_scan_id,
+      </if>
+      <if test="process != null">
+        process,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentScanId != null">
+        #{shipmentScanId,jdbcType=INTEGER},
+      </if>
+      <if test="process != null">
+        #{process,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanProcess">
+    update shipment_scan_process
+    <set>
+      <if test="process != null">
+        process = #{process,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shipment_scan_id = #{shipmentScanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentScanProcess">
+    update shipment_scan_process
+    set process = #{process,jdbcType=INTEGER},
+      barcode = #{barcode,jdbcType=VARCHAR}
+    where shipment_scan_id = #{shipmentScanId,jdbcType=INTEGER}
+  </update>
+</mapper>

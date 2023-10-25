@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.OrgRateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="zone_id" jdbcType="TINYINT" property="zoneId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="vfrom" jdbcType="DATE" property="vfrom" />
+    <result column="vto" jdbcType="DATE" property="vto" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, zone_id, name, code, type, vfrom, vto, currency, updated
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from org_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCourierId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select org_id from org_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCodeByCourierId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select code from org_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate" useGeneratedKeys="true">
+    insert into org_rate (org_id, zone_id, name, 
+      code, type, vfrom, vto, 
+      currency, updated, meta
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{zoneId,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{vfrom,jdbcType=DATE}, #{vto,jdbcType=DATE}, 
+      #{currency,jdbcType=TINYINT}, #{updated,jdbcType=TIMESTAMP}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate" useGeneratedKeys="true">
+    insert into org_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="zoneId != null">
+        zone_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="vfrom != null">
+        vfrom,
+      </if>
+      <if test="vto != null">
+        vto,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="vfrom != null">
+        #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        #{vto,jdbcType=DATE},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate">
+    update org_rate
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="zoneId != null">
+        zone_id = #{zoneId,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="vfrom != null">
+        vfrom = #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        vto = #{vto,jdbcType=DATE},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate">
+    update org_rate
+    set org_id = #{orgId,jdbcType=INTEGER},
+      zone_id = #{zoneId,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      currency = #{currency,jdbcType=TINYINT},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgRate">
+    update org_rate
+    set org_id = #{orgId,jdbcType=INTEGER},
+      zone_id = #{zoneId,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      currency = #{currency,jdbcType=TINYINT},
+      updated = #{updated,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

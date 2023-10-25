@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.JobMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="awb" jdbcType="VARCHAR" property="awb" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="dpmt" jdbcType="TINYINT" property="dpmt" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, no, dpt_id, owner_id, user_id, awb, created, due, type, dpmt, currency, status
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job" useGeneratedKeys="true">
+    insert into job (no, dpt_id, owner_id, 
+      user_id, awb, created, 
+      due, type, dpmt, currency, 
+      status, meta)
+    values (#{no,jdbcType=VARCHAR}, #{dptId,jdbcType=INTEGER}, #{ownerId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{awb,jdbcType=VARCHAR}, #{created,jdbcType=DATE}, 
+      #{due,jdbcType=DATE}, #{type,jdbcType=TINYINT}, #{dpmt,jdbcType=TINYINT}, #{currency,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job" useGeneratedKeys="true">
+    insert into job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        no,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="awb != null">
+        awb,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="dpmt != null">
+        dpmt,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="awb != null">
+        #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="dpmt != null">
+        #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job">
+    update job
+    <set>
+      <if test="no != null">
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="awb != null">
+        awb = #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="dpmt != null">
+        dpmt = #{dpmt,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job">
+    update job
+    set no = #{no,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      awb = #{awb,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      type = #{type,jdbcType=TINYINT},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Job">
+    update job
+    set no = #{no,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      awb = #{awb,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      type = #{type,jdbcType=TINYINT},
+      dpmt = #{dpmt,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

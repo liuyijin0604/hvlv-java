@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ExProdbPriceMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="agt_id" jdbcType="INTEGER" property="agtId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="poc" jdbcType="VARCHAR" property="poc" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="hs" jdbcType="VARCHAR" property="hs" />
+    <result column="hs2" jdbcType="VARCHAR" property="hs2" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, type, agt_id, status, poc, sn, name, price, hs, hs2
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ex_prodb_price
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ex_prodb_price
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice" useGeneratedKeys="true">
+    insert into ex_prodb_price (pid, type, agt_id, 
+      status, poc, sn, name, 
+      price, hs, hs2, meta
+      )
+    values (#{pid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{agtId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{poc,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{hs,jdbcType=VARCHAR}, #{hs2,jdbcType=VARCHAR}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice" useGeneratedKeys="true">
+    insert into ex_prodb_price
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="agtId != null">
+        agt_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="poc != null">
+        poc,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="hs != null">
+        hs,
+      </if>
+      <if test="hs2 != null">
+        hs2,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="agtId != null">
+        #{agtId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="poc != null">
+        #{poc,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="hs != null">
+        #{hs,jdbcType=VARCHAR},
+      </if>
+      <if test="hs2 != null">
+        #{hs2,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice">
+    update ex_prodb_price
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="agtId != null">
+        agt_id = #{agtId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="poc != null">
+        poc = #{poc,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="hs != null">
+        hs = #{hs,jdbcType=VARCHAR},
+      </if>
+      <if test="hs2 != null">
+        hs2 = #{hs2,jdbcType=VARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice">
+    update ex_prodb_price
+    set pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      agt_id = #{agtId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      poc = #{poc,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      hs = #{hs,jdbcType=VARCHAR},
+      hs2 = #{hs2,jdbcType=VARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExProdbPrice">
+    update ex_prodb_price
+    set pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      agt_id = #{agtId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      poc = #{poc,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      hs = #{hs,jdbcType=VARCHAR},
+      hs2 = #{hs2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

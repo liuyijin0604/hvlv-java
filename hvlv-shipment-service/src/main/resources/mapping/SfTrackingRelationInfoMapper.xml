@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SfTrackingRelationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfTrackingRelationInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="courier_id" jdbcType="INTEGER" property="courierId" />
+    <result column="tracking_code" jdbcType="VARCHAR" property="trackingCode" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="op_code" jdbcType="VARCHAR" property="opCode" />
+    <result column="op_description" jdbcType="VARCHAR" property="opDescription" />
+    <result column="reason_code" jdbcType="VARCHAR" property="reasonCode" />
+    <result column="reason_description" jdbcType="VARCHAR" property="reasonDescription" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, courier_id, tracking_code, status, op_code, op_description, reason_code, reason_description, 
+    created
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sf_tracking_relation_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sf_tracking_relation_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfTrackingRelationInfo" useGeneratedKeys="true">
+    insert into sf_tracking_relation_info (courier_id, tracking_code, status, 
+      op_code, op_description, reason_code, 
+      reason_description, created)
+    values (#{courierId,jdbcType=INTEGER}, #{trackingCode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{opCode,jdbcType=VARCHAR}, #{opDescription,jdbcType=VARCHAR}, #{reasonCode,jdbcType=VARCHAR}, 
+      #{reasonDescription,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfTrackingRelationInfo" useGeneratedKeys="true">
+    insert into sf_tracking_relation_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courierId != null">
+        courier_id,
+      </if>
+      <if test="trackingCode != null">
+        tracking_code,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="opCode != null">
+        op_code,
+      </if>
+      <if test="opDescription != null">
+        op_description,
+      </if>
+      <if test="reasonCode != null">
+        reason_code,
+      </if>
+      <if test="reasonDescription != null">
+        reason_description,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courierId != null">
+        #{courierId,jdbcType=INTEGER},
+      </if>
+      <if test="trackingCode != null">
+        #{trackingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null">
+        #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opDescription != null">
+        #{opDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonCode != null">
+        #{reasonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescription != null">
+        #{reasonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfTrackingRelationInfo">
+    update sf_tracking_relation_info
+    <set>
+      <if test="courierId != null">
+        courier_id = #{courierId,jdbcType=INTEGER},
+      </if>
+      <if test="trackingCode != null">
+        tracking_code = #{trackingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null">
+        op_code = #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opDescription != null">
+        op_description = #{opDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonCode != null">
+        reason_code = #{reasonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonDescription != null">
+        reason_description = #{reasonDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SfTrackingRelationInfo">
+    update sf_tracking_relation_info
+    set courier_id = #{courierId,jdbcType=INTEGER},
+      tracking_code = #{trackingCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      op_code = #{opCode,jdbcType=VARCHAR},
+      op_description = #{opDescription,jdbcType=VARCHAR},
+      reason_code = #{reasonCode,jdbcType=VARCHAR},
+      reason_description = #{reasonDescription,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsTaskMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="link_id" jdbcType="INTEGER" property="linkId" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_request" jdbcType="BIT" property="isRequest" />
+    <result column="billed" jdbcType="BIT" property="billed" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="due_time" jdbcType="TIMESTAMP" property="dueTime" />
+    <result column="schd_time" jdbcType="TIMESTAMP" property="schdTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="compl_time" jdbcType="TIMESTAMP" property="complTime" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_id, op_id, link_id, type, status, is_request, billed, ref, due_time, schd_time, 
+    start_time, compl_time, bwf
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wms_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask" useGeneratedKeys="true">
+    insert into wms_task (job_id, op_id, link_id, 
+      type, status, is_request, 
+      billed, ref, due_time, 
+      schd_time, start_time, compl_time, 
+      bwf, meta)
+    values (#{jobId,jdbcType=INTEGER}, #{opId,jdbcType=INTEGER}, #{linkId,jdbcType=INTEGER}, 
+      #{type,jdbcType=SMALLINT}, #{status,jdbcType=TINYINT}, #{isRequest,jdbcType=BIT}, 
+      #{billed,jdbcType=BIT}, #{ref,jdbcType=VARCHAR}, #{dueTime,jdbcType=TIMESTAMP}, 
+      #{schdTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{complTime,jdbcType=TIMESTAMP}, 
+      #{bwf,jdbcType=INTEGER}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask" useGeneratedKeys="true">
+    insert into wms_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isRequest != null">
+        is_request,
+      </if>
+      <if test="billed != null">
+        billed,
+      </if>
+      <if test="ref != null">
+        ref,
+      </if>
+      <if test="dueTime != null">
+        due_time,
+      </if>
+      <if test="schdTime != null">
+        schd_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="complTime != null">
+        compl_time,
+      </if>
+      <if test="bwf != null">
+        bwf,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isRequest != null">
+        #{isRequest,jdbcType=BIT},
+      </if>
+      <if test="billed != null">
+        #{billed,jdbcType=BIT},
+      </if>
+      <if test="ref != null">
+        #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="dueTime != null">
+        #{dueTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schdTime != null">
+        #{schdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="complTime != null">
+        #{complTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bwf != null">
+        #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask">
+    update wms_task
+    <set>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        link_id = #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isRequest != null">
+        is_request = #{isRequest,jdbcType=BIT},
+      </if>
+      <if test="billed != null">
+        billed = #{billed,jdbcType=BIT},
+      </if>
+      <if test="ref != null">
+        ref = #{ref,jdbcType=VARCHAR},
+      </if>
+      <if test="dueTime != null">
+        due_time = #{dueTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schdTime != null">
+        schd_time = #{schdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="complTime != null">
+        compl_time = #{complTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bwf != null">
+        bwf = #{bwf,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask">
+    update wms_task
+    set job_id = #{jobId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      link_id = #{linkId,jdbcType=INTEGER},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=TINYINT},
+      is_request = #{isRequest,jdbcType=BIT},
+      billed = #{billed,jdbcType=BIT},
+      ref = #{ref,jdbcType=VARCHAR},
+      due_time = #{dueTime,jdbcType=TIMESTAMP},
+      schd_time = #{schdTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      compl_time = #{complTime,jdbcType=TIMESTAMP},
+      bwf = #{bwf,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsTask">
+    update wms_task
+    set job_id = #{jobId,jdbcType=INTEGER},
+      op_id = #{opId,jdbcType=INTEGER},
+      link_id = #{linkId,jdbcType=INTEGER},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=TINYINT},
+      is_request = #{isRequest,jdbcType=BIT},
+      billed = #{billed,jdbcType=BIT},
+      ref = #{ref,jdbcType=VARCHAR},
+      due_time = #{dueTime,jdbcType=TIMESTAMP},
+      schd_time = #{schdTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      compl_time = #{complTime,jdbcType=TIMESTAMP},
+      bwf = #{bwf,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

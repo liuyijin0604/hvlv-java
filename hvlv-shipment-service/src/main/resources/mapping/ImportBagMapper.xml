@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ImportBagMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="bag_tag" jdbcType="VARCHAR" property="bagTag" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap2" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Shipment">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <result column="man_id" jdbcType="INTEGER" property="manId" />
+    <result column="rec_id" jdbcType="INTEGER" property="recId" />
+    <result column="odpt_id" jdbcType="INTEGER" property="odptId" />
+    <result column="ddpt_id" jdbcType="INTEGER" property="ddptId" />
+    <result column="cnor_id" jdbcType="INTEGER" property="cnorId" />
+    <result column="cnee_id" jdbcType="INTEGER" property="cneeId" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="notify_id" jdbcType="INTEGER" property="notifyId" />
+    <result column="zr_id" jdbcType="INTEGER" property="zrId" />
+    <result column="ot_id" jdbcType="INTEGER" property="otId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="styp" jdbcType="INTEGER" property="styp" />
+    <result column="pickup" jdbcType="INTEGER" property="pickup" />
+    <result column="hbn" jdbcType="VARCHAR" property="hbn" />
+    <result column="ref" jdbcType="VARCHAR" property="ref" />
+    <result column="cref" jdbcType="VARCHAR" property="cref" />
+    <result column="pkg" jdbcType="INTEGER" property="pkg" />
+    <result column="packages" jdbcType="LONGVARCHAR" property="packages" />
+    <result column="items" jdbcType="LONGVARCHAR" property="items" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="value" jdbcType="DECIMAL" property="value" />
+    <result column="dvalue" jdbcType="DECIMAL" property="dvalue" />
+    <result column="tariff" jdbcType="DECIMAL" property="tariff" />
+    <result column="insurance" jdbcType="DECIMAL" property="insurance" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="wtck" jdbcType="DOUBLE" property="wtck" />
+    <result column="cbm" jdbcType="DOUBLE" property="cbm" />
+    <result column="sac" jdbcType="INTEGER" property="sac" />
+    <result column="exm" jdbcType="VARCHAR" property="exm" />
+    <result column="can" jdbcType="VARCHAR" property="can" />
+    <result column="bwf" jdbcType="INTEGER" property="bwf" />
+    <result column="cbwf" jdbcType="INTEGER" property="cbwf" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="scan" jdbcType="INTEGER" property="scan" />
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+    <result column="created" jdbcType="TIME" property="created" />
+    <result column="scan_no" jdbcType="INTEGER" property="scanNo" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, user_id, bag_tag, created
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from import_bag
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from import_bag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag" useGeneratedKeys="true">
+    insert into import_bag (user_id, bag_tag, created, 
+      meta)
+    values (#{userId,jdbcType=INTEGER}, #{bagTag,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag" useGeneratedKeys="true">
+    insert into import_bag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="bagTag != null">
+        bag_tag,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="bagTag != null">
+        #{bagTag,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag">
+    update import_bag
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="bagTag != null">
+        bag_tag = #{bagTag,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag">
+    update import_bag
+    set user_id = #{userId,jdbcType=INTEGER},
+      bag_tag = #{bagTag,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ImportBag">
+    update import_bag
+    set user_id = #{userId,jdbcType=INTEGER},
+      bag_tag = #{bagTag,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selecByBagTag" resultMap="BaseResultMap">
+    select * from import_bag where bag_tag = #{bagTag}
+  </select>
+
+  <select id="getBagTagShipmentsWithContainerNo" resultMap="BaseResultMap2">
+    select * from shipment s join import_bag_tag ibt on s.id=ibt.shipment_id  join consol c on c.id =s.consol_id
+    where bag_tag = #{bagTag} and json_value(c.meta,'$.container_no') = #{containerNo}
+  </select>
+
+  <select id="getBagTagShipments" resultMap="BaseResultMap2">
+    select * from shipment s join import_bag_tag ibt on s.id=ibt.shipment_id
+    where bag_tag = #{bagTag}
+  </select>
+</mapper>

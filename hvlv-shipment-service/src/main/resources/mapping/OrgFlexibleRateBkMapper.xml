@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.OrgFlexibleRateBkMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgFlexibleRateBk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="item" jdbcType="VARCHAR" property="item" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="minimum" jdbcType="DECIMAL" property="minimum" />
+    <result column="branch" jdbcType="VARCHAR" property="branch" />
+    <result column="cargo" jdbcType="VARCHAR" property="cargo" />
+    <result column="service" jdbcType="VARCHAR" property="service" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="rebate" jdbcType="TINYINT" property="rebate" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="criteria" jdbcType="INTEGER" property="criteria" />
+    <result column="bk_time" jdbcType="TIMESTAMP" property="bkTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, user_id, create, amount, item, unit, minimum, branch, cargo, service, 
+    fid, rebate, model, version, create_user, start_date, criteria, bk_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from org_flexible_rate_bk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org_flexible_rate_bk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgFlexibleRateBk" useGeneratedKeys="true">
+    insert into org_flexible_rate_bk (org_id, user_id, create, 
+      amount, item, unit, 
+      minimum, branch, cargo, 
+      service, fid, rebate, 
+      model, version, create_user, 
+      start_date, criteria, bk_time
+      )
+    values (#{orgId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{create,jdbcType=TIMESTAMP}, 
+      #{amount,jdbcType=DECIMAL}, #{item,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{minimum,jdbcType=DECIMAL}, #{branch,jdbcType=VARCHAR}, #{cargo,jdbcType=VARCHAR}, 
+      #{service,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}, #{rebate,jdbcType=TINYINT}, 
+      #{model,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{createUser,jdbcType=INTEGER}, 
+      #{startDate,jdbcType=DATE}, #{criteria,jdbcType=INTEGER}, #{bkTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgFlexibleRateBk" useGeneratedKeys="true">
+    insert into org_flexible_rate_bk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="item != null">
+        item,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="minimum != null">
+        minimum,
+      </if>
+      <if test="branch != null">
+        branch,
+      </if>
+      <if test="cargo != null">
+        cargo,
+      </if>
+      <if test="service != null">
+        service,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="rebate != null">
+        rebate,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="criteria != null">
+        criteria,
+      </if>
+      <if test="bkTime != null">
+        bk_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="minimum != null">
+        #{minimum,jdbcType=DECIMAL},
+      </if>
+      <if test="branch != null">
+        #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="cargo != null">
+        #{cargo,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null">
+        #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="rebate != null">
+        #{rebate,jdbcType=TINYINT},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="criteria != null">
+        #{criteria,jdbcType=INTEGER},
+      </if>
+      <if test="bkTime != null">
+        #{bkTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgFlexibleRateBk">
+    update org_flexible_rate_bk
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        item = #{item,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="minimum != null">
+        minimum = #{minimum,jdbcType=DECIMAL},
+      </if>
+      <if test="branch != null">
+        branch = #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="cargo != null">
+        cargo = #{cargo,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null">
+        service = #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="rebate != null">
+        rebate = #{rebate,jdbcType=TINYINT},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="criteria != null">
+        criteria = #{criteria,jdbcType=INTEGER},
+      </if>
+      <if test="bkTime != null">
+        bk_time = #{bkTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.OrgFlexibleRateBk">
+    update org_flexible_rate_bk
+    set org_id = #{orgId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=DECIMAL},
+      item = #{item,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      minimum = #{minimum,jdbcType=DECIMAL},
+      branch = #{branch,jdbcType=VARCHAR},
+      cargo = #{cargo,jdbcType=VARCHAR},
+      service = #{service,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      rebate = #{rebate,jdbcType=TINYINT},
+      model = #{model,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=DATE},
+      criteria = #{criteria,jdbcType=INTEGER},
+      bk_time = #{bkTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

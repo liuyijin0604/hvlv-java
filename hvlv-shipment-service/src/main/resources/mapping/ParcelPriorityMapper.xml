@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ParcelPriorityMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ParcelPriority">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parcel_type" jdbcType="INTEGER" property="parcelType" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="area_type" jdbcType="INTEGER" property="areaType" />
+    <result column="is_oversize" jdbcType="INTEGER" property="isOversize" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parcel_type, priority, area_type, is_oversize, dpt_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parcel_priority
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parcel_priority
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ParcelPriority" useGeneratedKeys="true">
+    insert into parcel_priority (parcel_type, priority, area_type, 
+      is_oversize, dpt_id)
+    values (#{parcelType,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{areaType,jdbcType=INTEGER}, 
+      #{isOversize,jdbcType=INTEGER}, #{dptId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ParcelPriority" useGeneratedKeys="true">
+    insert into parcel_priority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parcelType != null">
+        parcel_type,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="areaType != null">
+        area_type,
+      </if>
+      <if test="isOversize != null">
+        is_oversize,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parcelType != null">
+        #{parcelType,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="areaType != null">
+        #{areaType,jdbcType=INTEGER},
+      </if>
+      <if test="isOversize != null">
+        #{isOversize,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ParcelPriority">
+    update parcel_priority
+    <set>
+      <if test="parcelType != null">
+        parcel_type = #{parcelType,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="areaType != null">
+        area_type = #{areaType,jdbcType=INTEGER},
+      </if>
+      <if test="isOversize != null">
+        is_oversize = #{isOversize,jdbcType=INTEGER},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ParcelPriority">
+    update parcel_priority
+    set parcel_type = #{parcelType,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      area_type = #{areaType,jdbcType=INTEGER},
+      is_oversize = #{isOversize,jdbcType=INTEGER},
+      dpt_id = #{dptId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

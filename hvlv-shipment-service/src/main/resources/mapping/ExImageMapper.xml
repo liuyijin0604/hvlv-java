@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ExImageMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExImage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="file_adr" jdbcType="VARCHAR" property="fileAdr" />
+    <result column="hbn" jdbcType="VARCHAR" property="hbn" />
+    <result column="islinked" jdbcType="BIT" property="islinked" />
+    <result column="agent_id" jdbcType="VARCHAR" property="agentId" />
+    <result column="pdf_number" jdbcType="VARCHAR" property="pdfNumber" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, file_adr, hbn, islinked, agent_id, pdf_number, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ex_image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ex_image
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExImage" useGeneratedKeys="true">
+    insert into ex_image (file_adr, hbn, islinked, 
+      agent_id, pdf_number, date
+      )
+    values (#{fileAdr,jdbcType=VARCHAR}, #{hbn,jdbcType=VARCHAR}, #{islinked,jdbcType=BIT}, 
+      #{agentId,jdbcType=VARCHAR}, #{pdfNumber,jdbcType=VARCHAR}, #{date,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExImage" useGeneratedKeys="true">
+    insert into ex_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileAdr != null">
+        file_adr,
+      </if>
+      <if test="hbn != null">
+        hbn,
+      </if>
+      <if test="islinked != null">
+        islinked,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="pdfNumber != null">
+        pdf_number,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileAdr != null">
+        #{fileAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="hbn != null">
+        #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="islinked != null">
+        #{islinked,jdbcType=BIT},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfNumber != null">
+        #{pdfNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExImage">
+    update ex_image
+    <set>
+      <if test="fileAdr != null">
+        file_adr = #{fileAdr,jdbcType=VARCHAR},
+      </if>
+      <if test="hbn != null">
+        hbn = #{hbn,jdbcType=VARCHAR},
+      </if>
+      <if test="islinked != null">
+        islinked = #{islinked,jdbcType=BIT},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfNumber != null">
+        pdf_number = #{pdfNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ExImage">
+    update ex_image
+    set file_adr = #{fileAdr,jdbcType=VARCHAR},
+      hbn = #{hbn,jdbcType=VARCHAR},
+      islinked = #{islinked,jdbcType=BIT},
+      agent_id = #{agentId,jdbcType=VARCHAR},
+      pdf_number = #{pdfNumber,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

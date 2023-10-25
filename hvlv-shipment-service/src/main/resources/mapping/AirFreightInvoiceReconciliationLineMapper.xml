@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.AirFreightInvoiceReconciliationLineMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="glcode" jdbcType="VARCHAR" property="glcode" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine">
+    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, invoice_id, gst, glcode, amount
+  </sql>
+  <sql id="Blob_Column_List">
+    desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from air_freight_invoice_reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from air_freight_invoice_reconciliation_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation_line (invoice_id, gst, glcode, 
+      amount, desc)
+    values (#{invoiceId,jdbcType=INTEGER}, #{gst,jdbcType=DECIMAL}, #{glcode,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{desc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        invoice_id,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="glcode != null">
+        glcode,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="desc != null">
+        desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="glcode != null">
+        #{glcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine">
+    update air_freight_invoice_reconciliation_line
+    <set>
+      <if test="invoiceId != null">
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="glcode != null">
+        glcode = #{glcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine">
+    update air_freight_invoice_reconciliation_line
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      gst = #{gst,jdbcType=DECIMAL},
+      glcode = #{glcode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      desc = #{desc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliationLine">
+    update air_freight_invoice_reconciliation_line
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      gst = #{gst,jdbcType=DECIMAL},
+      glcode = #{glcode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.TlaTaskMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="task_no" jdbcType="VARCHAR" property="taskNo" />
+    <result column="dpt_id" jdbcType="INTEGER" property="dptId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="ets" jdbcType="TIMESTAMP" property="ets" />
+    <result column="ete" jdbcType="TIMESTAMP" property="ete" />
+    <result column="tag" jdbcType="INTEGER" property="tag" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask">
+    <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+    <result column="task_content" jdbcType="LONGVARCHAR" property="taskContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, task_no, dpt_id, status, user_id, model, fid, create, ets, ete, tag, agent_id
+  </sql>
+  <sql id="Blob_Column_List">
+    comment, meta, task_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tla_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tla_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask" useGeneratedKeys="true">
+    insert into tla_task (type, task_no, dpt_id, 
+      status, user_id, model, 
+      fid, create, ets, 
+      ete, tag, agent_id, 
+      comment, meta, task_content
+      )
+    values (#{type,jdbcType=INTEGER}, #{taskNo,jdbcType=VARCHAR}, #{dptId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR}, 
+      #{fid,jdbcType=INTEGER}, #{create,jdbcType=TIMESTAMP}, #{ets,jdbcType=TIMESTAMP}, 
+      #{ete,jdbcType=TIMESTAMP}, #{tag,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, 
+      #{comment,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR}, #{taskContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask" useGeneratedKeys="true">
+    insert into tla_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="taskNo != null">
+        task_no,
+      </if>
+      <if test="dptId != null">
+        dpt_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="ets != null">
+        ets,
+      </if>
+      <if test="ete != null">
+        ete,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+      <if test="taskContent != null">
+        task_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="taskNo != null">
+        #{taskNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ets != null">
+        #{ets,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ete != null">
+        #{ete,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taskContent != null">
+        #{taskContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask">
+    update tla_task
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="taskNo != null">
+        task_no = #{taskNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dptId != null">
+        dpt_id = #{dptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ets != null">
+        ets = #{ets,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ete != null">
+        ete = #{ete,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taskContent != null">
+        task_content = #{taskContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask">
+    update tla_task
+    set type = #{type,jdbcType=INTEGER},
+      task_no = #{taskNo,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      ets = #{ets,jdbcType=TIMESTAMP},
+      ete = #{ete,jdbcType=TIMESTAMP},
+      tag = #{tag,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR},
+      task_content = #{taskContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.TlaTask">
+    update tla_task
+    set type = #{type,jdbcType=INTEGER},
+      task_no = #{taskNo,jdbcType=VARCHAR},
+      dpt_id = #{dptId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      create = #{create,jdbcType=TIMESTAMP},
+      ets = #{ets,jdbcType=TIMESTAMP},
+      ete = #{ete,jdbcType=TIMESTAMP},
+      tag = #{tag,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

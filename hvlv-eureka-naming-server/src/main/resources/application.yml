@@ -1,0 +1,68 @@
+spring:
+  security: # security 账号密码
+    user:
+      name: topadmin
+      password: topadmin912
+
+server:
+  port: 8761  #端口号
+
+eureka:
+  client:
+    #    设置服务注册中心地址，指向另一个注册中心，以实现高可用
+    serviceUrl:
+      defaultZone: http://topadmin:topadmin912@localhost:8761/eureka/
+
+
+##spring:
+##  application:
+##    name: hvlv-eureka-naming-server
+##  security:
+##    basic:
+##      enabled: true
+##    user:
+##      name: admin
+##      password: admin
+##
+##eureka:
+##  instance:
+##    hostname: localhost
+##  client:
+##    register-with-eureka: true
+##    fetch-registry: true
+##    service-url:
+##      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka
+##
+##
+##server:
+##  port: ${port:8761}
+#
+#
+#server:
+#  port: 5000
+#
+##spring:
+##  application:
+##    name: EurekaServer
+##  security:
+##    basic:
+##      enabled: true
+##    user:
+##      name: admin
+##      password: 123456
+#spring:
+#  application:
+#    name: hvlv-eureka-naming-server
+#  security:
+#    user:
+#      name: admin
+#      password: 123456
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka

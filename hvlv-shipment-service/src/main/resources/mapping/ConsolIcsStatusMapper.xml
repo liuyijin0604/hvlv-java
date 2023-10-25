@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ConsolIcsStatusMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolIcsStatus">
+    <id column="consol_id" jdbcType="INTEGER" property="consolId" />
+    <id column="type" jdbcType="VARCHAR" property="type" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    consol_id, type, value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from consol_ics_status
+    where consol_id = #{consolId,jdbcType=INTEGER}
+      and type = #{type,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from consol_ics_status
+    where consol_id = #{consolId,jdbcType=INTEGER}
+      and type = #{type,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolIcsStatus">
+    insert into consol_ics_status (consol_id, type, value
+      )
+    values (#{consolId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolIcsStatus">
+    insert into consol_ics_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consolId != null">
+        consol_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consolId != null">
+        #{consolId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolIcsStatus">
+    update consol_ics_status
+    <set>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where consol_id = #{consolId,jdbcType=INTEGER}
+      and type = #{type,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConsolIcsStatus">
+    update consol_ics_status
+    set value = #{value,jdbcType=VARCHAR}
+    where consol_id = #{consolId,jdbcType=INTEGER}
+      and type = #{type,jdbcType=VARCHAR}
+  </update>
+</mapper>

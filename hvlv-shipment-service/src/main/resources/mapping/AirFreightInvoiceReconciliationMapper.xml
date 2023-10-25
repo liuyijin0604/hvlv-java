@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.AirFreightInvoiceReconciliationMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="history_id" jdbcType="INTEGER" property="historyId" />
+    <result column="invoice_no" jdbcType="VARCHAR" property="invoiceNo" />
+    <result column="awb" jdbcType="VARCHAR" property="awb" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="due" jdbcType="DATE" property="due" />
+    <result column="eta" jdbcType="DATE" property="eta" />
+    <result column="etd" jdbcType="DATE" property="etd" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="cnee" jdbcType="VARCHAR" property="cnee" />
+    <result column="cnor" jdbcType="VARCHAR" property="cnor" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="dest" jdbcType="VARCHAR" property="dest" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="charge_weight" jdbcType="DECIMAL" property="chargeWeight" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="subtotal" jdbcType="DECIMAL" property="subtotal" />
+    <result column="gst" jdbcType="DECIMAL" property="gst" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="matched_result" jdbcType="TINYINT" property="matchedResult" />
+    <result column="op" jdbcType="INTEGER" property="op" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, supplier_id, history_id, invoice_no, awb, date, due, eta, etd, created, cnee, 
+    cnor, origin, dest, weight, charge_weight, volume, subtotal, gst, total, model, fid, 
+    matched_result, op
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from air_freight_invoice_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from air_freight_invoice_reconciliation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation (supplier_id, history_id, invoice_no, 
+      awb, date, due, eta, 
+      etd, created, cnee, cnor, 
+      origin, dest, weight, 
+      charge_weight, volume, subtotal, 
+      gst, total, model, 
+      fid, matched_result, op, 
+      meta)
+    values (#{supplierId,jdbcType=INTEGER}, #{historyId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, 
+      #{awb,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{due,jdbcType=DATE}, #{eta,jdbcType=DATE}, 
+      #{etd,jdbcType=DATE}, #{created,jdbcType=DATE}, #{cnee,jdbcType=VARCHAR}, #{cnor,jdbcType=VARCHAR}, 
+      #{origin,jdbcType=VARCHAR}, #{dest,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
+      #{chargeWeight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{subtotal,jdbcType=DECIMAL}, 
+      #{gst,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, #{model,jdbcType=VARCHAR}, 
+      #{fid,jdbcType=INTEGER}, #{matchedResult,jdbcType=TINYINT}, #{op,jdbcType=INTEGER}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation" useGeneratedKeys="true">
+    insert into air_freight_invoice_reconciliation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="historyId != null">
+        history_id,
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no,
+      </if>
+      <if test="awb != null">
+        awb,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="due != null">
+        due,
+      </if>
+      <if test="eta != null">
+        eta,
+      </if>
+      <if test="etd != null">
+        etd,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="cnee != null">
+        cnee,
+      </if>
+      <if test="cnor != null">
+        cnor,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="dest != null">
+        dest,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="subtotal != null">
+        subtotal,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="matchedResult != null">
+        matched_result,
+      </if>
+      <if test="op != null">
+        op,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="historyId != null">
+        #{historyId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null">
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="awb != null">
+        #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        #{due,jdbcType=DATE},
+      </if>
+      <if test="eta != null">
+        #{eta,jdbcType=DATE},
+      </if>
+      <if test="etd != null">
+        #{etd,jdbcType=DATE},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="cnee != null">
+        #{cnee,jdbcType=VARCHAR},
+      </if>
+      <if test="cnor != null">
+        #{cnor,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="dest != null">
+        #{dest,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="matchedResult != null">
+        #{matchedResult,jdbcType=TINYINT},
+      </if>
+      <if test="op != null">
+        #{op,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation">
+    update air_freight_invoice_reconciliation
+    <set>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="historyId != null">
+        history_id = #{historyId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="awb != null">
+        awb = #{awb,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="due != null">
+        due = #{due,jdbcType=DATE},
+      </if>
+      <if test="eta != null">
+        eta = #{eta,jdbcType=DATE},
+      </if>
+      <if test="etd != null">
+        etd = #{etd,jdbcType=DATE},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="cnee != null">
+        cnee = #{cnee,jdbcType=VARCHAR},
+      </if>
+      <if test="cnor != null">
+        cnor = #{cnor,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="dest != null">
+        dest = #{dest,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeWeight != null">
+        charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="matchedResult != null">
+        matched_result = #{matchedResult,jdbcType=TINYINT},
+      </if>
+      <if test="op != null">
+        op = #{op,jdbcType=INTEGER},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation">
+    update air_freight_invoice_reconciliation
+    set supplier_id = #{supplierId,jdbcType=INTEGER},
+      history_id = #{historyId,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      awb = #{awb,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      eta = #{eta,jdbcType=DATE},
+      etd = #{etd,jdbcType=DATE},
+      created = #{created,jdbcType=DATE},
+      cnee = #{cnee,jdbcType=VARCHAR},
+      cnor = #{cnor,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      dest = #{dest,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=DECIMAL},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      matched_result = #{matchedResult,jdbcType=TINYINT},
+      op = #{op,jdbcType=INTEGER},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.AirFreightInvoiceReconciliation">
+    update air_freight_invoice_reconciliation
+    set supplier_id = #{supplierId,jdbcType=INTEGER},
+      history_id = #{historyId,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      awb = #{awb,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      due = #{due,jdbcType=DATE},
+      eta = #{eta,jdbcType=DATE},
+      etd = #{etd,jdbcType=DATE},
+      created = #{created,jdbcType=DATE},
+      cnee = #{cnee,jdbcType=VARCHAR},
+      cnor = #{cnor,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      dest = #{dest,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      charge_weight = #{chargeWeight,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=DECIMAL},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      matched_result = #{matchedResult,jdbcType=TINYINT},
+      op = #{op,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

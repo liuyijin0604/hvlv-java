@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SalesfunnelRequirementsSubmissionMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="contact_number" jdbcType="INTEGER" property="contactNumber" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="forwarder_shippingagent" jdbcType="INTEGER" property="forwarderShippingagent" />
+    <result column="customer_type" jdbcType="INTEGER" property="customerType" />
+    <result column="sub_status" jdbcType="INTEGER" property="subStatus" />
+    <result column="sub_status_ignore" jdbcType="INTEGER" property="subStatusIgnore" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission">
+    <result column="business_requirement" jdbcType="LONGVARCHAR" property="businessRequirement" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_name, first_name, last_name, email, contact_number, status, password, 
+    category, forwarder_shippingagent, customer_type, sub_status, sub_status_ignore
+  </sql>
+  <sql id="Blob_Column_List">
+    business_requirement
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from salesfunnel_requirements_submission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salesfunnel_requirements_submission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission" useGeneratedKeys="true">
+    insert into salesfunnel_requirements_submission (company_name, first_name, last_name, 
+      email, contact_number, status, 
+      password, category, forwarder_shippingagent, 
+      customer_type, sub_status, sub_status_ignore, 
+      business_requirement)
+    values (#{companyName,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{contactNumber,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{forwarderShippingagent,jdbcType=INTEGER}, 
+      #{customerType,jdbcType=INTEGER}, #{subStatus,jdbcType=INTEGER}, #{subStatusIgnore,jdbcType=INTEGER}, 
+      #{businessRequirement,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission" useGeneratedKeys="true">
+    insert into salesfunnel_requirements_submission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="lastName != null">
+        last_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="forwarderShippingagent != null">
+        forwarder_shippingagent,
+      </if>
+      <if test="customerType != null">
+        customer_type,
+      </if>
+      <if test="subStatus != null">
+        sub_status,
+      </if>
+      <if test="subStatusIgnore != null">
+        sub_status_ignore,
+      </if>
+      <if test="businessRequirement != null">
+        business_requirement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="forwarderShippingagent != null">
+        #{forwarderShippingagent,jdbcType=INTEGER},
+      </if>
+      <if test="customerType != null">
+        #{customerType,jdbcType=INTEGER},
+      </if>
+      <if test="subStatus != null">
+        #{subStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subStatusIgnore != null">
+        #{subStatusIgnore,jdbcType=INTEGER},
+      </if>
+      <if test="businessRequirement != null">
+        #{businessRequirement,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission">
+    update salesfunnel_requirements_submission
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="forwarderShippingagent != null">
+        forwarder_shippingagent = #{forwarderShippingagent,jdbcType=INTEGER},
+      </if>
+      <if test="customerType != null">
+        customer_type = #{customerType,jdbcType=INTEGER},
+      </if>
+      <if test="subStatus != null">
+        sub_status = #{subStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subStatusIgnore != null">
+        sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER},
+      </if>
+      <if test="businessRequirement != null">
+        business_requirement = #{businessRequirement,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission">
+    update salesfunnel_requirements_submission
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      forwarder_shippingagent = #{forwarderShippingagent,jdbcType=INTEGER},
+      customer_type = #{customerType,jdbcType=INTEGER},
+      sub_status = #{subStatus,jdbcType=INTEGER},
+      sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER},
+      business_requirement = #{businessRequirement,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SalesfunnelRequirementsSubmission">
+    update salesfunnel_requirements_submission
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      forwarder_shippingagent = #{forwarderShippingagent,jdbcType=INTEGER},
+      customer_type = #{customerType,jdbcType=INTEGER},
+      sub_status = #{subStatus,jdbcType=INTEGER},
+      sub_status_ignore = #{subStatusIgnore,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

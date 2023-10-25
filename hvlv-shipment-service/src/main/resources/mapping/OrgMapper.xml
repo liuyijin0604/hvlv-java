@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.OrgMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="accode" jdbcType="VARCHAR" property="accode" />
+    <result column="abn" jdbcType="VARCHAR" property="abn" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="by" jdbcType="INTEGER" property="by" />
+    <result column="manager" jdbcType="INTEGER" property="manager" />
+    <result column="nln" jdbcType="INTEGER" property="nln" />
+    <result column="cargo_driver_type" jdbcType="INTEGER" property="cargoDriverType" />
+    <result column="hash" jdbcType="VARCHAR" property="hash" />
+    <result column="lat" jdbcType="REAL" property="lat" />
+    <result column="lng" jdbcType="REAL" property="lng" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org">
+    <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, type, name, code, accode, abn, address, suburb, state, postcode, country, 
+    email, phone, fax, status, `by`, manager, nln, cargo_driver_type, hash, lat, lng
+  </sql>
+  <sql id="Blob_Column_List">
+    `desc`, `meta`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from org
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from org
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org" useGeneratedKeys="true">
+    insert into org (pid, type, name, 
+      code, accode, abn, 
+      address, suburb, state, 
+      postcode, country, email, 
+      phone, fax, status, by, 
+      manager, nln, cargo_driver_type, 
+      hash, lat, lng, desc, 
+      meta)
+    values (#{pid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{accode,jdbcType=VARCHAR}, #{abn,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{by,jdbcType=INTEGER}, 
+      #{manager,jdbcType=INTEGER}, #{nln,jdbcType=INTEGER}, #{cargoDriverType,jdbcType=INTEGER}, 
+      #{hash,jdbcType=VARCHAR}, #{lat,jdbcType=REAL}, #{lng,jdbcType=REAL}, #{desc,jdbcType=LONGVARCHAR}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org" useGeneratedKeys="true">
+    insert into org
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="accode != null">
+        accode,
+      </if>
+      <if test="abn != null">
+        abn,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="by != null">
+        by,
+      </if>
+      <if test="manager != null">
+        manager,
+      </if>
+      <if test="nln != null">
+        nln,
+      </if>
+      <if test="cargoDriverType != null">
+        cargo_driver_type,
+      </if>
+      <if test="hash != null">
+        hash,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="desc != null">
+        desc,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="accode != null">
+        #{accode,jdbcType=VARCHAR},
+      </if>
+      <if test="abn != null">
+        #{abn,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="by != null">
+        #{by,jdbcType=INTEGER},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=INTEGER},
+      </if>
+      <if test="nln != null">
+        #{nln,jdbcType=INTEGER},
+      </if>
+      <if test="cargoDriverType != null">
+        #{cargoDriverType,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=REAL},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=REAL},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org">
+    update org
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="accode != null">
+        accode = #{accode,jdbcType=VARCHAR},
+      </if>
+      <if test="abn != null">
+        abn = #{abn,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="by != null">
+        by = #{by,jdbcType=INTEGER},
+      </if>
+      <if test="manager != null">
+        manager = #{manager,jdbcType=INTEGER},
+      </if>
+      <if test="nln != null">
+        nln = #{nln,jdbcType=INTEGER},
+      </if>
+      <if test="cargoDriverType != null">
+        cargo_driver_type = #{cargoDriverType,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        hash = #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=REAL},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=REAL},
+      </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org">
+    update org
+    set pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      accode = #{accode,jdbcType=VARCHAR},
+      abn = #{abn,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      by = #{by,jdbcType=INTEGER},
+      manager = #{manager,jdbcType=INTEGER},
+      nln = #{nln,jdbcType=INTEGER},
+      cargo_driver_type = #{cargoDriverType,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=REAL},
+      lng = #{lng,jdbcType=REAL},
+      desc = #{desc,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.Org">
+    update org
+    set pid = #{pid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      accode = #{accode,jdbcType=VARCHAR},
+      abn = #{abn,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      by = #{by,jdbcType=INTEGER},
+      manager = #{manager,jdbcType=INTEGER},
+      nln = #{nln,jdbcType=INTEGER},
+      cargo_driver_type = #{cargoDriverType,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=REAL},
+      lng = #{lng,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

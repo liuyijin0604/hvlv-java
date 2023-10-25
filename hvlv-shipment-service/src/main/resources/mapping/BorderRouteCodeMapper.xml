@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.BorderRouteCodeMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BorderRouteCode">
+    <id column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <id column="state" jdbcType="VARCHAR" property="state" />
+    <id column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="route_code" jdbcType="VARCHAR" property="routeCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    suburb, state, postcode, route_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from border_route_code
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and state = #{state,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from border_route_code
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and state = #{state,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BorderRouteCode">
+    insert into border_route_code (suburb, state, postcode, 
+      route_code)
+    values (#{suburb,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{routeCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BorderRouteCode">
+    insert into border_route_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="routeCode != null">
+        route_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="routeCode != null">
+        #{routeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BorderRouteCode">
+    update border_route_code
+    <set>
+      <if test="routeCode != null">
+        route_code = #{routeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and state = #{state,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.BorderRouteCode">
+    update border_route_code
+    set route_code = #{routeCode,jdbcType=VARCHAR}
+    where suburb = #{suburb,jdbcType=VARCHAR}
+      and state = #{state,jdbcType=VARCHAR}
+      and postcode = #{postcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.WmsOrgQuoteMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="quote_no" jdbcType="VARCHAR" property="quoteNo" />
+    <result column="vfrom" jdbcType="DATE" property="vfrom" />
+    <result column="vto" jdbcType="DATE" property="vto" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, quote_no, vfrom, vto, status
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wms_org_quote
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wms_org_quote
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote" useGeneratedKeys="true">
+    insert into wms_org_quote (org_id, quote_no, vfrom, 
+      vto, status, meta)
+    values (#{orgId,jdbcType=INTEGER}, #{quoteNo,jdbcType=VARCHAR}, #{vfrom,jdbcType=DATE}, 
+      #{vto,jdbcType=DATE}, #{status,jdbcType=TINYINT}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote" useGeneratedKeys="true">
+    insert into wms_org_quote
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="quoteNo != null">
+        quote_no,
+      </if>
+      <if test="vfrom != null">
+        vfrom,
+      </if>
+      <if test="vto != null">
+        vto,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="quoteNo != null">
+        #{quoteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vfrom != null">
+        #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        #{vto,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote">
+    update wms_org_quote
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="quoteNo != null">
+        quote_no = #{quoteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vfrom != null">
+        vfrom = #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        vto = #{vto,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote">
+    update wms_org_quote
+    set org_id = #{orgId,jdbcType=INTEGER},
+      quote_no = #{quoteNo,jdbcType=VARCHAR},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.WmsOrgQuote">
+    update wms_org_quote
+    set org_id = #{orgId,jdbcType=INTEGER},
+      quote_no = #{quoteNo,jdbcType=VARCHAR},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

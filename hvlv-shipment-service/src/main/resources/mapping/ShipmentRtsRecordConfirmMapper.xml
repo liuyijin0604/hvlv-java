@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentRtsRecordConfirmMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecordConfirm">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="agent_id" jdbcType="VARCHAR" property="agentId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="suburb" jdbcType="VARCHAR" property="suburb" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="original_id" jdbcType="INTEGER" property="originalId" />
+    <result column="new_id" jdbcType="INTEGER" property="newId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="rtc_gp_id" jdbcType="INTEGER" property="rtcGpId" />
+    <result column="rts_done_time" jdbcType="TIMESTAMP" property="rtsDoneTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, agent_id, user_id, name, address, tel, suburb, state, postcode, country, email, 
+    status, original_id, new_id, create_time, rtc_gp_id, rts_done_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shipment_rts_record_confirm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_rts_record_confirm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecordConfirm" useGeneratedKeys="true">
+    insert into shipment_rts_record_confirm (agent_id, user_id, name, 
+      address, tel, suburb, 
+      state, postcode, country, 
+      email, status, original_id, 
+      new_id, create_time, rtc_gp_id, 
+      rts_done_time)
+    values (#{agentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{suburb,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{originalId,jdbcType=INTEGER}, 
+      #{newId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{rtcGpId,jdbcType=INTEGER}, 
+      #{rtsDoneTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecordConfirm" useGeneratedKeys="true">
+    insert into shipment_rts_record_confirm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="suburb != null">
+        suburb,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="originalId != null">
+        original_id,
+      </if>
+      <if test="newId != null">
+        new_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="rtcGpId != null">
+        rtc_gp_id,
+      </if>
+      <if test="rtsDoneTime != null">
+        rts_done_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="agentId != null">
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="originalId != null">
+        #{originalId,jdbcType=INTEGER},
+      </if>
+      <if test="newId != null">
+        #{newId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtcGpId != null">
+        #{rtcGpId,jdbcType=INTEGER},
+      </if>
+      <if test="rtsDoneTime != null">
+        #{rtsDoneTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecordConfirm">
+    update shipment_rts_record_confirm
+    <set>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="suburb != null">
+        suburb = #{suburb,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="originalId != null">
+        original_id = #{originalId,jdbcType=INTEGER},
+      </if>
+      <if test="newId != null">
+        new_id = #{newId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtcGpId != null">
+        rtc_gp_id = #{rtcGpId,jdbcType=INTEGER},
+      </if>
+      <if test="rtsDoneTime != null">
+        rts_done_time = #{rtsDoneTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecordConfirm">
+    update shipment_rts_record_confirm
+    set agent_id = #{agentId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      suburb = #{suburb,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      original_id = #{originalId,jdbcType=INTEGER},
+      new_id = #{newId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      rtc_gp_id = #{rtcGpId,jdbcType=INTEGER},
+      rts_done_time = #{rtsDoneTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

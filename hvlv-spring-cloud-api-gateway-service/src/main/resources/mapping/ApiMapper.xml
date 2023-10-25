@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.springcloudapigatewayservice.hvlvspringcloudapigatewayservice.mapper.ApiMapper">
+
+    <resultMap id="BaseResultMap" type="com.hvlv.microservices.springcloudapigatewayservice.hvlvspringcloudapigatewayservice.entity.Api">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user" jdbcType="VARCHAR" property="user" />
+        <result column="key" jdbcType="VARCHAR" property="key" />
+    </resultMap>
+
+    <select id="select" resultType="com.hvlv.microservices.springcloudapigatewayservice.hvlvspringcloudapigatewayservice.entity.Api">
+        select * from api where `user` = #{user}
+    </select>
+
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ConnoteRangeMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="prefix" jdbcType="VARCHAR" property="prefix" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="start" jdbcType="INTEGER" property="start" />
+    <result column="finish" jdbcType="INTEGER" property="finish" />
+    <result column="digits" jdbcType="TINYINT" property="digits" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, status, model, fid, prefix, suffix, start, finish, digits
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from connote_range
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAllByTypeAndStatusAndModelAndFid" resultMap="BaseResultMap">
+    SELECT * FROM connote_range
+    WHERE type = 10
+      AND status = 70
+      AND model = 'Org'
+      AND fid = #{oid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from connote_range
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange" useGeneratedKeys="true">
+    insert into connote_range (type, status, model, 
+      fid, prefix, suffix, 
+      start, finish, digits, 
+      meta)
+    values (#{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{model,jdbcType=VARCHAR}, 
+      #{fid,jdbcType=INTEGER}, #{prefix,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR}, 
+      #{start,jdbcType=INTEGER}, #{finish,jdbcType=INTEGER}, #{digits,jdbcType=TINYINT}, 
+      #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange" useGeneratedKeys="true">
+    insert into connote_range
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="prefix != null">
+        prefix,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="finish != null">
+        finish,
+      </if>
+      <if test="digits != null">
+        digits,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null">
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=INTEGER},
+      </if>
+      <if test="finish != null">
+        #{finish,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        #{digits,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange">
+    update connote_range
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null">
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        start = #{start,jdbcType=INTEGER},
+      </if>
+      <if test="finish != null">
+        finish = #{finish,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        digits = #{digits,jdbcType=TINYINT},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange">
+    update connote_range
+    set type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      prefix = #{prefix,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      start = #{start,jdbcType=INTEGER},
+      finish = #{finish,jdbcType=INTEGER},
+      digits = #{digits,jdbcType=TINYINT},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ConnoteRange">
+    update connote_range
+    set type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      model = #{model,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      prefix = #{prefix,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      start = #{start,jdbcType=INTEGER},
+      finish = #{finish,jdbcType=INTEGER},
+      digits = #{digits,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findRanges" resultMap="BaseResultMap">
+    select * from connote_range where  status = 10 AND model = #{model} AND fid = #{fid} AND `start` &lt; `finish`  AND `prefix` = #{pfx}
+  </select>
+
+  <update id="updateCache">
+    UPDATE connote_range SET `start`=(${v}:=`start`)+1, `status` = IF(`start` >= `finish`, 80, 10) WHERE status = 10 AND `start` &lt; `finish` AND id=#{id}
+
+  </update>
+
+  <select id="selectCacheV" resultType="Integer">
+    SELECT ${v}
+  </select>
+  <update id="updateCacheV">
+    SET ${v} = NULL
+  </update>
+</mapper>

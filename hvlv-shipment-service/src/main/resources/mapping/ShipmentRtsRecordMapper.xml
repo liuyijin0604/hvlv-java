@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentRtsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="shipment_id" jdbcType="INTEGER" property="shipmentId" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="sn" jdbcType="INTEGER" property="sn" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="adjust_shipment_id" jdbcType="INTEGER" property="adjustShipmentId" />
+    <result column="adjust_sn" jdbcType="INTEGER" property="adjustSn" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="is_print" jdbcType="INTEGER" property="isPrint" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="location_id" jdbcType="INTEGER" property="locationId" />
+    <result column="discard_time" jdbcType="TIMESTAMP" property="discardTime" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="confirm_id" jdbcType="INTEGER" property="confirmId" />
+    <result column="is_notice" jdbcType="INTEGER" property="isNotice" />
+    <result column="rts_invoice_id" jdbcType="INTEGER" property="rtsInvoiceId" />
+    <result column="unknown_edit_time" jdbcType="TIMESTAMP" property="unknownEditTime" />
+    <result column="discard_user_id" jdbcType="INTEGER" property="discardUserId" />
+    <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime" />
+    <result column="second_rts" jdbcType="INTEGER" property="secondRts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, shipment_id, barcode, record_time, type, sn, reason, adjust_shipment_id, adjust_sn, 
+    warehouse_id, user_id, is_print, status, location_id, discard_time, agent_id, confirm_id, 
+    is_notice, rts_invoice_id, unknown_edit_time, discard_user_id, notice_time, second_rts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shipment_rts_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shipment_rts_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecord" useGeneratedKeys="true">
+    insert into shipment_rts_record (shipment_id, barcode, record_time, 
+      type, sn, reason, adjust_shipment_id, 
+      adjust_sn, warehouse_id, user_id, 
+      is_print, status, location_id, 
+      discard_time, agent_id, confirm_id, 
+      is_notice, rts_invoice_id, unknown_edit_time, 
+      discard_user_id, notice_time, second_rts
+      )
+    values (#{shipmentId,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}, #{recordTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=INTEGER}, #{sn,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, #{adjustShipmentId,jdbcType=INTEGER}, 
+      #{adjustSn,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{isPrint,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{locationId,jdbcType=INTEGER}, 
+      #{discardTime,jdbcType=TIMESTAMP}, #{agentId,jdbcType=INTEGER}, #{confirmId,jdbcType=INTEGER}, 
+      #{isNotice,jdbcType=INTEGER}, #{rtsInvoiceId,jdbcType=INTEGER}, #{unknownEditTime,jdbcType=TIMESTAMP}, 
+      #{discardUserId,jdbcType=INTEGER}, #{noticeTime,jdbcType=TIMESTAMP}, #{secondRts,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecord" useGeneratedKeys="true">
+    insert into shipment_rts_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        shipment_id,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="adjustShipmentId != null">
+        adjust_shipment_id,
+      </if>
+      <if test="adjustSn != null">
+        adjust_sn,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="isPrint != null">
+        is_print,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="locationId != null">
+        location_id,
+      </if>
+      <if test="discardTime != null">
+        discard_time,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="confirmId != null">
+        confirm_id,
+      </if>
+      <if test="isNotice != null">
+        is_notice,
+      </if>
+      <if test="rtsInvoiceId != null">
+        rts_invoice_id,
+      </if>
+      <if test="unknownEditTime != null">
+        unknown_edit_time,
+      </if>
+      <if test="discardUserId != null">
+        discard_user_id,
+      </if>
+      <if test="noticeTime != null">
+        notice_time,
+      </if>
+      <if test="secondRts != null">
+        second_rts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipmentId != null">
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="adjustShipmentId != null">
+        #{adjustShipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adjustSn != null">
+        #{adjustSn,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isPrint != null">
+        #{isPrint,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null">
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="discardTime != null">
+        #{discardTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmId != null">
+        #{confirmId,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null">
+        #{isNotice,jdbcType=INTEGER},
+      </if>
+      <if test="rtsInvoiceId != null">
+        #{rtsInvoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="unknownEditTime != null">
+        #{unknownEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discardUserId != null">
+        #{discardUserId,jdbcType=INTEGER},
+      </if>
+      <if test="noticeTime != null">
+        #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secondRts != null">
+        #{secondRts,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecord">
+    update shipment_rts_record
+    <set>
+      <if test="shipmentId != null">
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="adjustShipmentId != null">
+        adjust_shipment_id = #{adjustShipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adjustSn != null">
+        adjust_sn = #{adjustSn,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isPrint != null">
+        is_print = #{isPrint,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null">
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="discardTime != null">
+        discard_time = #{discardTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmId != null">
+        confirm_id = #{confirmId,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null">
+        is_notice = #{isNotice,jdbcType=INTEGER},
+      </if>
+      <if test="rtsInvoiceId != null">
+        rts_invoice_id = #{rtsInvoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="unknownEditTime != null">
+        unknown_edit_time = #{unknownEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discardUserId != null">
+        discard_user_id = #{discardUserId,jdbcType=INTEGER},
+      </if>
+      <if test="noticeTime != null">
+        notice_time = #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secondRts != null">
+        second_rts = #{secondRts,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentRtsRecord">
+    update shipment_rts_record
+    set shipment_id = #{shipmentId,jdbcType=INTEGER},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      sn = #{sn,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      adjust_shipment_id = #{adjustShipmentId,jdbcType=INTEGER},
+      adjust_sn = #{adjustSn,jdbcType=INTEGER},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      is_print = #{isPrint,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      discard_time = #{discardTime,jdbcType=TIMESTAMP},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      confirm_id = #{confirmId,jdbcType=INTEGER},
+      is_notice = #{isNotice,jdbcType=INTEGER},
+      rts_invoice_id = #{rtsInvoiceId,jdbcType=INTEGER},
+      unknown_edit_time = #{unknownEditTime,jdbcType=TIMESTAMP},
+      discard_user_id = #{discardUserId,jdbcType=INTEGER},
+      notice_time = #{noticeTime,jdbcType=TIMESTAMP},
+      second_rts = #{secondRts,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

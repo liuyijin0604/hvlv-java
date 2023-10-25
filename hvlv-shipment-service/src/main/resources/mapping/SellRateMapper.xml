@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.SellRateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="by_id" jdbcType="INTEGER" property="byId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="vfrom" jdbcType="DATE" property="vfrom" />
+    <result column="vto" jdbcType="DATE" property="vto" />
+    <result column="currency" jdbcType="TINYINT" property="currency" />
+    <result column="wt_lo" jdbcType="DECIMAL" property="wtLo" />
+    <result column="wt_hi" jdbcType="DECIMAL" property="wtHi" />
+    <result column="base" jdbcType="DECIMAL" property="base" />
+    <result column="item" jdbcType="DECIMAL" property="item" />
+    <result column="perkg" jdbcType="DECIMAL" property="perkg" />
+    <result column="nkg" jdbcType="DECIMAL" property="nkg" />
+    <result column="min" jdbcType="DECIMAL" property="min" />
+    <result column="gst" jdbcType="BIT" property="gst" />
+    <result column="levy" jdbcType="DECIMAL" property="levy" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, by_id, code, type, vfrom, vto, currency, wt_lo, wt_hi, base, item, perkg, 
+    nkg, min, gst, levy
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sell_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sell_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate" useGeneratedKeys="true">
+    insert into sell_rate (org_id, by_id, code, 
+      type, vfrom, vto, currency, 
+      wt_lo, wt_hi, base, item, 
+      perkg, nkg, min, gst, 
+      levy, meta)
+    values (#{orgId,jdbcType=INTEGER}, #{byId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{vfrom,jdbcType=DATE}, #{vto,jdbcType=DATE}, #{currency,jdbcType=TINYINT}, 
+      #{wtLo,jdbcType=DECIMAL}, #{wtHi,jdbcType=DECIMAL}, #{base,jdbcType=DECIMAL}, #{item,jdbcType=DECIMAL}, 
+      #{perkg,jdbcType=DECIMAL}, #{nkg,jdbcType=DECIMAL}, #{min,jdbcType=DECIMAL}, #{gst,jdbcType=BIT}, 
+      #{levy,jdbcType=DECIMAL}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate" useGeneratedKeys="true">
+    insert into sell_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="byId != null">
+        by_id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="vfrom != null">
+        vfrom,
+      </if>
+      <if test="vto != null">
+        vto,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="wtLo != null">
+        wt_lo,
+      </if>
+      <if test="wtHi != null">
+        wt_hi,
+      </if>
+      <if test="base != null">
+        base,
+      </if>
+      <if test="item != null">
+        item,
+      </if>
+      <if test="perkg != null">
+        perkg,
+      </if>
+      <if test="nkg != null">
+        nkg,
+      </if>
+      <if test="min != null">
+        min,
+      </if>
+      <if test="gst != null">
+        gst,
+      </if>
+      <if test="levy != null">
+        levy,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="vfrom != null">
+        #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        #{vto,jdbcType=DATE},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="wtLo != null">
+        #{wtLo,jdbcType=DECIMAL},
+      </if>
+      <if test="wtHi != null">
+        #{wtHi,jdbcType=DECIMAL},
+      </if>
+      <if test="base != null">
+        #{base,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="perkg != null">
+        #{perkg,jdbcType=DECIMAL},
+      </if>
+      <if test="nkg != null">
+        #{nkg,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null">
+        #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        #{gst,jdbcType=BIT},
+      </if>
+      <if test="levy != null">
+        #{levy,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate">
+    update sell_rate
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="byId != null">
+        by_id = #{byId,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="vfrom != null">
+        vfrom = #{vfrom,jdbcType=DATE},
+      </if>
+      <if test="vto != null">
+        vto = #{vto,jdbcType=DATE},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=TINYINT},
+      </if>
+      <if test="wtLo != null">
+        wt_lo = #{wtLo,jdbcType=DECIMAL},
+      </if>
+      <if test="wtHi != null">
+        wt_hi = #{wtHi,jdbcType=DECIMAL},
+      </if>
+      <if test="base != null">
+        base = #{base,jdbcType=DECIMAL},
+      </if>
+      <if test="item != null">
+        item = #{item,jdbcType=DECIMAL},
+      </if>
+      <if test="perkg != null">
+        perkg = #{perkg,jdbcType=DECIMAL},
+      </if>
+      <if test="nkg != null">
+        nkg = #{nkg,jdbcType=DECIMAL},
+      </if>
+      <if test="min != null">
+        min = #{min,jdbcType=DECIMAL},
+      </if>
+      <if test="gst != null">
+        gst = #{gst,jdbcType=BIT},
+      </if>
+      <if test="levy != null">
+        levy = #{levy,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate">
+    update sell_rate
+    set org_id = #{orgId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      currency = #{currency,jdbcType=TINYINT},
+      wt_lo = #{wtLo,jdbcType=DECIMAL},
+      wt_hi = #{wtHi,jdbcType=DECIMAL},
+      base = #{base,jdbcType=DECIMAL},
+      item = #{item,jdbcType=DECIMAL},
+      perkg = #{perkg,jdbcType=DECIMAL},
+      nkg = #{nkg,jdbcType=DECIMAL},
+      min = #{min,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=BIT},
+      levy = #{levy,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.SellRate">
+    update sell_rate
+    set org_id = #{orgId,jdbcType=INTEGER},
+      by_id = #{byId,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      vfrom = #{vfrom,jdbcType=DATE},
+      vto = #{vto,jdbcType=DATE},
+      currency = #{currency,jdbcType=TINYINT},
+      wt_lo = #{wtLo,jdbcType=DECIMAL},
+      wt_hi = #{wtHi,jdbcType=DECIMAL},
+      base = #{base,jdbcType=DECIMAL},
+      item = #{item,jdbcType=DECIMAL},
+      perkg = #{perkg,jdbcType=DECIMAL},
+      nkg = #{nkg,jdbcType=DECIMAL},
+      min = #{min,jdbcType=DECIMAL},
+      gst = #{gst,jdbcType=BIT},
+      levy = #{levy,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.ShipmentFbaViewMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentFbaView">
+    <result column="id" jdbcType="INTEGER" property="id" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentFbaView">
+    <result column="amazon_po" jdbcType="LONGVARCHAR" property="amazonPo" />
+    <result column="amazon_shipment_ids" jdbcType="LONGVARCHAR" property="amazonShipmentIds" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    amazon_po, amazon_shipment_ids
+  </sql>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentFbaView" useGeneratedKeys="true">
+    insert into shipment_fba_view (amazon_po, amazon_shipment_ids
+      )
+    values (#{amazonPo,jdbcType=LONGVARCHAR}, #{amazonShipmentIds,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.ShipmentFbaView" useGeneratedKeys="true">
+    insert into shipment_fba_view
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="amazonPo != null">
+        amazon_po,
+      </if>
+      <if test="amazonShipmentIds != null">
+        amazon_shipment_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="amazonPo != null">
+        #{amazonPo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="amazonShipmentIds != null">
+        #{amazonShipmentIds,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

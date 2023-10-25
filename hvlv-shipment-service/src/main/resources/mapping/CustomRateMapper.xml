@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.CustomRateMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hs" jdbcType="VARCHAR" property="hs" />
+    <result column="from_date" jdbcType="DATE" property="fromDate" />
+    <result column="to_date" jdbcType="DATE" property="toDate" />
+    <result column="charge_type" jdbcType="BIT" property="chargeType" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hs, from_date, to_date, charge_type, rate
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from custom_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from custom_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate" useGeneratedKeys="true">
+    insert into custom_rate (hs, from_date, to_date, 
+      charge_type, rate, meta
+      )
+    values (#{hs,jdbcType=VARCHAR}, #{fromDate,jdbcType=DATE}, #{toDate,jdbcType=DATE}, 
+      #{chargeType,jdbcType=BIT}, #{rate,jdbcType=DECIMAL}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate" useGeneratedKeys="true">
+    insert into custom_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hs != null">
+        hs,
+      </if>
+      <if test="fromDate != null">
+        from_date,
+      </if>
+      <if test="toDate != null">
+        to_date,
+      </if>
+      <if test="chargeType != null">
+        charge_type,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hs != null">
+        #{hs,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        #{fromDate,jdbcType=DATE},
+      </if>
+      <if test="toDate != null">
+        #{toDate,jdbcType=DATE},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=BIT},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate">
+    update custom_rate
+    <set>
+      <if test="hs != null">
+        hs = #{hs,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null">
+        from_date = #{fromDate,jdbcType=DATE},
+      </if>
+      <if test="toDate != null">
+        to_date = #{toDate,jdbcType=DATE},
+      </if>
+      <if test="chargeType != null">
+        charge_type = #{chargeType,jdbcType=BIT},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate">
+    update custom_rate
+    set hs = #{hs,jdbcType=VARCHAR},
+      from_date = #{fromDate,jdbcType=DATE},
+      to_date = #{toDate,jdbcType=DATE},
+      charge_type = #{chargeType,jdbcType=BIT},
+      rate = #{rate,jdbcType=DECIMAL},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.CustomRate">
+    update custom_rate
+    set hs = #{hs,jdbcType=VARCHAR},
+      from_date = #{fromDate,jdbcType=DATE},
+      to_date = #{toDate,jdbcType=DATE},
+      charge_type = #{chargeType,jdbcType=BIT},
+      rate = #{rate,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

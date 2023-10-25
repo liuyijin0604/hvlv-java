@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvlv.microservices.shipmentService.hvlvShipmentService.mapper.GatepassShipmentMapper">
+  <resultMap id="BaseResultMap" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="sno" jdbcType="TINYINT" property="sno" />
+    <result column="courier_id" jdbcType="INTEGER" property="courierId" />
+    <result column="shipment_status" jdbcType="INTEGER" property="shipmentStatus" />
+    <result column="connote_no" jdbcType="VARCHAR" property="connoteNo" />
+    <result column="warehouse" jdbcType="INTEGER" property="warehouse" />
+    <result column="scan_time" jdbcType="TIMESTAMP" property="scanTime" />
+    <result column="gate_pass_time" jdbcType="TIMESTAMP" property="gatePassTime" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="can_gatepass_date" jdbcType="TIMESTAMP" property="canGatepassDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment">
+    <result column="meta" jdbcType="LONGVARCHAR" property="meta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fid, sno, courier_id, shipment_status, connote_no, warehouse, scan_time, gate_pass_time, 
+    parent_id, status, can_gatepass_date
+  </sql>
+  <sql id="Blob_Column_List">
+    meta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from gatepass_shipment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gatepass_shipment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment" useGeneratedKeys="true">
+    insert into gatepass_shipment (fid, sno, courier_id, 
+      shipment_status, connote_no, warehouse, 
+      scan_time, gate_pass_time, parent_id, 
+      status, can_gatepass_date, meta
+      )
+    values (#{fid,jdbcType=INTEGER}, #{sno,jdbcType=TINYINT}, #{courierId,jdbcType=INTEGER}, 
+      #{shipmentStatus,jdbcType=INTEGER}, #{connoteNo,jdbcType=VARCHAR}, #{warehouse,jdbcType=INTEGER}, 
+      #{scanTime,jdbcType=TIMESTAMP}, #{gatePassTime,jdbcType=TIMESTAMP}, #{parentId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{canGatepassDate,jdbcType=TIMESTAMP}, #{meta,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment" useGeneratedKeys="true">
+    insert into gatepass_shipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="sno != null">
+        sno,
+      </if>
+      <if test="courierId != null">
+        courier_id,
+      </if>
+      <if test="shipmentStatus != null">
+        shipment_status,
+      </if>
+      <if test="connoteNo != null">
+        connote_no,
+      </if>
+      <if test="warehouse != null">
+        warehouse,
+      </if>
+      <if test="scanTime != null">
+        scan_time,
+      </if>
+      <if test="gatePassTime != null">
+        gate_pass_time,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="canGatepassDate != null">
+        can_gatepass_date,
+      </if>
+      <if test="meta != null">
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=TINYINT},
+      </if>
+      <if test="courierId != null">
+        #{courierId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentStatus != null">
+        #{shipmentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="connoteNo != null">
+        #{connoteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null">
+        #{warehouse,jdbcType=INTEGER},
+      </if>
+      <if test="scanTime != null">
+        #{scanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatePassTime != null">
+        #{gatePassTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="canGatepassDate != null">
+        #{canGatepassDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment">
+    update gatepass_shipment
+    <set>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null">
+        sno = #{sno,jdbcType=TINYINT},
+      </if>
+      <if test="courierId != null">
+        courier_id = #{courierId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentStatus != null">
+        shipment_status = #{shipmentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="connoteNo != null">
+        connote_no = #{connoteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null">
+        warehouse = #{warehouse,jdbcType=INTEGER},
+      </if>
+      <if test="scanTime != null">
+        scan_time = #{scanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatePassTime != null">
+        gate_pass_time = #{gatePassTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="canGatepassDate != null">
+        can_gatepass_date = #{canGatepassDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meta != null">
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment">
+    update gatepass_shipment
+    set fid = #{fid,jdbcType=INTEGER},
+      sno = #{sno,jdbcType=TINYINT},
+      courier_id = #{courierId,jdbcType=INTEGER},
+      shipment_status = #{shipmentStatus,jdbcType=INTEGER},
+      connote_no = #{connoteNo,jdbcType=VARCHAR},
+      warehouse = #{warehouse,jdbcType=INTEGER},
+      scan_time = #{scanTime,jdbcType=TIMESTAMP},
+      gate_pass_time = #{gatePassTime,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      can_gatepass_date = #{canGatepassDate,jdbcType=TIMESTAMP},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hvlv.microservices.shipmentService.hvlvShipmentService.entity.GatepassShipment">
+    update gatepass_shipment
+    set fid = #{fid,jdbcType=INTEGER},
+      sno = #{sno,jdbcType=TINYINT},
+      courier_id = #{courierId,jdbcType=INTEGER},
+      shipment_status = #{shipmentStatus,jdbcType=INTEGER},
+      connote_no = #{connoteNo,jdbcType=VARCHAR},
+      warehouse = #{warehouse,jdbcType=INTEGER},
+      scan_time = #{scanTime,jdbcType=TIMESTAMP},
+      gate_pass_time = #{gatePassTime,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      can_gatepass_date = #{canGatepassDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
